@@ -78,6 +78,7 @@ func (repository *Repository) GetStocks() ([]models.Product, error) {
 		}
 
 		stocks = append(stocks, stock)
+
 	}
 
 	return stocks, nil
