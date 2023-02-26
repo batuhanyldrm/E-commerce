@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -12,10 +12,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import { BrowserRouter, HashRouter, Link, Route, Routes, Switch } from "react-router-dom";
-import { Button, IconButton } from '@mui/material';
-import Product from '../Product';
+import {Link} from "react-router-dom";
+import {IconButton } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -42,7 +40,7 @@ function LeftDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Trendmoda
           </Typography>
         </Toolbar>
         </AppBar>
