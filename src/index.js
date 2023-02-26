@@ -4,6 +4,8 @@ import reportWebVitals from './reportWebVitals';
 import Product from './components/Product';
 import configureStore from './components/reducer/store';
 import { Provider } from 'react-redux';
+import LeftDrawer from './components/company/LeftDrawer';
+import RouterPage from './components/company/RouterPage';
 
 const store = configureStore();
 
@@ -11,7 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Product/>
+      <RouterPage/>
     </Provider>
   </React.StrictMode>
 );
