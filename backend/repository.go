@@ -174,6 +174,20 @@ func (repository *Repository) DeleteStocks(stockId string) error {
 
 }
 
+func (repository *Repository) PostRegister(ID string) (models.Register, error) {
+	collection := repository.client.Database("register").Collection("register")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	register := models.Register{}
+	err := collection.FindOne(ctx, bson.M{"id": ID}).Decode(&register)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	return register, nil
+}
+
 func GetCleanTestRepository() *Repository {
 
 	repository := NewRepository()

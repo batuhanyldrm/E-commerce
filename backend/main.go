@@ -30,6 +30,7 @@ func SetupApp(api *Api) *fiber.App {
 	app.Get("/search", api.GetSearchHandler)
 
 	//auth
+	app.Post("/register", api.HandlePostRegister)
 
 	return app
 }

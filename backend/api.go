@@ -3,6 +3,7 @@ package main
 import (
 	"example.com/greetings/models"
 	"github.com/gofiber/fiber/v2"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type Api struct {
@@ -144,4 +145,36 @@ func (api *Api) DeleteStocksHandler(c *fiber.Ctx) error {
 	}
 
 	return nil
+}
+
+func (api *Api) HandlePostRegister(c *fiber.Ctx) error {
+
+	var data map[string]string
+
+	err := c.BodyParser(&data)
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+	}
+
+	password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
+
+	user := models.Register{
+		Name:     data["name"],
+		Email:    data["email"],
+		Password: password,
+	}
+
+	//stock := api.Service.PostStocks(createStocks)
+
+	switch err {
+	case nil:
+		c.JSON(user)
+		c.Status(fiber.StatusCreated)
+
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
+
+	return nil
+
 }

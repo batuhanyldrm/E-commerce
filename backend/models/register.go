@@ -8,11 +8,11 @@ import (
 
 type Register struct {
 	ID        string    `json:"id" bson:"id"`
-	Company   string    `json:"company" bson:"company"`
+	Company   []string  `json:"company" bson:"company"`
 	Name      string    `json:"name" bson:"name"`
 	Surname   string    `json:"surname" bson:"surname"`
 	Email     string    `json:"email" bson:"email"`
-	Password  string    `json:"password" bson:"password"`
+	Password  []byte    `json:"password" bson:"password"`
 	Tel       string    `json:"tel" bson:"tel"`
 	Role      string    `json:"role" bson:"role"`
 	CreatedAt time.Time `json:"createdAt" bson:"createdAt"`
@@ -29,8 +29,8 @@ type Token struct {
 }
 
 type Permission struct {
-	UserID    string   `json:"userId" bson:"userId"`
-	Companies []string `json:"companies" bson:"companies"`
+	UserID       string         `json:"userId" bson:"userId"`
+	Companies    []string       `json:"companies" bson:"companies"`
 	CompanyAdmin []CompanyAdmin `json:"cAdmin" bson:"cAdmin"`
 }
 
