@@ -8,8 +8,21 @@ import AddProduct from './AddProduct';
 import ProductList from './ProductList';
 import Order from './Order';
 import { fetchProducts, fetchSearchProducts } from './actions/productActions';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        marginTop:"5px",
+    },
+    content: {
+      flexGrow: 1,
+      padding: 0,
+      overflowX: "auto"
+    },
+  }));
 
 function Product(props) {
+    const classes = useStyles();
 
     const {fetchProducts, products, fetchSearchProducts} = props;
 
@@ -59,7 +72,8 @@ function Product(props) {
             ADD PRODUCT
         </Button>
              <TextField 
-             style={{marginTop:"5px"}} 
+             className={classes.root} 
+             style={{ marginTop:"5px",}}
              id="outlined-basic" 
              label="Search" 
              size='small'

@@ -8,8 +8,21 @@ import TextField from '@mui/material/TextField';
 import DialogContent from '@mui/material/DialogContent';
 import { addProduct } from './actions/productActions';
 import { postProduct } from './api/productApi';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "grid",
+  },
+  content: {
+    flexGrow: 1,
+    padding: 0,
+    overflowX: "auto"
+  },
+}));
 
 function AddProduct(props) {
+  const classes = useStyles();
 
     const {open, handleClose, addProduct} = props
 
@@ -48,7 +61,7 @@ function AddProduct(props) {
             </div>
           </DialogTitle>
           <DialogContent>
-            <div style={{display:"grid"}}>
+            <div className={classes.root}>
           <TextField
             id="product"
             value={productName}
