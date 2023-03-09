@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"strings"
 	"time"
 
@@ -147,6 +149,30 @@ func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Reg
 	}
 
 	return &userRegister
+}
+
+var UserNotFoundError error = errors.New("User not found")
+
+func (service *Service) PostLogin(loginUser models.UserCredencial) (*models.Register, error) {
+
+	userLogin := models.Register{}
+	// error message ekle
+	err := bcrypt.CompareHashAndPassword([]byte(userLogin.Password), []byte(loginUser.Password))
+
+	userLogin.Email = loginUser.Email
+	userLogin.Password = string(loginUser.Password)
+	fmt.Println(err, "wwwwww")
+	if err != nil {
+		return nil, UserNotFoundError
+	}
+
+	err = service.Repository.PostLogin(userLogin)
+
+	if err != nil {
+		return nil, UserNotFoundError
+	}
+
+	return &userLogin, nil
 }
 
 func GenerateUUID(length int) string {

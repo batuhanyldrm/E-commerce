@@ -146,7 +146,7 @@ func (api *Api) DeleteStocksHandler(c *fiber.Ctx) error {
 	return nil
 }
 
-func (api *Api) HandlePostRegister(c *fiber.Ctx) error {
+func (api *Api) PostRegisterHandler(c *fiber.Ctx) error {
 
 	createUserRegister := models.RegisterDTO{}
 
@@ -167,5 +167,27 @@ func (api *Api) HandlePostRegister(c *fiber.Ctx) error {
 	}
 
 	return nil
+}
 
+func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
+
+	loginUser := models.UserCredencial{}
+
+	err := c.BodyParser(&loginUser)
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+	}
+
+	userLogin, _ := api.Service.PostLogin(loginUser)
+
+	switch err {
+	case nil:
+		c.JSON(userLogin)
+		c.Status(fiber.StatusCreated)
+
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
+
+	return nil
 }
