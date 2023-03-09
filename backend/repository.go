@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"time"
 
@@ -181,7 +180,7 @@ func (repository *Repository) PostRegister(userRegister models.Register) error {
 	defer cancel()
 
 	_, err := collection.InsertOne(ctx, userRegister)
-	fmt.Println(userRegister, "sdfsfsd")
+
 	if err != nil {
 		return err
 	}

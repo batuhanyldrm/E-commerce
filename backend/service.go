@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 	"time"
 
@@ -125,7 +124,7 @@ func (service *Service) DeleteStocks(stockId string) error {
 }
 
 func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Register {
-	//var data map[string]string
+
 	userRegister := models.Register{}
 
 	password, _ := bcrypt.GenerateFromPassword([]byte(registerDTO.Password), 14)
@@ -142,7 +141,7 @@ func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Reg
 	userRegister.UpdatedAt = time.Now().UTC().Round(time.Second)
 
 	err := service.Repository.PostRegister(userRegister)
-	fmt.Println(err, "aliiiiii")
+
 	if err != nil {
 		return nil
 	}

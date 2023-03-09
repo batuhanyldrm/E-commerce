@@ -147,7 +147,6 @@ func (api *Api) DeleteStocksHandler(c *fiber.Ctx) error {
 }
 
 func (api *Api) HandlePostRegister(c *fiber.Ctx) error {
-	//var data map[string]string
 
 	createUserRegister := models.RegisterDTO{}
 
@@ -156,15 +155,6 @@ func (api *Api) HandlePostRegister(c *fiber.Ctx) error {
 		c.Status(fiber.StatusBadRequest)
 	}
 
-	/* password, _ := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
-
-	user := models.Register{
-		ID:       GenerateUUID(8),
-		Name:     data["name"],
-		Email:    data["email"],
-		Password: password,
-	}
-	*/
 	userRegister := api.Service.PostRegister(createUserRegister)
 
 	switch err {
