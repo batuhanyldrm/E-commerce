@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -174,18 +175,17 @@ func (repository *Repository) DeleteStocks(stockId string) error {
 
 }
 
-func (repository *Repository) PostRegister(ID string) (models.Register, error) {
+func (repository *Repository) PostRegister(userRegister models.Register) error {
 	collection := repository.client.Database("register").Collection("register")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	register := models.Register{}
-	err := collection.FindOne(ctx, bson.M{"id": ID}).Decode(&register)
-
+	_, err := collection.InsertOne(ctx, userRegister)
+	fmt.Println(userRegister, "sdfsfsd")
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
-	return register, nil
+	return nil
 }
 
 func GetCleanTestRepository() *Repository {

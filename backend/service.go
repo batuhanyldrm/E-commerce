@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 	"time"
 
 	"example.com/greetings/models"
 	"github.com/google/uuid"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type Service struct {
@@ -120,6 +122,32 @@ func (service *Service) DeleteStocks(stockId string) error {
 	}
 
 	return nil
+}
+
+func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Register {
+	//var data map[string]string
+	userRegister := models.Register{}
+
+	password, _ := bcrypt.GenerateFromPassword([]byte(registerDTO.Password), 14)
+
+	userRegister.ID = GenerateUUID(8)
+	userRegister.Name = registerDTO.Name
+	userRegister.Surname = registerDTO.Surname
+	userRegister.Email = registerDTO.Email
+	userRegister.Password = password
+	userRegister.Company = registerDTO.Company
+	userRegister.Role = registerDTO.Role
+	userRegister.Tel = registerDTO.Tel
+	userRegister.CreatedAt = time.Now().UTC().Round(time.Second)
+	userRegister.UpdatedAt = time.Now().UTC().Round(time.Second)
+
+	err := service.Repository.PostRegister(userRegister)
+	fmt.Println(err, "aliiiiii")
+	if err != nil {
+		return nil
+	}
+
+	return &userRegister
 }
 
 func GenerateUUID(length int) string {
