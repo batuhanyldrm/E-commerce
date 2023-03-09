@@ -12,7 +12,7 @@ type Register struct {
 	Name      string    `json:"name" bson:"name"`
 	Surname   string    `json:"surname" bson:"surname"`
 	Email     string    `json:"email" bson:"email"`
-	Password  []byte    `json:"password" bson:"password"`
+	Password  string    `json:"password" bson:"password"`
 	Tel       string    `json:"tel" bson:"tel"`
 	Role      string    `json:"role" bson:"role"`
 	CreatedAt time.Time `json:"createdAt" bson:"createdAt"`
@@ -24,7 +24,7 @@ type RegisterDTO struct {
 	Name      string    `json:"name" bson:"name"`
 	Surname   string    `json:"surname" bson:"surname"`
 	Email     string    `json:"email" bson:"email"`
-	Password  []byte    `json:"password" bson:"password"`
+	Password  string    `json:"password" bson:"password"`
 	Tel       string    `json:"tel" bson:"tel"`
 	Role      string    `json:"role" bson:"role"`
 	UpdatedAt time.Time `json:"updatedAt" bson:"updatedAt"`

@@ -134,7 +134,7 @@ func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Reg
 	userRegister.Name = registerDTO.Name
 	userRegister.Surname = registerDTO.Surname
 	userRegister.Email = registerDTO.Email
-	userRegister.Password = password
+	userRegister.Password = string(password)
 	userRegister.Company = registerDTO.Company
 	userRegister.Role = registerDTO.Role
 	userRegister.Tel = registerDTO.Tel

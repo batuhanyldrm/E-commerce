@@ -31,6 +31,7 @@ func SetupApp(api *Api) *fiber.App {
 
 	//auth
 	app.Post("/register", api.HandlePostRegister)
+	
 
 	return app
 }
