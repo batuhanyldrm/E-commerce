@@ -153,15 +153,15 @@ func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Reg
 
 var UserNotFoundError error = errors.New("User not found")
 
-func (service *Service) PostLogin(loginUser models.UserCredencial) (*models.Register, error) {
+func (service *Service) PostLogin(loginUser models.RegisterDTO) (*models.Register, error) {
 
 	userLogin := models.Register{}
 	// error message ekle
 	err := bcrypt.CompareHashAndPassword([]byte(userLogin.Password), []byte(loginUser.Password))
 
 	userLogin.Email = loginUser.Email
-	userLogin.Password = string(loginUser.Password)
-	fmt.Println(err, "wwwwww")
+	userLogin.Password = loginUser.Password
+	fmt.Println(userLogin.Password, loginUser.Password, "wwwwww")
 	if err != nil {
 		return nil, UserNotFoundError
 	}

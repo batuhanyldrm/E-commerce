@@ -171,7 +171,7 @@ func (api *Api) PostRegisterHandler(c *fiber.Ctx) error {
 
 func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 
-	loginUser := models.UserCredencial{}
+	loginUser := models.RegisterDTO{}
 
 	err := c.BodyParser(&loginUser)
 	if err != nil {
