@@ -200,6 +200,33 @@ func (repository *Repository) PostLogin(userRegister models.Register) error {
 	return nil
 }
 
+func (repository *Repository) GetUsers() ([]models.Register, error) {
+	collection := repository.client.Database("register").Collection("register")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	cur, err := collection.Find(ctx, bson.M{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	users := []models.Register{}
+	for cur.Next(ctx) {
+		var user models.Register
+		err := cur.Decode(&user)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		users = append(users, user)
+
+	}
+
+	return users, nil
+
+}
+
 func GetCleanTestRepository() *Repository {
 
 	repository := NewRepository()

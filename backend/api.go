@@ -191,3 +191,18 @@ func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 
 	return nil
 }
+
+func (api *Api) GetUsersHandler(c *fiber.Ctx) error {
+
+	users, err := api.Service.GetUsers()
+
+	switch err {
+	case nil:
+		c.JSON(users)
+		c.Status(fiber.StatusOK)
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
+
+	return nil
+}

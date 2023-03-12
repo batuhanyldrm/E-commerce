@@ -175,6 +175,17 @@ func (service *Service) PostLogin(loginUser models.RegisterDTO) (*models.Registe
 	return &userLogin, nil
 }
 
+func (service *Service) GetUsers() ([]models.Register, error) {
+
+	users, err := service.Repository.GetUsers()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
 func GenerateUUID(length int) string {
 	uuid := uuid.New().String()
 
