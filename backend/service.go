@@ -10,9 +10,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-/*
-const SecretKey = "secret" */
-
 type Service struct {
 	Repository *Repository
 }
@@ -168,17 +165,6 @@ func (service *Service) PostLogin(loginUser models.RegisterDTO) (*models.Registe
 	if err != nil {
 		return nil, UserNotFoundError
 	}
-
-	/* claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer:    loginUser.Email,
-		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
-	})
-
-	token, err := claims.SignedString([]byte(SecretKey))
-
-	if err != nil {
-		return nil, UserNotFoundError
-	} */
 
 	return &userEmail, nil
 }
