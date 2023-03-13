@@ -178,7 +178,7 @@ func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 		c.Status(fiber.StatusBadRequest)
 	}
 
-	userLogin, _ := api.Service.PostLogin(loginUser)
+	userLogin, err := api.Service.PostLogin(loginUser)
 
 	switch err {
 	case nil:
@@ -205,4 +205,20 @@ func (api *Api) GetUsersHandler(c *fiber.Ctx) error {
 	}
 
 	return nil
+}
+
+func (api *Api) GetUserHandler(c *fiber.Ctx) error {
+	ID := c.Params("id")
+	stock, err := api.Service.GetUser(ID)
+
+	switch err {
+	case nil:
+		c.JSON(stock)
+		c.Status(fiber.StatusOK)
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
+
+	return nil
+
 }

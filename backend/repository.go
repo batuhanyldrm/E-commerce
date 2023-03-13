@@ -187,7 +187,7 @@ func (repository *Repository) PostRegister(userRegister models.Register) error {
 	return nil
 }
 
-func (repository *Repository) PostLogin(userRegister models.Register) error {
+/* func (repository *Repository) PostLogin(userRegister models.Register) error {
 	collection := repository.client.Database("register").Collection("register")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -198,7 +198,7 @@ func (repository *Repository) PostLogin(userRegister models.Register) error {
 		return err
 	}
 	return nil
-}
+} */
 
 func (repository *Repository) GetUsers() ([]models.Register, error) {
 	collection := repository.client.Database("register").Collection("register")
@@ -225,6 +225,20 @@ func (repository *Repository) GetUsers() ([]models.Register, error) {
 
 	return users, nil
 
+}
+
+func (repository *Repository) GetUser(ID string) (models.Register, error) {
+	collection := repository.client.Database("register").Collection("register")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	user := models.Register{}
+	err := collection.FindOne(ctx, bson.M{"email": ID}).Decode(&user)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	return user, nil
 }
 
 func GetCleanTestRepository() *Repository {
