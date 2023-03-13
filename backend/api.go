@@ -195,7 +195,7 @@ func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 	}
 
 	cookie := fiber.Cookie{
-		Name:     "jwt",
+		Name:     loginUser.Email,
 		Value:    token,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
@@ -247,3 +247,30 @@ func (api *Api) GetUserHandler(c *fiber.Ctx) error {
 	return nil
 
 }
+
+/* func (api *Api) GetUserLogoutHandler(c *fiber.Ctx) error {
+
+	logoutUser := models.RegisterDTO{}
+
+	cookie := fiber.Cookie{
+		Name:     logoutUser.Email,
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HTTPOnly: true,
+	}
+
+	c.Cookie(&cookie)
+
+	userLogout, err := api.Service.PostLogout(logoutUser)
+
+	switch err {
+	case nil:
+		c.JSON(userLogout)
+		c.Status(fiber.StatusCreated)
+
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
+
+	return nil
+} */

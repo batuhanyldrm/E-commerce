@@ -182,14 +182,25 @@ func (service *Service) GetUsers() ([]models.Register, error) {
 
 func (service *Service) GetUser(email string) (models.Register, error) {
 
-	stock, err := service.Repository.GetUser(email)
+	user, err := service.Repository.GetUser(email)
 
 	if err != nil {
 		return models.Register{}, nil
 	}
 
-	return stock, nil
+	return user, nil
 }
+
+/* func (service *Service) PostLogout(loginUser models.RegisterDTO) (*models.Register, error) {
+
+	userEmail, err := service.Repository.GetUser(loginUser.Email)
+
+	if err != nil {
+		return nil, UserNotFoundError
+	}
+
+	return &userEmail, nil
+} */
 
 func GenerateUUID(length int) string {
 	uuid := uuid.New().String()

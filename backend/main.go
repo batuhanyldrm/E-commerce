@@ -33,7 +33,8 @@ func SetupApp(api *Api) *fiber.App {
 	app.Post("/register", api.PostRegisterHandler)
 	app.Post("/login", api.PostLoginHandler)
 	app.Get("/users", api.GetUsersHandler)
-	app.Get("/users/:id", api.GetUserHandler)
+	app.Get("/users/:id", api.GetUserHandler) //kontrol edilecek
+	//app.Post("logout", api.GetUserLogoutHandler)
 
 	return app
 }
