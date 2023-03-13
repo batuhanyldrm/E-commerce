@@ -180,9 +180,9 @@ func (service *Service) GetUsers() ([]models.Register, error) {
 	return users, nil
 }
 
-func (service *Service) GetUser(ID string) (models.Register, error) {
+func (service *Service) GetUser(email string) (models.Register, error) {
 
-	stock, err := service.Repository.GetUser(ID)
+	stock, err := service.Repository.GetUser(email)
 
 	if err != nil {
 		return models.Register{}, nil

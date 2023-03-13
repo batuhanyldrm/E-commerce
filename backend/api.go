@@ -208,8 +208,8 @@ func (api *Api) GetUsersHandler(c *fiber.Ctx) error {
 }
 
 func (api *Api) GetUserHandler(c *fiber.Ctx) error {
-	ID := c.Params("id")
-	stock, err := api.Service.GetUser(ID)
+	email := c.Params("email")
+	stock, err := api.Service.GetUser(email)
 
 	switch err {
 	case nil:
