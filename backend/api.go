@@ -169,6 +169,8 @@ func (api *Api) PostRegisterHandler(c *fiber.Ctx) error {
 	return nil
 }
 
+const SecretKey = "secret"
+
 func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 
 	loginUser := models.RegisterDTO{}
@@ -176,6 +178,17 @@ func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 	err := c.BodyParser(&loginUser)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
+	}
+
+	/* claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
+		Issuer:    loginUser.Email,
+		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
+	}) */
+
+	//token, err := claims.SignedString([]byte(SecretKey))
+
+	if err != nil {
+		c.Status(fiber.StatusInternalServerError)
 	}
 
 	userLogin, err := api.Service.PostLogin(loginUser)
