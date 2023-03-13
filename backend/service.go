@@ -191,7 +191,7 @@ func (service *Service) GetUser(email string) (models.Register, error) {
 	return user, nil
 }
 
-/* func (service *Service) PostLogout(loginUser models.RegisterDTO) (*models.Register, error) {
+func (service *Service) PostLogout(loginUser models.RegisterDTO) (*models.Register, error) {
 
 	userEmail, err := service.Repository.GetUser(loginUser.Email)
 
@@ -200,7 +200,7 @@ func (service *Service) GetUser(email string) (models.Register, error) {
 	}
 
 	return &userEmail, nil
-} */
+}
 
 func GenerateUUID(length int) string {
 	uuid := uuid.New().String()

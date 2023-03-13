@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -234,7 +235,7 @@ func (repository *Repository) GetUser(email string) (models.Register, error) {
 
 	user := models.Register{}
 	err := collection.FindOne(ctx, bson.M{"email": email}).Decode(&user)
-
+	fmt.Println(user.Email, "sadsasd")
 	if err != nil {
 		log.Fatal(err)
 	}

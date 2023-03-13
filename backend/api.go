@@ -248,9 +248,14 @@ func (api *Api) GetUserHandler(c *fiber.Ctx) error {
 
 }
 
-/* func (api *Api) GetUserLogoutHandler(c *fiber.Ctx) error {
+func (api *Api) GetUserLogoutHandler(c *fiber.Ctx) error {
 
 	logoutUser := models.RegisterDTO{}
+
+	err := c.BodyParser(&logoutUser)
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+	}
 
 	cookie := fiber.Cookie{
 		Name:     logoutUser.Email,
@@ -273,4 +278,4 @@ func (api *Api) GetUserHandler(c *fiber.Ctx) error {
 	}
 
 	return nil
-} */
+}
