@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/gofiber/fiber/v2 v2.27.0
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/google/uuid v1.3.0
 	github.com/smartystreets/goconvey v1.7.2

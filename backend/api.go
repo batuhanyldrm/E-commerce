@@ -1,8 +1,11 @@
 package main
 
 import (
+	"time"
+
 	"example.com/greetings/models"
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt"
 )
 
 type Api struct {
@@ -180,16 +183,25 @@ func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 		c.Status(fiber.StatusBadRequest)
 	}
 
-	/* claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
+	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
 		Issuer:    loginUser.Email,
 		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
-	}) */
+	})
 
-	//token, err := claims.SignedString([]byte(SecretKey))
+	token, err := claims.SignedString([]byte(SecretKey))
 
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError)
 	}
+
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    token,
+		Expires:  time.Now().Add(time.Hour * 24),
+		HTTPOnly: true,
+	}
+
+	c.Cookie(&cookie)
 
 	userLogin, err := api.Service.PostLogin(loginUser)
 
