@@ -195,7 +195,7 @@ func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 	}
 
 	cookie := fiber.Cookie{
-		Name:     loginUser.Email,
+		Name:     "user_token",
 		Value:    token,
 		Expires:  time.Now().Add(time.Hour * 24),
 		HTTPOnly: true,
@@ -258,7 +258,7 @@ func (api *Api) GetUserLogoutHandler(c *fiber.Ctx) error {
 	}
 
 	cookie := fiber.Cookie{
-		Name:     logoutUser.Email,
+		Name:     "user_token",
 		Value:    "",
 		Expires:  time.Now().Add(-time.Hour),
 		HTTPOnly: true,
