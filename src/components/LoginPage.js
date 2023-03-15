@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react';
+import { connect } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -8,10 +9,42 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
+import { addUser } from './actions/userActions';
+import { postRegister } from './api/userApi';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 
-    const [showPassword, setShowPassword] = React.useState(false);
+    const {addUser} = props;
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [phone, setPhone] = useState("");
+    const [company, setCompany] = useState("");
+    const [role, setRole] = useState("");
+
+    const createUser = async () => {
+        const data = {
+            company: company,
+            name: name,
+            surname: surname,
+            email: email,
+            password: password,
+            tel: phone,
+            role: role,
+        }
+        await postRegister(data
+            ).then((res) => {
+                addUser(res.data)
+            }).finally((err) => {
+                console.log(err, "error")
+            })
+    }
+
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -29,7 +62,7 @@ const LoginPage = () => {
                         style={{width:"380px"}} 
                         id="outlined-basic" 
                         label="E-mail" 
-                        variant="outlined" 
+                        variant="outlined"
                     />
                 </div>
 
@@ -77,7 +110,9 @@ const LoginPage = () => {
                         }} 
                         id="outlined-basic" 
                         label="Name" 
-                        variant="outlined" 
+                        variant="outlined"
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </div>
 
@@ -90,7 +125,10 @@ const LoginPage = () => {
                     }} 
                     id="outlined-basic" 
                     label="Surname" 
-                    variant="outlined" 
+                    variant="outlined"
+                    type="text"
+                    value={surname}
+                    onChange={(e) => setSurname(e.target.value)}
                 />
 
                 <TextField 
@@ -101,6 +139,9 @@ const LoginPage = () => {
                     id="outlined-basic" 
                     label="E-mail" 
                     variant="outlined"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 
                     <FormControl variant="outlined">
@@ -122,6 +163,8 @@ const LoginPage = () => {
                             </InputAdornment>
                             }
                             label="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </FormControl>
                     <FormControl variant="outlined">
@@ -143,6 +186,7 @@ const LoginPage = () => {
                             </InputAdornment>
                             }
                             label="Confirm Password"
+                            //onChange={(e) => setName(e.target.value)}
                         />
                     </FormControl>
 
@@ -153,7 +197,22 @@ const LoginPage = () => {
                         }} 
                         id="outlined-basic" 
                         label="Phone" 
-                        variant="outlined" 
+                        variant="outlined"
+                        type="text"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)} 
+                    />
+                    <TextField 
+                        style={{
+                            width:"380px",
+                            marginBottom:"10px"
+                        }} 
+                        id="outlined-basic" 
+                        label="Company" 
+                        variant="outlined"
+                        type="text"
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
                     />
 
                     <TextField 
@@ -163,7 +222,10 @@ const LoginPage = () => {
                         }} 
                         id="outlined-basic" 
                         label="Role" 
-                        variant="outlined" 
+                        variant="outlined"
+                        type="text"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                     />
 
                 </div>
@@ -171,6 +233,7 @@ const LoginPage = () => {
                     style={{width:"380px"}} 
                     disableElevation 
                     variant="contained"
+                    onClick={() => createUser()}
                 >
                     Register
                 </Button>
@@ -181,4 +244,13 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+const mapStateToProps = (state) => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    addUser: (data) => {
+    dispatch(addUser(data));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (LoginPage)

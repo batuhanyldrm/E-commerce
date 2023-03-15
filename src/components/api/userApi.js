@@ -1,15 +1,15 @@
 import axios from "axios";
 
-export const postRegister = async (data) => {
-    const resp = await axios.post("hhtp://localhost:3001/register", {
-        company: data.company,
-        name: data.name,
-        surname: data.surname,
-        email: data.email,
-        password: data.password,
-        tel: data.tel,
-        role: data.role
+export const postRegister = async ({company, name, surname, email, password, tel, role}) => {
+    const resp = await axios.post("http://localhost:3001/register", {
+        company: company,
+        name: name,
+        surname: surname,
+        email: email,
+        password: password,
+        tel: tel,
+        role: role,
     })
 
-    return resp
+    return resp;
 }
