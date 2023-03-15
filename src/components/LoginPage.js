@@ -24,18 +24,18 @@ const LoginPage = (props) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phone, setPhone] = useState("");
-    const [company, setCompany] = useState("");
-    const [role, setRole] = useState("");
+    /* onst [company, setCompany] = useState([]);
+    const [role, setRole] = useState(""); */
 
     const createUser = async () => {
         const data = {
-            company: company,
+            /* company: company, */
             name: name,
             surname: surname,
             email: email,
             password: password,
             tel: phone,
-            role: role,
+            /* role: role, */
         }
         await postRegister(data
             ).then((res) => {
@@ -211,8 +211,8 @@ const LoginPage = (props) => {
                         label="Company" 
                         variant="outlined"
                         type="text"
-                        value={company}
-                        onChange={(e) => setCompany(e.target.value)}
+                        /* value={company}
+                        onChange={(e) => setCompany(e.target.value)} */
                     />
 
                     <TextField 
@@ -224,8 +224,8 @@ const LoginPage = (props) => {
                         label="Role" 
                         variant="outlined"
                         type="text"
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
+                       /*  value={role}
+                        onChange={(e) => setRole(e.target.value)} */
                     />
 
                 </div>
@@ -248,8 +248,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addUser: (data) => {
-    dispatch(addUser(data));
+    addUser: (user) => {
+    dispatch(addUser(user));
   },
 });
 

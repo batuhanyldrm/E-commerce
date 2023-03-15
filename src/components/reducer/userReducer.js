@@ -1,9 +1,9 @@
 import { ADD_USER } from "../actions/types";
 
-const UserReducer = (state = {}, action) => {
+const UserReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_USER:
-            return  {...state, user:  [...state.user, action.payload]};
+            return  [...state, action.payload];
         default:
             return state
     }
