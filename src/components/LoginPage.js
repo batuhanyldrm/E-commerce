@@ -9,12 +9,13 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
-import { addUser } from './actions/userActions';
+/* import { addUser } from './actions/userActions'; */
 import { postRegister } from './api/userApi';
+import { Redirect } from 'react-router-dom';
 
 const LoginPage = (props) => {
 
-    const {addUser} = props;
+    const {/* addUser */} = props;
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -37,12 +38,17 @@ const LoginPage = (props) => {
             tel: phone,
             /* role: role, */
         }
-        await postRegister(data
-            ).then((res) => {
-                addUser(res.data)
-            }).finally((err) => {
-                console.log(err, "error")
-            })
+        try {
+            await postRegister(data)
+            /* .then((res) => {
+                    console.log(res,"başarılı")
+                    addUser(res.data)
+                }).finally((err) => {
+                    console.log(err, "error")
+                }) */
+        } catch (error) {
+            console.log(error, "catch error")
+        }
     }
 
 
@@ -248,9 +254,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addUser: (user) => {
+   /*  addUser: (user) => {
     dispatch(addUser(user));
-  },
+  }, */
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (LoginPage)
