@@ -10,7 +10,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
 /* import { addUser } from './actions/userActions'; */
-import { postRegister } from './api/userApi';
+import { postLogin, postRegister } from './api/userApi';
 import { Redirect } from 'react-router-dom';
 
 const LoginPage = (props) => {
@@ -51,6 +51,18 @@ const LoginPage = (props) => {
         }
     }
 
+    const loginUser = async () => {
+        const data = {
+            email: email,
+            password: password,
+        }
+        try {
+            await postLogin(data)
+        } catch (error) {
+            console.log(error, "catch error")
+        }
+    }
+
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -69,6 +81,8 @@ const LoginPage = (props) => {
                         id="outlined-basic" 
                         label="E-mail" 
                         variant="outlined"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
 
@@ -78,6 +92,8 @@ const LoginPage = (props) => {
                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                     <OutlinedInput style={{ width:"380px",marginBottom:"10px",}}
                         id="outlined-adornment-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         type={showPassword ? 'text' : 'password'}
                         endAdornment={
                         <InputAdornment position="end">
@@ -99,6 +115,7 @@ const LoginPage = (props) => {
                     style={{width:"380px"}} 
                     disableElevation 
                     variant="contained"
+                    onClick={() => loginUser()}
                     >
                     Login
                 </Button>
