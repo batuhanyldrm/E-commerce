@@ -25,6 +25,9 @@ const LoginPage = (props) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phone, setPhone] = useState("");
+
+    const [loginEmail, setLoginEmail] = useState("");
+    const [loginPassword, setLoginPassword] = useState("")
     /* onst [company, setCompany] = useState([]);
     const [role, setRole] = useState(""); */
 
@@ -53,8 +56,8 @@ const LoginPage = (props) => {
 
     const loginUser = async () => {
         const data = {
-            email: email,
-            password: password,
+            email: loginEmail,
+            password: loginPassword,
         }
         try {
             await postLogin(data)
@@ -81,8 +84,8 @@ const LoginPage = (props) => {
                         id="outlined-basic" 
                         label="E-mail" 
                         variant="outlined"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={loginEmail}
+                        onChange={(e) => setLoginEmail(e.target.value)}
                     />
                 </div>
 
@@ -92,8 +95,8 @@ const LoginPage = (props) => {
                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                     <OutlinedInput style={{ width:"380px",marginBottom:"10px",}}
                         id="outlined-adornment-password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={loginPassword}
+                        onChange={(e) => setLoginPassword(e.target.value)}
                         type={showPassword ? 'text' : 'password'}
                         endAdornment={
                         <InputAdornment position="end">
