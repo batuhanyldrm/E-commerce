@@ -115,11 +115,12 @@ const LoginPage = (props) => {
                 </FormControl>
                 </div>
                 <Button 
+                    href='/allProducts'
                     style={{width:"380px"}} 
                     disableElevation 
                     variant="contained"
                     onClick={() => loginUser()}
-                    >
+                >
                     Login
                 </Button>
             </div>
