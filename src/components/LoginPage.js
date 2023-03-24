@@ -11,7 +11,8 @@ import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
 /* import { addUser } from './actions/userActions'; */
 import { postLogin, postRegister } from './api/userApi';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect, Route } from 'react-router-dom';
+import AllProducts from './AllProducts';
 
 const LoginPage = (props) => {
 
@@ -28,6 +29,7 @@ const LoginPage = (props) => {
 
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("")
+    const [redirect, setRedirect] = useState(false)
     /* onst [company, setCompany] = useState([]);
     const [role, setRole] = useState(""); */
 
@@ -60,10 +62,15 @@ const LoginPage = (props) => {
             password: loginPassword,
         }
         try {
-            await postLogin(data)
+            await postLogin(data).then(() => {
+                setTimeout(() => {
+                  window.location = window.location.origin + "/allProducts";
+                }, 3000);
+              })
         } catch (error) {
             console.log(error, "catch error")
         }
+        setRedirect(true)
     }
 
 
@@ -72,6 +79,9 @@ const LoginPage = (props) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+    /* if (redirect) {
+        return <Route path='/allProducts'/>
+    } */
 
   return (
     <>
@@ -114,8 +124,7 @@ const LoginPage = (props) => {
                     />
                 </FormControl>
                 </div>
-                <Button 
-                    href='/allProducts'
+                <Button
                     style={{width:"380px"}} 
                     disableElevation 
                     variant="contained"
