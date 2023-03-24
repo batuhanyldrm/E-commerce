@@ -79,9 +79,6 @@ const LoginPage = (props) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    /* if (redirect) {
-        return <Route path='/allProducts'/>
-    } */
 
   return (
     <>
