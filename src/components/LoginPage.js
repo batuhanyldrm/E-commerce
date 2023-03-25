@@ -9,10 +9,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
-/* import { addUser } from './actions/userActions'; */
 import { postLogin, postRegister } from './api/userApi';
-import { Link, Redirect, Route } from 'react-router-dom';
-import AllProducts from './AllProducts';
 
 const LoginPage = (props) => {
 
