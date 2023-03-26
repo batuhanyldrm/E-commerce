@@ -1,4 +1,4 @@
-import { ADD_USER } from "./types";
+import { ADD_USER, LOGIN_USER } from "./types";
 
 export const addUser = (user) => (
     dispatch
@@ -8,3 +8,12 @@ export const addUser = (user) => (
             payload: user
         })
     }
+
+export const loginUser = (user) => (
+dispatch
+) => {
+    dispatch({
+        type: LOGIN_USER,
+        payload: user
+    })
+}    

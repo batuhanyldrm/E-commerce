@@ -10,13 +10,15 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
 import { postLogin, postRegister } from './api/userApi';
+import { loginUser } from './actions/userActions';
+import AllProducts from './AllProducts';
 
 const LoginPage = (props) => {
 
-    const {/* addUser */} = props;
+    const {user,loginUser} = props;
 
     const [showPassword, setShowPassword] = useState(false);
-
+console.log(user,"aaa")
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
@@ -53,13 +55,14 @@ const LoginPage = (props) => {
         }
     }
 
-    const loginUser = async () => {
+    const handleloginUser = async () => {
         const data = {
             email: loginEmail,
             password: loginPassword,
         }
         try {
-            await postLogin(data).then(() => {
+            await postLogin(data).then((res) => {
+                loginUser(res.data)
                 setTimeout(() => {
                   window.location = window.location.origin + "/allProducts";
                 }, 3000);
@@ -79,6 +82,9 @@ const LoginPage = (props) => {
 
   return (
     <>
+    <AllProducts
+    user={user}
+    />
         <div style={{display:"flex", justifyContent:"space-between"}}>
             <div style={{display:"block"}}>
 
@@ -122,7 +128,7 @@ const LoginPage = (props) => {
                     style={{width:"380px"}} 
                     disableElevation 
                     variant="contained"
-                    onClick={() => loginUser()}
+                    onClick={() => handleloginUser()}
                 >
                     Login
                 </Button>
@@ -275,12 +281,13 @@ const LoginPage = (props) => {
 }
 
 const mapStateToProps = (state) => ({
+    user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-   /*  addUser: (user) => {
-    dispatch(addUser(user));
-  }, */
+    loginUser: (user) => {
+    dispatch(loginUser(user));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (LoginPage)

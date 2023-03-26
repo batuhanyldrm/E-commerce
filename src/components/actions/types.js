@@ -7,3 +7,4 @@ export const FETCH_SEARCH_PRODUCT = "FETCH_SEARCH_PRODUCT";
 
 //user
 export const ADD_USER = "ADD_USER";
+export const LOGIN_USER = "LOGIN_USER"

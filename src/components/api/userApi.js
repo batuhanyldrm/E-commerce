@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createBearerToken, getUserId } from "./auth";
 
 export const postRegister = async ({name, surname, email, password, tel, company, role}) => {
     const resp = await axios.post("http://localhost:3001/register", {
@@ -29,3 +30,14 @@ export const postLogout = async ({name, surname, email, password, tel, company, 
 
     return resp.status === 201 ? resp : false
 }
+
+/* export const getUser = async () => {
+    const bearerToken = createBearerToken()
+    const resp = await axios.get(`http://localhost:3001/users/${getUserId()}`,{
+        headers: {
+            Authorization: bearerToken,
+          },
+    })
+    return resp;
+}
+ */
