@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import IconButton from '@mui/material/IconButton';
 import { List, ListItem, ListItemText } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
+import { loginUser } from './actions/userActions';
 
 const useStyles = makeStyles((theme) => ({
   userNavigation: {
@@ -87,11 +88,15 @@ const useStyles = makeStyles((theme) => ({
 const AllProducts = (props) => {
   const classes = useStyles();
 
-  const {user} = props
+  const {user,loginUser} = props
+
+  useEffect(() => {
+    loginUser()
+  }, [])
+  
 
   return (
-    <div>scfc
-      {Cookies.get('username')}
+    <div>{user}
     </div>
   )
 }
@@ -99,4 +104,10 @@ const AllProducts = (props) => {
 const mapStateToProps = (state) => ({
 });
 
-export default connect(mapStateToProps) (AllProducts)
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (user) => {
+  dispatch(loginUser(user));
+},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (AllProducts)

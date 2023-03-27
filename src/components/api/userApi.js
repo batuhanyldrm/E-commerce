@@ -24,20 +24,20 @@ export const postLogin = async ({email, password}) => {
 }
 
 export const postLogout = async ({name, surname, email, password, tel, company, role}) => {
-    const resp = await axios.post("http://localhost:3001/login", {
+    const resp = await axios.post("http://localhost:3001/logout", {
         email: email,
     })
 
     return resp.status === 201 ? resp : false
 }
 
-/* export const getUser = async () => {
-    const bearerToken = createBearerToken()
+export const getUser = async () => {
+    const bearerToken = createBearerToken();
     const resp = await axios.get(`http://localhost:3001/users/${getUserId()}`,{
         headers: {
-            Authorization: bearerToken,
-          },
+            Authorization: bearerToken
+        }
     })
     return resp;
 }
- */
+

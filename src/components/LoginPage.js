@@ -18,7 +18,11 @@ const LoginPage = (props) => {
     const {user,loginUser} = props;
 
     const [showPassword, setShowPassword] = useState(false);
-console.log(user,"aaa")
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
@@ -65,7 +69,7 @@ console.log(user,"aaa")
                 loginUser(res.data)
                 setTimeout(() => {
                   window.location = window.location.origin + "/allProducts";
-                }, 3000);
+                }, 500);
               })
         } catch (error) {
             console.log(error, "catch error")
@@ -79,12 +83,9 @@ console.log(user,"aaa")
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
+    console.log(getCookie,"ttttt")
   return (
     <>
-    <AllProducts
-    user={user}
-    />
         <div style={{display:"flex", justifyContent:"space-between"}}>
             <div style={{display:"block"}}>
 
@@ -281,7 +282,7 @@ console.log(user,"aaa")
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user,
+    user: state.user.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
