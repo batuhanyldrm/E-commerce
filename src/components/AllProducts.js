@@ -84,6 +84,11 @@ import { postLogout } from './api/userApi';
 
 const AllProducts = (props) => {
   //const classes = useStyles();
+  const userToken = document.cookie.split(';')
+  .map(cookie => cookie.trim())
+  .find(cookie => cookie.startsWith('user_token='))
+  ?.split('=')[1];
+    console.log(document.cookie,"yyy")
 
   //const {user,loginUser} = props
 

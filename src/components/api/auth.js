@@ -56,7 +56,7 @@ export const getUserId = () => {
           alert('Email is ' + value);
       }
 
-      if (key == 'userID'){
+      if (key == 'password'){
           alert('userID is ' + value);
       }
   }

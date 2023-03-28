@@ -10,8 +10,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
 import { postLogin, postRegister } from './api/userApi';
-import { loginUser } from './actions/userActions';
-import AllProducts from './AllProducts';
+/* import { loginUser } from './actions/userActions';
+import AllProducts from './AllProducts'; */
 
 const LoginPage = (props) => {
 
@@ -20,9 +20,11 @@ const LoginPage = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const getCookie = (name) => {
         const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
+        console.log(document.g,"qqq")
+        //const parts = value.split(`; ${name}=`);
+        //if (parts.length === 2) return parts.pop().split(';').shift();
     }
+    
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
@@ -66,7 +68,6 @@ const LoginPage = (props) => {
         }
         try {
             await postLogin(data).then((res) => {
-                loginUser(res.data)
                 setTimeout(() => {
                   window.location = window.location.origin + "/allProducts";
                 }, 500);
@@ -83,7 +84,7 @@ const LoginPage = (props) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    console.log(getCookie,"ttttt")
+
   return (
     <>
         <div style={{display:"flex", justifyContent:"space-between"}}>
@@ -286,9 +287,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loginUser: (user) => {
+/*     loginUser: (user) => {
     dispatch(loginUser(user));
-  },
+  }, */
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (LoginPage)
