@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import IconButton from '@mui/material/IconButton';
-import { List, ListItem, ListItemText } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import React, { } from 'react'
+import { Button} from '@mui/material';
+//import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
-import Cookies from 'js-cookie';
-import { loginUser } from './actions/userActions';
+import { postLogout } from './api/userApi';
 
-const useStyles = makeStyles((theme) => ({
+/* const useStyles = makeStyles((theme) => ({
   userNavigation: {
     display: 'flex',
     alignItems: 'center',
@@ -83,20 +80,20 @@ const useStyles = makeStyles((theme) => ({
   languageSelection: {
     marginRight: '120px',
   },
-}));
+})); */
 
 const AllProducts = (props) => {
-  const classes = useStyles();
+  //const classes = useStyles();
 
-  const {user,loginUser} = props
+  //const {user,loginUser} = props
 
-  useEffect(() => {
-    loginUser()
-  }, [])
   
 
   return (
-    <div>{user}
+    <div>
+      <Button>
+        logout
+      </Button>
     </div>
   )
 }
@@ -105,8 +102,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: (user) => {
-  dispatch(loginUser(user));
+  postLogout: (user) => {
+  dispatch(postLogout(user));
 },
 });
 
