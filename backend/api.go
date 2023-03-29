@@ -280,3 +280,24 @@ func (api *Api) GetUserLogoutHandler(c *fiber.Ctx) error {
 
 	return nil
 }
+
+func (api *Api) GetUserAuthenticationHandler(c *fiber.Ctx) error {
+
+	cookie := c.Cookies("user_token")
+
+	token, err := jwt.ParseWithClaims(cookie, &jwt.MapClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return []byte(SecretKey), nil
+	})
+	claims := token.Claims
+
+	switch err {
+	case nil:
+		c.JSON(claims)
+		c.Status(fiber.StatusUnauthorized)
+
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
+
+	return nil
+}

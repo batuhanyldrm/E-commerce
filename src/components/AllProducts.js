@@ -88,7 +88,19 @@ const AllProducts = (props) => {
   .map(cookie => cookie.trim())
   .find(cookie => cookie.startsWith('user_token='))
   ?.split('=')[1];
-    console.log(document.cookie,"yyy")
+
+if (userToken) {
+  const decodedToken = decodeURIComponent(userToken);
+  try {
+    const parsedToken = JSON.parse(JSON.stringify(decodedToken));
+    const issuer = parsedToken.iss;
+    console.log(parsedToken,"xxxx")
+    console.log(issuer,"rrrr");
+    console.log(userToken,"ddtdt");
+  } catch (e) {
+    console.error('Error parsing JSON:', e);
+  }
+}
 
   //const {user,loginUser} = props
 
