@@ -249,6 +249,22 @@ func (api *Api) GetUserHandler(c *fiber.Ctx) error {
 
 }
 
+func (api *Api) GetUserIDHandler(c *fiber.Ctx) error {
+	ID := c.Params("id")
+	stock, err := api.Service.GetUserID(ID)
+
+	switch err {
+	case nil:
+		c.JSON(stock)
+		c.Status(fiber.StatusOK)
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
+
+	return nil
+
+}
+
 func (api *Api) GetUserLogoutHandler(c *fiber.Ctx) error {
 
 	logoutUser := models.RegisterDTO{}
@@ -285,16 +301,26 @@ func (api *Api) GetUserAuthenticationHandler(c *fiber.Ctx) error {
 
 	cookie := c.Cookies("user_token")
 
-	token, err := jwt.ParseWithClaims(cookie, &jwt.MapClaims{}, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(SecretKey), nil
 	})
-	claims := token.Claims
+
+	if err != nil {
+		c.Status(fiber.StatusUnauthorized)
+
+		return c.JSON(fiber.Map{
+			"message": "unauthenticated",
+		})
+	}
+	claims := token.Claims.(*jwt.StandardClaims)
+	userId := claims.Issuer
+
+	user, err := api.Service.GetUserAuth(userId)
 
 	switch err {
 	case nil:
-		c.JSON(claims)
-		c.Status(fiber.StatusUnauthorized)
-
+		c.JSON(user)
+		c.Status(fiber.StatusOK)
 	default:
 		c.Status(fiber.StatusInternalServerError)
 	}

@@ -241,6 +241,20 @@ func (repository *Repository) GetUser(email string) (models.Register, error) {
 	return user, nil
 }
 
+func (repository *Repository) GetUserID(ID string) (models.Register, error) {
+	collection := repository.client.Database("register").Collection("register")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	user := models.Register{}
+	err := collection.FindOne(ctx, bson.M{"email": ID}).Decode(&user)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	return user, nil
+}
+
 func GetCleanTestRepository() *Repository {
 
 	repository := NewRepository()
