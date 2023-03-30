@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 	"time"
 
@@ -217,8 +216,7 @@ func (service *Service) PostLogout(loginUser models.RegisterDTO) (*models.Regist
 func (service *Service) GetUserAuth(userId string) (*models.Register, error) {
 
 	user, err := service.Repository.GetUserID(userId)
-	fmt.Println(user, "qqq")
-	fmt.Println(err, "jkljl")
+
 	if err != nil {
 		return nil, UserNotFoundError
 	}
