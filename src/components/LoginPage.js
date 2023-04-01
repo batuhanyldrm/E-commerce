@@ -20,7 +20,6 @@ const LoginPage = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const getCookie = (name) => {
         const value = `; ${document.cookie}`;
-        console.log(document.g,"qqq")
         //const parts = value.split(`; ${name}=`);
         //if (parts.length === 2) return parts.pop().split(';').shift();
     }
