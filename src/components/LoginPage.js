@@ -18,27 +18,6 @@ const LoginPage = (props) => {
     const {user,loginUser} = props;
 
     const [showPassword, setShowPassword] = useState(false);
-    const getCookie = (name) => {
-        const value = `; ${document.cookie}`;
-        //const parts = value.split(`; ${name}=`);
-        //if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-    const userToken = document.cookie.split(';')
-  .map(cookie => cookie.trim())
-  .find(cookie => cookie.startsWith('user_token='))
-  ?.split('=')[1];
-
-if (userToken) {
-  const decodedToken = decodeURIComponent(userToken);
-  try {
-    const parsedToken = JSON.parse(decodedToken);
-    console.log(parsedToken);
-    const issuer = parsedToken.iss;
-    console.log(issuer);
-  } catch (e) {
-    console.error('Error parsing JSON:', e);
-  }
-}
 
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
@@ -83,9 +62,9 @@ if (userToken) {
         }
         try {
             await postLogin(data).then((res) => {
-                /* setTimeout(() => {
+                setTimeout(() => {
                   window.location = window.location.origin + "/allProducts";
-                }, 500); */
+                }, 500);
               })
         } catch (error) {
             console.log(error, "catch error")
