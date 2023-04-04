@@ -1,8 +1,9 @@
-import React, { } from 'react'
+import React, { useEffect } from 'react'
 import { Button} from '@mui/material';
 //import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
 import { postLogout } from './api/userApi';
+import { loginUser } from './actions/userActions';
 
 /* const useStyles = makeStyles((theme) => ({
 })); */
@@ -27,8 +28,11 @@ if (userToken) {
   }
 }
 
-  //const {user,loginUser} = props
+  const {user,loginUser} = props
 
+  useEffect(() => {
+    loginUser()
+  }, [])
   
 
   return (
@@ -41,11 +45,15 @@ if (userToken) {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   postLogout: (user) => {
-  dispatch(postLogout(user));
+  dispatch(postLogout(user))
+},
+loginUser: (user) => {
+  dispatch(loginUser(user));
 },
 });
 

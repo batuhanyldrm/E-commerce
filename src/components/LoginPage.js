@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -10,8 +10,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
 import { postLogin, postRegister } from './api/userApi';
-/* import { loginUser } from './actions/userActions';
-import AllProducts from './AllProducts'; */
+import { loginUser } from './actions/userActions';
+/*import AllProducts from './AllProducts'; */
 
 const LoginPage = (props) => {
 
@@ -62,16 +62,18 @@ const LoginPage = (props) => {
         }
         try {
             await postLogin(data).then((res) => {
-                setTimeout(() => {
+                /* setTimeout(() => {
                   window.location = window.location.origin + "/allProducts";
-                }, 500);
+                }, 500); */
               })
         } catch (error) {
             console.log(error, "catch error")
         }
         setRedirect(true)
     }
-
+    useEffect(() => {
+        loginUser()
+      }, [])
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -281,9 +283,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-/*     loginUser: (user) => {
+    loginUser: (user) => {
     dispatch(loginUser(user));
-  }, */
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (LoginPage)

@@ -1,4 +1,4 @@
-/* import { getUser } from "../api/userApi"; */
+import { getUser } from "../api/userApi";
 import { ADD_USER, LOGIN_USER } from "./types";
 
 export const addUser = (user) => (
@@ -10,7 +10,7 @@ export const addUser = (user) => (
         })
     }
 
-/* export const loginUser = () => async (
+export const loginUser = () => async (
 dispatch
 ) => {
     const resp = await getUser()
@@ -18,4 +18,4 @@ dispatch
         type: LOGIN_USER,
         payload: resp.data
     })
-}     */
+}    
