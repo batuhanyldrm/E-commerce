@@ -22,6 +22,9 @@ type ProductDTO struct {
 }
 
 type Images struct {
-	ID       string `json:"id" bson:"id"`
-	ImageUrl string `json:"imageUrl" bson:"imageUrl"`
+	ID        string `json:"id" bson:"id"`
+	ImageName string `json:"imageName" bson:"imageName"`
+	ImageUrl  string `json:"imageUrl" bson:"imageUrl"`
+	Header    string `json:"header" bson:"header"`
+	Size      string `json:"size" bson:"size"`
 }
