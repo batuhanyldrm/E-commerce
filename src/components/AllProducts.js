@@ -20,9 +20,6 @@ if (userToken) {
   try {
     const parsedToken = JSON.parse(JSON.stringify(decodedToken));
     const issuer = parsedToken.iss;
-    console.log(parsedToken,"xxxx")
-    console.log(issuer,"rrrr");
-    console.log(userToken,"ddtdt");
   } catch (e) {
     console.error('Error parsing JSON:', e);
   }
