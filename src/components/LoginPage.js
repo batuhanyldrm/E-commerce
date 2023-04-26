@@ -62,9 +62,9 @@ const LoginPage = (props) => {
         }
         try {
             await postLogin(data).then((res) => {
-                /* setTimeout(() => {
+                setTimeout(() => {
                   window.location = window.location.origin + "/allProducts";
-                }, 500); */
+                }, 500);
               })
         } catch (error) {
             console.log(error, "catch error")

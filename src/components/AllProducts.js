@@ -4,11 +4,14 @@ import { Button} from '@mui/material';
 import { connect } from 'react-redux';
 import { postLogout } from './api/userApi';
 import { loginUser } from './actions/userActions';
+import { fetchProducts } from './actions/productActions';
 
 /* const useStyles = makeStyles((theme) => ({
 })); */
 
 const AllProducts = (props) => {
+
+  const {user,loginUser,products,fetchProducts} = props
   //const classes = useStyles();
   const userToken = document.cookie.split(';')
   .map(cookie => cookie.trim())
@@ -25,10 +28,9 @@ if (userToken) {
   }
 }
 
-  const {user,loginUser} = props
-
   useEffect(() => {
     loginUser()
+    fetchProducts()
   }, [])
   
 
@@ -37,12 +39,25 @@ if (userToken) {
       <Button>
         logout
       </Button>
+      <div style={{display:"flex", justifyContent:"space-between"}}>
+        {products && products.map((product, index) => (
+          <div key={index} style={{ marginLeft:"5px", minWidth:200, maxWidth:200, minHeight:200, border:'1px solid lightgray', borderRadius:5}}>
+            <div style={{display:"flex", marginLeft:"5px"}}>
+              Product Name: {product.productName}
+            </div>
+            <div style={{display:"flex", marginLeft:"5px"}}>
+              Product Description: {product.description}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = (state) => ({
   user: state.user.user,
+  products: state.products.products
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -51,6 +66,9 @@ const mapDispatchToProps = (dispatch) => ({
 },
 loginUser: (user) => {
   dispatch(loginUser(user));
+},
+fetchProducts: () => {
+  dispatch(fetchProducts());
 },
 });
 
