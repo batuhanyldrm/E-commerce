@@ -28,4 +28,5 @@ type Images struct {
 	ImageUrl  string `json:"imageUrl" bson:"imageUrl"`
 	Header    string `json:"header" bson:"header"`
 	Size      string `json:"size" bson:"size"`
+	//Data      []byte `json:"data" bson:"data"`
 }

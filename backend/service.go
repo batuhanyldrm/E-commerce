@@ -104,6 +104,17 @@ func (service *Service) PostStocks(productDTO models.ProductDTO) *models.Product
 	stock.Description = productDTO.Description
 	stock.Price = productDTO.Price
 	stock.Amount = productDTO.Amount
+	//stock.Image = productDTO.Image //image için yeni eklendi
+
+	/* for _, img := range productDTO.Image {
+		img.ID = GenerateUUID(8)
+		data, err := ioutil.ReadFile(img.ImageUrl)
+		if err != nil {
+			return nil
+		}
+		img.Data = data
+	}
+	stock.Image = productDTO.Image */
 
 	err := service.Repository.PostStocks(stock)
 	if err != nil {
