@@ -78,14 +78,16 @@ if (userToken) {
       <div className={classes.allProduct}>
         <div className={classes.grid}>
           {products && products.map((product, index) => (
-            <div key={index} className={classes.products}>
-              <div className={classes.productName}>
-                Product Name: {product.productName}
+            //<a href='dsfsdf'>
+              <div key={index} className={classes.products}>
+                <div className={classes.productName}>
+                  Product Name: {product.productName}
+                </div>
+                <div className={classes.productName}>
+                  Product Description: {product.description}
+                </div>
               </div>
-              <div className={classes.productName}>
-                Product Description: {product.description}
-              </div>
-            </div>
+            //</a>
           ))}
         </div>
       </div>
