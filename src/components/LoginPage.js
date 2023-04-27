@@ -83,7 +83,7 @@ const LoginPage = (props) => {
 
   return (
     <>
-        <div style={{display:"flex", justifyContent:"space-between"}}>
+        <div style={{display:"flex", justifyContent:"space-around"}}>
             <div style={{display:"block"}}>
 
                 <div style={{marginBottom:"10px"}}>
@@ -139,8 +139,9 @@ const LoginPage = (props) => {
                 <div style={{marginBottom:"10px"}}>
                     <TextField 
                         style={{
-                            width:"380px",
-                            marginBottom:"10px"
+                            maxWidth:"380px",
+                            marginBottom:"10px",
+                            marginRight:"5px"
                         }} 
                         id="outlined-basic" 
                         label="Name" 
@@ -148,13 +149,9 @@ const LoginPage = (props) => {
                         value={name} 
                         onChange={(e) => setName(e.target.value)}
                     />
-                </div>
-
-                <div style={{marginBottom:"10px", maxWidth:"380px"}}>
-
-                <TextField 
+                    <TextField 
                     style={{
-                        width:"380px",
+                        maxWidth:"380px",
                         marginBottom:"10px"
                     }} 
                     id="outlined-basic" 
@@ -164,10 +161,13 @@ const LoginPage = (props) => {
                     value={surname}
                     onChange={(e) => setSurname(e.target.value)}
                 />
+                </div>
+
+                <div style={{marginBottom:"10px", maxWidth:"380px"}}>
 
                 <TextField 
                     style={{
-                        width:"380px",
+                        width:"395px",
                         marginBottom:"10px"
                     }} 
                     id="outlined-basic" 
@@ -180,7 +180,7 @@ const LoginPage = (props) => {
                 
                     <FormControl variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                        <OutlinedInput style={{ width:"380px",marginBottom:"10px",}}
+                        <OutlinedInput style={{ width:"395px",marginBottom:"10px",}}
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
                             
@@ -203,7 +203,7 @@ const LoginPage = (props) => {
                     </FormControl>
                     <FormControl variant="outlined">
                         <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
-                        <OutlinedInput style={{ width:"380px",marginBottom:"10px",}}
+                        <OutlinedInput style={{ width:"395px",marginBottom:"10px",}}
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
                             
@@ -226,7 +226,7 @@ const LoginPage = (props) => {
 
                     <TextField 
                         style={{
-                            width:"380px",
+                            width:"395px",
                             marginBottom:"10px"
                         }} 
                         id="outlined-basic" 
@@ -238,7 +238,7 @@ const LoginPage = (props) => {
                     />
                     <TextField 
                         style={{
-                            width:"380px",
+                            width:"395px",
                             marginBottom:"10px"
                         }} 
                         id="outlined-basic" 
@@ -251,7 +251,7 @@ const LoginPage = (props) => {
 
                     <TextField 
                         style={{
-                            width:"380px",
+                            width:"395px",
                             marginBottom:"10px"
                         }} 
                         id="outlined-basic" 
@@ -264,7 +264,7 @@ const LoginPage = (props) => {
 
                 </div>
                 <Button 
-                    style={{width:"380px"}} 
+                    style={{width:"395px"}} 
                     disableElevation 
                     variant="contained"
                     onClick={() => createUser()}
@@ -272,7 +272,6 @@ const LoginPage = (props) => {
                     Register
                 </Button>
             </div>
-            <div style={{width:"1px", backgroundColor:"gray"}}></div>
         </div>
     </>
   )
