@@ -57,7 +57,7 @@ function LeftDrawer(props) {
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                  <Link style={{textDecoration:"none", color:"black"}} to='/'>Home</Link>
+                  <Link style={{textDecoration:"none", color:"black"}} to='/allProducts'>Home</Link>
                   </ListItemIcon>
                 </ListItemButton>
               </ListItem>
