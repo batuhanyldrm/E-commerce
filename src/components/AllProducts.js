@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { postLogout } from './api/userApi';
 import { loginUser } from './actions/userActions';
 import { fetchProducts } from './actions/productActions';
+import ResponsiveAppBar from './ResponsiveAppBar';
 
 const useStyles = makeStyles((theme) => ({
   allProduct:{
@@ -71,10 +72,12 @@ if (userToken) {
   
 
   return (
+    <>
     <div>
-      <Button>
+      {/* <Button>
         logout
-      </Button>
+      </Button> */}
+      <ResponsiveAppBar/>
       <div className={classes.allProduct}>
         <div className={classes.grid}>
           {products && products.map((product, index) => (
@@ -92,6 +95,7 @@ if (userToken) {
         </div>
       </div>
     </div>
+    </>
   )
 }
 
