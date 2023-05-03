@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
 import { postLogin, postRegister } from './api/userApi';
 import { loginUser } from './actions/userActions';
-/*import AllProducts from './AllProducts'; */
+import MuiPhoneNumber from 'material-ui-phone-number';
 
 const LoginPage = (props) => {
 
@@ -29,8 +29,8 @@ const LoginPage = (props) => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("")
     const [redirect, setRedirect] = useState(false)
-    /* onst [company, setCompany] = useState([]);
-    const [role, setRole] = useState(""); */
+    const [company, setCompany] = useState([]);
+    const [role, setRole] = useState("");
 
     const createUser = async () => {
         const data = {
@@ -92,6 +92,7 @@ const LoginPage = (props) => {
                         id="outlined-basic" 
                         label="E-mail" 
                         variant="outlined"
+                        type="email"
                         value={loginEmail}
                         onChange={(e) => setLoginEmail(e.target.value)}
                     />
@@ -173,7 +174,7 @@ const LoginPage = (props) => {
                     id="outlined-basic" 
                     label="E-mail" 
                     variant="outlined"
-                    type="text"
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -224,19 +225,24 @@ const LoginPage = (props) => {
                         />
                     </FormControl>
 
-                    <TextField 
+                    <TextField
                         style={{
                             width:"395px",
                             marginBottom:"10px"
                         }} 
-                        id="outlined-basic" 
-                        label="Phone" 
-                        variant="outlined"
-                        type="text"
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)} 
+                        onChange={(value) => setPhone(value)}
+                        InputProps={{
+                        inputComponent: MuiPhoneNumber,
+                        inputProps: {
+                            locale: 'tr',
+                            defaultCountry: 'tr',
+                            format: '+## ### ### ## ##'
+                        },
+                        disableUnderline: true,
+                        }}
                     />
-                    <TextField 
+                   <TextField 
                         style={{
                             width:"395px",
                             marginBottom:"10px"
@@ -245,8 +251,8 @@ const LoginPage = (props) => {
                         label="Company" 
                         variant="outlined"
                         type="text"
-                        /* value={company}
-                        onChange={(e) => setCompany(e.target.value)} */
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
                     />
 
                     <TextField 
@@ -258,8 +264,8 @@ const LoginPage = (props) => {
                         label="Role" 
                         variant="outlined"
                         type="text"
-                       /*  value={role}
-                        onChange={(e) => setRole(e.target.value)} */
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                     />
 
                 </div>

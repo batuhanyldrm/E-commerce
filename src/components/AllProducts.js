@@ -50,7 +50,7 @@ const AllProducts = (props) => {
 
   const {user,loginUser,products,fetchProducts} = props
   const classes = useStyles();
-  const userToken = document.cookie.split(';')
+/*   const userToken = document.cookie.split(';')
   .map(cookie => cookie.trim())
   .find(cookie => cookie.startsWith('user_token='))
   ?.split('=')[1];
@@ -63,7 +63,7 @@ if (userToken) {
   } catch (e) {
     console.error('Error parsing JSON:', e);
   }
-}
+} */
 
   useEffect(() => {
     loginUser()
