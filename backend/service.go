@@ -5,7 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"example.com/greetings/models"
+	"example/models"
+
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 )

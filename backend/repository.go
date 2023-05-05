@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"example.com/greetings/models"
+	"example/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

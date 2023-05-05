@@ -1,18 +1,20 @@
 package main
 
 import (
-	/* "context"
-	"fmt" */
+	"context"
+	"fmt"
+	"io"
+	"os"
 
 	"time"
 
-	"example.com/greetings/models"
-	/* 	firebase "firebase.google.com/go" */
+	"example/models"
+	firebase "firebase.google.com/go"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
-	/* "github.com/google/uuid"
-	"github.com/joho/godotenv"
-	"google.golang.org/api/option" */)
+	"github.com/google/uuid"
+	"google.golang.org/api/option"
+)
 
 type Api struct {
 	Service *Service
@@ -125,7 +127,6 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 	}
-	/* godotenv.Load("app.env")
 
 	opt := option.WithCredentialsFile("serviceAccountKey.json")
 	app, err := firebase.NewApp(context.Background(), nil, opt)
@@ -162,7 +163,7 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	if _, err := io.Copy(writer, f); err != nil {
 		return fmt.Errorf("error initializing app: %v", err)
 	}
-	fmt.Println("qqqqq") */
+	fmt.Println("qqqqq")
 
 	stock := api.Service.PostStocks(createStocks)
 

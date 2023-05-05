@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
@@ -15,9 +17,12 @@ func main() {
 
 func SetupApp(api *Api) *fiber.App {
 	app := fiber.New()
+	os.Setenv("BUCKET_NAME", "graduation-project-5ff56.appspot.com")
 
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,
+		AllowOrigins:     "http://localhost:3000",
+		AllowHeaders:     "Origin, Content-Type, Accept",
 	}))
 
 	//stock

@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"example.com/greetings/models"
+	"example/models"
 	"github.com/gofiber/fiber/v2"
 	. "github.com/smartystreets/goconvey/convey"
 )
