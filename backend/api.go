@@ -1,12 +1,18 @@
 package main
 
 import (
+	/* "context"
+	"fmt" */
+
 	"time"
 
 	"example.com/greetings/models"
+	/* 	firebase "firebase.google.com/go" */
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
-)
+	/* "github.com/google/uuid"
+	"github.com/joho/godotenv"
+	"google.golang.org/api/option" */)
 
 type Api struct {
 	Service *Service
@@ -119,6 +125,45 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 	}
+	/* godotenv.Load("app.env")
+
+	opt := option.WithCredentialsFile("serviceAccountKey.json")
+	app, err := firebase.NewApp(context.Background(), nil, opt)
+	if err != nil {
+		return fmt.Errorf("error initializing app: %v", err)
+	}
+
+	client, err := app.Storage(context.TODO())
+	if err != nil {
+		return fmt.Errorf("error getting storage client: %v", err)
+	}
+	buckedHandle, err := client.Bucket(os.Getenv("BUCKET_NAME"))
+	if err != nil {
+		return fmt.Errorf("error getting storage bucket: %v", err)
+	}
+
+	f, err := os.Open("Iaulogo.png")
+	if err != nil {
+		fmt.Println("error opening casual.jpg")
+		return err
+	}
+
+	defer f.Close()
+
+	objectHandle := buckedHandle.Object(f.Name())
+
+	writer := objectHandle.NewWriter(context.Background())
+
+	id := uuid.New()
+
+	writer.ObjectAttrs.Metadata = map[string]string{"firebaseStorageDownloadTokens": id.String()}
+	defer writer.Close()
+
+	if _, err := io.Copy(writer, f); err != nil {
+		return fmt.Errorf("error initializing app: %v", err)
+	}
+	fmt.Println("qqqqq") */
+
 	stock := api.Service.PostStocks(createStocks)
 
 	switch err {
