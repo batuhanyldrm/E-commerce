@@ -8,7 +8,7 @@ type Product struct {
 	Description string    `json:"description" bson:"description"`
 	Price       int       `json:"price" bson:"price"`
 	Amount      int       `json:"amount" bson:"amount"`
-	Image       []Images  `json:"image" bson:"image"`
+	Image       string  `json:"image" bson:"image"`
 	CreatedAt   time.Time `json:"createdAt" bson:"createdAt"`
 	UpdatedAt   time.Time `json:"updatedAt" bson:"updatedAt"`
 }
@@ -17,7 +17,7 @@ type ProductDTO struct {
 	Description string    `json:"description" bson:"description"`
 	Price       int       `json:"price" bson:"price"`
 	Amount      int       `json:"amount" bson:"amount"`
-	Image       []Images  `json:"image" bson:"image"`
+	Image       string  `json:"image" bson:"image"`
 	CreatedAt   time.Time `json:"createdAt" bson:"createdAt"`
 	UpdatedAt   time.Time `json:"updatedAt" bson:"updatedAt"`
 }
