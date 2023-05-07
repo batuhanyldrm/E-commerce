@@ -12,10 +12,26 @@ import FormControl from '@mui/material/FormControl';
 import { postLogin, postRegister } from './api/userApi';
 import { loginUser } from './actions/userActions';
 import MuiPhoneNumber from 'material-ui-phone-number';
+import loginVideo from "./video/login.mp4"
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+    video:{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        minWidth: "100%",
+        minHeight: "100%",
+        zIndex: -1,
+        background: "#110313",
+        mixBlendMode: "overlay",
+    },
+  }));
 
 const LoginPage = (props) => {
 
     const {user,loginUser} = props;
+    const classes = useStyles();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -84,10 +100,13 @@ const LoginPage = (props) => {
   return (
     <>
         <div style={{display:"flex", justifyContent:"space-around"}}>
+        <video className={classes.video} autoPlay muted loop id="background-video">
+      <source src={loginVideo} type="video/mp4" />
+    </video>
             <div style={{display:"block"}}>
 
                 <div style={{marginBottom:"10px"}}>
-                    <TextField 
+                    <TextField
                         style={{width:"380px"}} 
                         id="outlined-basic" 
                         label="E-mail" 
