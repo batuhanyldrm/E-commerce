@@ -100,9 +100,9 @@ const LoginPage = (props) => {
   return (
     <>
         <div style={{display:"flex", justifyContent:"space-around"}}>
-        <video className={classes.video} autoPlay muted loop id="background-video">
-      <source src={loginVideo} type="video/mp4" />
-    </video>
+            <video className={classes.video} autoPlay muted loop id="background-video">
+                <source src={loginVideo} type="video/mp4" />
+            </video>
             <div style={{display:"block"}}>
 
                 <div style={{marginBottom:"10px"}}>
