@@ -153,13 +153,12 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 		fmt.Println("error formfile")
 		return err
 	}
-
-	objectHandle := buckedHandle.Object(file.Filename)
+	imageId := uuid.New()
+	objectHandle := buckedHandle.Object(imageId.String())
 
 	writer := objectHandle.NewWriter(context.Background())
 
 	id := uuid.New()
-	imageId := uuid.New()
 
 	writer.ObjectAttrs.Metadata = map[string]string{"firebaseStorageDownloadTokens": id.String()}
 	defer writer.Close()
@@ -170,6 +169,7 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	fmt.Println(c.FormValue("productName"))
 	fmt.Println(c.FormValue("description"))
 	fmt.Println("qqqqq")
+
 	createStocks.Image = imageId.String()
 	createStocks.ProductName = c.FormValue("productName")
 	amount, err := strconv.Atoi(c.FormValue("amount"))
