@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strconv"
 
 	"time"
 
 	"example/models"
+
 	firebase "firebase.google.com/go"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
@@ -143,15 +145,16 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 		return fmt.Errorf("error getting storage bucket: %v", err)
 	}
 
-	f, err := os.Open("Iaulogo.png")
+	file, err := c.FormFile("image")
+
+	f, err := file.Open()
+
 	if err != nil {
-		fmt.Println("error opening casual.jpg")
+		fmt.Println("error formfile")
 		return err
 	}
 
-	defer f.Close()
-
-	objectHandle := buckedHandle.Object(f.Name())
+	objectHandle := buckedHandle.Object(file.Filename)
 
 	writer := objectHandle.NewWriter(context.Background())
 
@@ -163,7 +166,12 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	if _, err := io.Copy(writer, f); err != nil {
 		return fmt.Errorf("error initializing app: %v", err)
 	}
+	fmt.Println(c.FormValue("productName"))
+	fmt.Println(c.FormValue("description"))
 	fmt.Println("qqqqq")
+	createStocks.ProductName = c.FormValue("productName")
+	amount, err := strconv.Atoi(c.FormValue("amount"))
+	createStocks.Amount = amount
 
 	stock := api.Service.PostStocks(createStocks)
 
