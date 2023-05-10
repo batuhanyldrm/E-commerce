@@ -4,6 +4,7 @@ import Product from "../Product";
 import Page from "../common/Page";
 import LoginPage from "../LoginPage";
 import AllProducts from "../AllProducts";
+import SignUp from "../SignUp";
 
 const RouterPage = () => {
   return (
@@ -13,6 +14,7 @@ const RouterPage = () => {
             <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<LoginPage component={LoginPage} title={"Home"} />}></Route>
           </Route>
+          <Route path="/sign-up" element={<SignUp component={SignUp} title={"Home"} />}></Route>
           <Route path="/allProducts" element={<AllProducts component={LoginPage} title={"AllProducts"} />}></Route>
           <Route exact path="/stock" element={<Page component={Product} title={"Mevcut Stoklar"} />}></Route>
         </Routes>
