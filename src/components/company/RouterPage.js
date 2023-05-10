@@ -15,7 +15,7 @@ const RouterPage = () => {
             <Route path="/login" element={<LoginPage component={LoginPage} title={"Home"} />}></Route>
           </Route>
           <Route path="/sign-up" element={<SignUp component={SignUp} title={"Home"} />}></Route>
-          <Route path="/allProducts" element={<AllProducts component={LoginPage} title={"AllProducts"} />}></Route>
+          <Route path="/all-products" element={<AllProducts component={LoginPage} title={"AllProducts"} />}></Route>
           <Route exact path="/stock" element={<Page component={Product} title={"Mevcut Stoklar"} />}></Route>
         </Routes>
           

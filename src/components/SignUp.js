@@ -1,13 +1,6 @@
 import {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import TextField from '@mui/material/TextField';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import IconButton from '@mui/material/IconButton';
-import { postLogin, postRegister } from './api/userApi';
+import { postRegister } from './api/userApi';
 import { loginUser } from './actions/userActions';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import loginVideo from "./video/login.mp4"
@@ -62,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = (props) => {
 
-    const {user,loginUser} = props;
+    const {} = props;
     const classes = useStyles();
 
     const [showPassword, setShowPassword] = useState(false);
@@ -74,12 +67,9 @@ const SignUp = (props) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phone, setPhone] = useState("");
 
-    const [loginEmail, setLoginEmail] = useState("");
-    const [loginPassword, setLoginPassword] = useState("");
-
-    const [redirect, setRedirect] = useState(false)
-    const [company, setCompany] = useState([]);
-    const [role, setRole] = useState("");
+    //const [redirect, setRedirect] = useState(false)
+    //const [company, setCompany] = useState([]);
+    //const [role, setRole] = useState("");
 
     const createUser = async () => {
         const data = {
@@ -104,31 +94,11 @@ const SignUp = (props) => {
         }
     }
 
-    const handleloginUser = async () => {
-        const data = {
-            email: loginEmail,
-            password: loginPassword,
-        }
-        try {
-            await postLogin(data).then((res) => {
-                setTimeout(() => {
-                  window.location = window.location.origin + "/allProducts";
-                }, 500);
-              })
-        } catch (error) {
-            console.log(error, "catch error")
-        }
-        setRedirect(true)
-    }
-    useEffect(() => {
-        loginUser()
-      }, [])
+    //const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    //const handleMouseDownPassword = (event) => {
+    //    event.preventDefault();
+    //};
 
   return (
     <>
@@ -160,6 +130,28 @@ const SignUp = (props) => {
             <Typography level="body2">Sign in to continue.</Typography>
           </div>
           <FormControl>
+            <FormLabel>Name</FormLabel>
+            <Input
+              // html input attribute
+              name="name"
+              type="name"
+              placeholder="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Surname</FormLabel>
+            <Input
+              // html input attribute
+              name="surname"
+              type="surname"
+              placeholder="surname"
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)}
+            />
+          </FormControl>
+          <FormControl>
             <FormLabel>Email</FormLabel>
             <Input
               // html input attribute
@@ -181,8 +173,30 @@ const SignUp = (props) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
+          <FormControl>
+            <FormLabel>Confirm Password</FormLabel>
+            <Input
+              // html input attribute
+              name="Confirm Password"
+              type="Confirm Password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Phone</FormLabel>
+            <Input
+              // html input attribute
+              name="phone"
+              type="phone"
+              placeholder="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </FormControl>
 
-          <Button sx={{ mt: 1 /* margin top */ }} onClick={createUser}>Sign up</Button>
+          <Button sx={{ mt: 1 }} onClick={createUser}>Sign up</Button>
           <Typography
             endDecorator={<Link href="/login">Login</Link>}
             fontSize="sm"

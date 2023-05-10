@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+/* import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -50,22 +50,22 @@ const LoginPage = (props) => {
 
     const createUser = async () => {
         const data = {
-            /* company: company, */
+            //company: company,
             name: name,
             surname: surname,
             email: email,
             password: password,
             tel: phone,
-            /* role: role, */
+            //role: role,
         }
         try {
             await postRegister(data)
-            /* .then((res) => {
-                    console.log(res,"başarılı")
-                    addUser(res.data)
-                }).finally((err) => {
-                    console.log(err, "error")
-                }) */
+            // .then((res) => {
+            //        console.log(res,"başarılı")
+              //      addUser(res.data)
+              //  }).finally((err) => {
+               //     console.log(err, "error")
+               // }) 
         } catch (error) {
             console.log(error, "catch error")
         }
@@ -79,7 +79,7 @@ const LoginPage = (props) => {
         try {
             await postLogin(data).then((res) => {
                 setTimeout(() => {
-                  window.location = window.location.origin + "/allProducts";
+                  window.location = window.location.origin + "/all-products";
                 }, 500);
               })
         } catch (error) {
@@ -312,9 +312,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps) (LoginPage)
+export default connect(mapStateToProps, mapDispatchToProps) (LoginPage) */
 
-/* 
+
 import {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import TextField from '@mui/material/TextField';
@@ -428,7 +428,7 @@ const LoginPage = (props) => {
         try {
             await postLogin(data).then((res) => {
                 setTimeout(() => {
-                  window.location = window.location.origin + "/allProducts";
+                  window.location = window.location.origin + "/all-products";
                 }, 500);
               })
         } catch (error) {
@@ -524,4 +524,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (LoginPage)
- */
