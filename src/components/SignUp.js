@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { postRegister } from './api/userApi';
 import { loginUser } from './actions/userActions';
@@ -14,46 +14,49 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
-
-function ModeToggle() {
-    const { mode, setMode } = useColorScheme();
-    const [mounted, setMounted] = React.useState(false);
-  
-    // necessary for server-side rendering
-    // because mode is undefined on the server
-    React.useEffect(() => {
-      setMounted(true);
-    }, []);
-    if (!mounted) {
-      return null;
-    }
-  
-    return (
-      <Button 
-        size='sm'
-        style={{marginLeft:10}}
-        variant="outlined"
-        onClick={() => {
-          setMode(mode === 'light' ? 'dark' : 'light');
-        }}
-      >
-        {mode === 'light' ? 'Turn dark' : 'Turn light'}
-      </Button>
-    );
-  }
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import IconButton from '@mui/joy/IconButton';
 
 const useStyles = makeStyles((theme) => ({
-    video:{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        minWidth: "100%",
-        minHeight: "100%",
-        zIndex: -1,
-        background: "#110313",
-        mixBlendMode: "overlay",
-    },
-  }));
+  video:{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      minWidth: "100%",
+      minHeight: "100%",
+      zIndex: -1,
+      background: "#110313",
+      mixBlendMode: "overlay",
+  },
+}));
+
+function ModeToggle() {
+  const { mode, setMode } = useColorScheme();
+  const [mounted, setMounted] = useState(false);
+
+  // necessary for server-side rendering
+  // because mode is undefined on the server
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <Button 
+      size='sm'
+      style={{marginLeft:10}}
+      variant="outlined"
+      onClick={() => {
+        setMode(mode === 'light' ? 'dark' : 'light');
+      }}
+    >
+      {mode === 'light' ? 'Turn dark' : 'Turn light'}
+    </Button>
+  );
+}
 
 const SignUp = (props) => {
 
@@ -61,6 +64,7 @@ const SignUp = (props) => {
     const classes = useStyles();
 
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
@@ -96,11 +100,16 @@ const SignUp = (props) => {
         }
     }
 
-    //const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
 
-    //const handleMouseDownPassword = (event) => {
-    //    event.preventDefault();
-    //};
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    const handleMouseDownConfirmPassword = (event) => {
+      event.preventDefault();
+    };
 
   return (
     <>
@@ -171,10 +180,18 @@ const SignUp = (props) => {
             <Input
               // html input attribute
               name="password"
-              type="password"
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              type={showPassword ? 'text' : 'password'}              
+              endDecorator={
+                <IconButton 
+                  variant="plain" 
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              }
             />
           </FormControl>
           <FormControl>
@@ -182,10 +199,18 @@ const SignUp = (props) => {
             <Input
               // html input attribute
               name="Confirm Password"
-              type="Confirm Password"
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              type={showConfirmPassword ? 'text' : 'password'}              
+              endDecorator={
+                <IconButton 
+                  variant="plain" 
+                  onClick={handleClickShowConfirmPassword}
+                  onMouseDown={handleMouseDownConfirmPassword}>
+                  {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              }
             />
           </FormControl>
           <FormControl>

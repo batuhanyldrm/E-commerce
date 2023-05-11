@@ -227,6 +227,8 @@ const LoginPage = (props) => {
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
                             
+
+
                             endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
@@ -317,15 +319,10 @@ export default connect(mapStateToProps, mapDispatchToProps) (LoginPage) */
 
 import {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import IconButton from '@mui/material/IconButton';
-import { postLogin, postRegister } from './api/userApi';
+import { postLogin } from './api/userApi';
 import { loginUser } from './actions/userActions';
-import MuiPhoneNumber from 'material-ui-phone-number';
 import loginVideo from "./video/login.mp4"
 import { makeStyles } from '@mui/styles';
 import * as React from 'react';
@@ -337,33 +334,35 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
+import IconButton from '@mui/joy/IconButton';
+
 
 function ModeToggle() {
-    const { mode, setMode } = useColorScheme();
-    const [mounted, setMounted] = React.useState(false);
-  
-    // necessary for server-side rendering
-    // because mode is undefined on the server
-    React.useEffect(() => {
-      setMounted(true);
-    }, []);
-    if (!mounted) {
-      return null;
-    }
-  
-    return (
-      <Button 
-        size='sm'
-        style={{marginLeft:10}}
-        variant="outlined"
-        onClick={() => {
-          setMode(mode === 'light' ? 'dark' : 'light');
-        }}
-      >
-        {mode === 'light' ? 'Turn dark' : 'Turn light'}
-      </Button>
-    );
+  const { mode, setMode } = useColorScheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  // necessary for server-side rendering
+  // because mode is undefined on the server
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) {
+    return null;
   }
+
+  return (
+    <Button 
+      size='sm'
+      style={{marginLeft:10}}
+      variant="outlined"
+      onClick={() => {
+        setMode(mode === 'light' ? 'dark' : 'light');
+      }}
+    >
+      {mode === 'light' ? 'Turn dark' : 'Turn light'}
+    </Button>
+  );
+}
 
 const useStyles = makeStyles((theme) => ({
     video:{
@@ -376,76 +375,46 @@ const useStyles = makeStyles((theme) => ({
         background: "#110313",
         mixBlendMode: "overlay",
     },
-  }));
+}));
 
 const LoginPage = (props) => {
 
-    const {user,loginUser} = props;
-    const classes = useStyles();
+  const {user,loginUser} = props;
+  const classes = useStyles();
 
-    const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-    const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [phone, setPhone] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("")
+  const [redirect, setRedirect] = useState(false)
+  //const [company, setCompany] = useState([]);
+  //const [role, setRole] = useState("");
 
-    const [loginEmail, setLoginEmail] = useState("");
-    const [loginPassword, setLoginPassword] = useState("")
-    const [redirect, setRedirect] = useState(false)
-    const [company, setCompany] = useState([]);
-    const [role, setRole] = useState("");
+  const handleloginUser = async () => {
+      const data = {
+          email: loginEmail,
+          password: loginPassword,
+      }
+      try {
+          await postLogin(data).then((res) => {
+              setTimeout(() => {
+                window.location = window.location.origin + "/all-products";
+              }, 500);
+            })
+      } catch (error) {
+          console.log(error, "catch error")
+      }
+      setRedirect(true)
+  }
+  useEffect(() => {
+      loginUser()
+    }, [])
 
-    const createUser = async () => {
-        const data = {
-            //company: company,
-            name: name,
-            surname: surname,
-            email: email,
-            password: password,
-            tel: phone,
-            //role: role,
-        }
-        try {
-            await postRegister(data)
-            //.then((res) => {
-              //      console.log(res,"başarılı")
-               //     addUser(res.data)
-               // }).finally((err) => {
-                 //   console.log(err, "error")
-                //}) 
-        } catch (error) {
-            console.log(error, "catch error")
-        }
-    }
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    const handleloginUser = async () => {
-        const data = {
-            email: loginEmail,
-            password: loginPassword,
-        }
-        try {
-            await postLogin(data).then((res) => {
-                setTimeout(() => {
-                  window.location = window.location.origin + "/all-products";
-                }, 500);
-              })
-        } catch (error) {
-            console.log(error, "catch error")
-        }
-        setRedirect(true)
-    }
-    useEffect(() => {
-        loginUser()
-      }, [])
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+  const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+};
 
   return (
     <>
@@ -454,21 +423,6 @@ const LoginPage = (props) => {
             </video>
             <CssVarsProvider>
       <main>
-       {/*  <div
-          style={{
-            display: "relative",
-            height: "100vh",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "100%",
-            }}
-          > */}
             <Sheet
               sx={{
                 width: 300,
@@ -512,10 +466,15 @@ const LoginPage = (props) => {
                   placeholder="password"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
-                  type={showPassword ? 'text' : 'password'}
-                                
-                  endDecorator=
+                  type={showPassword ? 'text' : 'password'}              
+                  endDecorator={
+                    <IconButton 
+                      variant="plain" 
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}>
                       {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  }
                 />
               </FormControl>
 
@@ -528,8 +487,6 @@ const LoginPage = (props) => {
                 Don&apos;t have an account?
               </Typography>
             </Sheet>
-        {/*   </div>
-        </div> */}
       </main>
     </CssVarsProvider>
     </>
