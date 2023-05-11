@@ -95,63 +95,6 @@ func (service *Service) UpdateStocks(productDTO models.ProductDTO, ID string) (*
 	return &stock, nil
 }
 
-/* func (service *Service) PostStocks(productDTO models.ProductDTO) (*models.Product, error) {
-
-	stock := models.Product{}
-	stock.ID = GenerateUUID(8)
-	stock.CreatedAt = time.Now().UTC().Round(time.Second)
-	stock.UpdatedAt = time.Now().UTC().Round(time.Second)
-	stock.ProductName = productDTO.ProductName
-	stock.Description = productDTO.Description
-	stock.Price = productDTO.Price
-	stock.Amount = productDTO.Amount
-
-	opt := option.WithCredentialsFile("serviceAccountKey.json")
-	app, err := firebase.NewApp(context.Background(), nil, opt)
-	if err != nil {
-		return nil, fmt.Errorf("error initializing app: %v", err)
-	}
-
-	client, err := app.Storage(context.TODO())
-	if err != nil {
-		return nil, fmt.Errorf("error getting storage client: %v", err)
-	}
-	bucketHandle, err := client.Bucket(os.Getenv("BUCKET_NAME"))
-	if err != nil {
-		return nil, fmt.Errorf("error getting storage bucket: %v", err)
-	}
-
-	f, err := os.Open(productDTO.Image)
-	if err != nil {
-		fmt.Println("error opening image:", productDTO.Image)
-		return nil, err
-	}
-
-	defer f.Close()
-
-	objectHandle := bucketHandle.Object(f.Name())
-
-	writer := objectHandle.NewWriter(context.Background())
-
-	id := uuid.New()
-
-	writer.ObjectAttrs.Metadata = map[string]string{"firebaseStorageDownloadTokens": id.String()}
-	defer writer.Close()
-
-	if _, err := io.Copy(writer, f); err != nil {
-		return nil, fmt.Errorf("error copying file to storage: %v", err)
-	}
-
-	stock.Image = objectHandle.ObjectName() // set the image URL to the Firebase Storage URL
-
-	err = service.Repository.PostStocks(stock)
-	if err != nil {
-		return nil, err
-	}
-
-	return &stock, nil
-} */
-
 func (service *Service) PostStocks(productDTO models.ProductDTO) *models.Product {
 
 	stock := models.Product{}
@@ -162,17 +105,7 @@ func (service *Service) PostStocks(productDTO models.ProductDTO) *models.Product
 	stock.Description = productDTO.Description
 	stock.Price = productDTO.Price
 	stock.Amount = productDTO.Amount
-	//stock.Image = productDTO.Image //image için yeni eklendi
-
-	/* for _, img := range productDTO.Image {
-		img.ID = GenerateUUID(8)
-		data, err := ioutil.ReadFile(img.ImageUrl)
-		if err != nil {
-			return nil
-		}
-		img.Data = data
-	}
-	stock.Image = productDTO.Image */
+	stock.Image = productDTO.Image
 
 	err := service.Repository.PostStocks(stock)
 	if err != nil {

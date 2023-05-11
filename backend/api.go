@@ -125,10 +125,6 @@ func (api *Api) UpdateStocksHandler(c *fiber.Ctx) error {
 func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 
 	createStocks := models.ProductDTO{}
-	err := c.BodyParser(&createStocks)
-	if err != nil {
-		c.Status(fiber.StatusBadRequest)
-	}
 
 	opt := option.WithCredentialsFile("serviceAccountKey.json")
 	app, err := firebase.NewApp(context.Background(), nil, opt)
@@ -170,8 +166,9 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	fmt.Println(c.FormValue("description"))
 	fmt.Println("qqqqq")
 
-	createStocks.Image = imageId.String()
+	createStocks.Image = "https://firebasestorage.googleapis.com/v0/b/graduation-project-5ff56.appspot.com/o/" + imageId.String()
 	createStocks.ProductName = c.FormValue("productName")
+	createStocks.Description = c.FormValue("description")
 	amount, err := strconv.Atoi(c.FormValue("amount"))
 	createStocks.Amount = amount
 	price, err := strconv.Atoi(c.FormValue("price"))
