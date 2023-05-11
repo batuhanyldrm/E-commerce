@@ -29,7 +29,9 @@ function ModeToggle() {
     }
   
     return (
-      <Button
+      <Button 
+        size='sm'
+        style={{marginLeft:10}}
         variant="outlined"
         onClick={() => {
           setMode(mode === 'light' ? 'dark' : 'light');
@@ -107,17 +109,16 @@ const SignUp = (props) => {
             </video>
             <CssVarsProvider>
       <main>
-        <ModeToggle />
         <Sheet
           sx={{
             width: 300,
             mx: 'auto', // margin left & right
-            my: 4, // margin top & bottom
-            py: 3, // padding top & bottom
+            my: 7, // margin top & bottom
+            py: 2, // padding top & bottom
             px: 2, // padding left & right
             display: 'flex',
             flexDirection: 'column',
-            gap: 2,
+            gap: 1,
             borderRadius: 'sm',
             boxShadow: 'md',
           }}
@@ -127,7 +128,10 @@ const SignUp = (props) => {
             <Typography level="h4" component="h1">
               <b>Welcome!</b>
             </Typography>
-            <Typography level="body2">Sign in to continue.</Typography>
+            <Typography level="body2">
+              Sign in to continue.
+              <ModeToggle />
+            </Typography>
           </div>
           <FormControl>
             <FormLabel>Name</FormLabel>

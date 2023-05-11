@@ -352,7 +352,9 @@ function ModeToggle() {
     }
   
     return (
-      <Button
+      <Button 
+        size='sm'
+        style={{marginLeft:10}}
         variant="outlined"
         onClick={() => {
           setMode(mode === 'light' ? 'dark' : 'light');
@@ -452,62 +454,82 @@ const LoginPage = (props) => {
             </video>
             <CssVarsProvider>
       <main>
-        <ModeToggle />
-        <Sheet
-          sx={{
-            width: 300,
-            mx: 'auto', // margin left & right
-            my: 4, // margin top & bottom
-            py: 3, // padding top & bottom
-            px: 2, // padding left & right
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-            borderRadius: 'sm',
-            boxShadow: 'md',
+       {/*  <div
+          style={{
+            display: "relative",
+            height: "100vh",
           }}
-          variant="outlined"
         >
-          <div>
-            <Typography level="h4" component="h1">
-              <b>Welcome!</b>
-            </Typography>
-            <Typography level="body2">Sign in to continue.</Typography>
-          </div>
-          <FormControl>
-            <FormLabel>Email</FormLabel>
-            <Input
-              // html input attribute
-              name="email"
-              type="email"
-              placeholder="johndoe@email.com"
-              value={loginEmail}
-              onChange={(e) => setLoginEmail(e.target.value)}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Password</FormLabel>
-            <Input
-              // html input attribute
-              name="password"
-              placeholder="password"
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
-              type={showPassword ? 'text' : 'password'}
-                            
-              endDecorator={<Visibility />}
-            />
-          </FormControl>
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "100%",
+            }}
+          > */}
+            <Sheet
+              sx={{
+                width: 300,
+                mx: 'auto', // margin left & right
+                my: 7, // margin top & bottom
+                py: 3, // padding top & bottom
+                px: 2, // padding left & right
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+                borderRadius: 'sm',
+                boxShadow: 'md',
+              }}
+              variant="outlined"
+            >
+              <div>
+                <Typography level="h4" component="h1">
+                  <b>Welcome!</b>
+                </Typography>
+                <Typography level="body2">
+                  Sign in to continue.
+                  <ModeToggle />
+                </Typography>
+              </div>
+              <FormControl>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  // html input attribute
+                  name="email"
+                  type="email"
+                  placeholder="johndoe@email.com"
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  // html input attribute
+                  name="password"
+                  placeholder="password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  type={showPassword ? 'text' : 'password'}
+                                
+                  endDecorator=
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                />
+              </FormControl>
 
-          <Button sx={{ mt: 1}} onClick={handleloginUser}>Log in</Button>
-          <Typography
-            endDecorator={<Link href="/sign-up">Sign up</Link>}
-            fontSize="sm"
-            sx={{ alignSelf: 'center' }}
-          >
-            Don&apos;t have an account?
-          </Typography>
-        </Sheet>
+              <Button sx={{ mt: 1}} onClick={handleloginUser}>Log in</Button>
+              <Typography
+                endDecorator={<Link href="/sign-up">Sign up</Link>}
+                fontSize="sm"
+                sx={{ alignSelf: 'center' }}
+              >
+                Don&apos;t have an account?
+              </Typography>
+            </Sheet>
+        {/*   </div>
+        </div> */}
       </main>
     </CssVarsProvider>
     </>
