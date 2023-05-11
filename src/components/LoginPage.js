@@ -317,7 +317,6 @@ export default connect(mapStateToProps, mapDispatchToProps) (LoginPage) */
 
 import {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
-import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -491,10 +490,12 @@ const LoginPage = (props) => {
             <Input
               // html input attribute
               name="password"
-              type="password"
               placeholder="password"
               value={loginPassword}
               onChange={(e) => setLoginPassword(e.target.value)}
+              type={showPassword ? 'text' : 'password'}
+                            
+              endDecorator={<Visibility />}
             />
           </FormControl>
 
