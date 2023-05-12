@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Button} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
 import { postLogout } from './api/userApi';
@@ -50,33 +49,21 @@ const AllProducts = (props) => {
 
   const {user,loginUser,products,fetchProducts} = props
   const classes = useStyles();
-/*   const userToken = document.cookie.split(';')
-  .map(cookie => cookie.trim())
-  .find(cookie => cookie.startsWith('user_token='))
-  ?.split('=')[1];
-
-if (userToken) {
-  const decodedToken = decodeURIComponent(userToken);
-  try {
-    const parsedToken = JSON.parse(JSON.stringify(decodedToken));
-    const issuer = parsedToken.iss;
-  } catch (e) {
-    console.error('Error parsing JSON:', e);
-  }
-} */
 
   useEffect(() => {
-    loginUser()
     fetchProducts()
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      loginUser()
+    }
   }, [])
   
 
   return (
     <>
     <div>
-      {/* <Button>
-        logout
-      </Button> */}
       <ResponsiveAppBar/>
       <div className={classes.allProduct}>
         <div className={classes.grid}>

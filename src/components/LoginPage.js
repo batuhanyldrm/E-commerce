@@ -322,7 +322,7 @@ import { connect } from 'react-redux';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { postLogin } from './api/userApi';
-import { loginUser } from './actions/userActions';
+/* import { loginUser } from './actions/userActions'; */
 import loginVideo from "./video/login.mp4"
 import { makeStyles } from '@mui/styles';
 import * as React from 'react';
@@ -387,8 +387,6 @@ const LoginPage = (props) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("")
   const [redirect, setRedirect] = useState(false)
-  //const [company, setCompany] = useState([]);
-  //const [role, setRole] = useState("");
 
   const handleloginUser = async () => {
       const data = {
@@ -407,7 +405,7 @@ const LoginPage = (props) => {
       setRedirect(true)
   }
   useEffect(() => {
-      loginUser()
+      /* loginUser() */
     }, [])
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -498,9 +496,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loginUser: (user) => {
+   /*  loginUser: (user) => {
     dispatch(loginUser(user));
-  },
+  }, */
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (LoginPage)
