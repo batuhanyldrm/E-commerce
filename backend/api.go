@@ -162,11 +162,8 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	if _, err := io.Copy(writer, f); err != nil {
 		return fmt.Errorf("error initializing app: %v", err)
 	}
-	fmt.Println(c.FormValue("productName"))
-	fmt.Println(c.FormValue("description"))
-	fmt.Println("qqqqq")
 
-	createStocks.Image = "https://firebasestorage.googleapis.com/v0/b/graduation-project-5ff56.appspot.com/o/" + imageId.String()
+	createStocks.Image = "https://firebasestorage.googleapis.com/v0/b/graduation-project-5ff56.appspot.com/o/" + imageId.String() + "?alt=media&token=" + id.String()
 	createStocks.ProductName = c.FormValue("productName")
 	createStocks.Description = c.FormValue("description")
 	amount, err := strconv.Atoi(c.FormValue("amount"))
