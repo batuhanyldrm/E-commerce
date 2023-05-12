@@ -23,10 +23,10 @@ export const postLogin = async ({ email, password }) => {
     return resp.status === 201 ? resp : false;
   };
 
-export const postLogout = async ({name, surname, email, password, tel, company, role}) => {
+export const postLogout = async (/* {name, surname, email, password, tel, company, role} */) => {
     const resp = await axios.post("http://localhost:3001/logout", {
-        email: email,
-        password: password
+       /*  email: email,
+        password: password */
     }, {withCredentials: true})
 
     return resp.status === 201 ? resp : false

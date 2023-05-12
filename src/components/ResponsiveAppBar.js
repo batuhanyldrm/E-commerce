@@ -13,12 +13,25 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { postLogout } from './api/userApi';
+import { connect } from 'react-redux';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar(props) {
+
+  const {} = props
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const userLogout = async () => {
+    try {
+        await postLogout()
+    } catch (error) {
+        console.log(error, "catch error")
+    }
+}
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -153,7 +166,7 @@ function ResponsiveAppBar() {
                 <MenuItem component={Link} to="/stock" onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Account</Typography>
                 </MenuItem>
-                <MenuItem component={Link} to="" onClick={handleCloseUserMenu}>
+                <MenuItem component={Link} to="" onClick={userLogout}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
             </Menu>
@@ -163,4 +176,11 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+
+const mapStateToProps = (state) => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (ResponsiveAppBar);
