@@ -13,7 +13,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import {Link} from "react-router-dom";
-import {IconButton } from '@mui/material';
+import {IconButton, ListItemText } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -53,26 +53,28 @@ function LeftDrawer(props) {
           open
         >
           <Divider />
-          <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                  <Link style={{textDecoration:"none", color:"black"}} to='/allProducts'>Home</Link>
-                  </ListItemIcon>
-                </ListItemButton>
-              </ListItem>
-            </List>
-            <Divider />
             <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                  <Link style={{textDecoration:"none", color:"black"}} to='/stock'>Stock</Link>
-                  </ListItemIcon>
-                </ListItemButton>
-              </ListItem>
+              <Link style={{textDecoration:"none", color:"black"}} to='/all-products'>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                    </ListItemIcon>
+                    <ListItemText primary="Home" />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+              <Link style={{textDecoration:"none", color:"black"}} to='/stock'>
+                <Divider />
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                    </ListItemIcon>
+                    <ListItemText primary="Stock" />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
             </List>
-      <Divider />
+          <Divider />
         </Drawer>
         </Box>
     </div>
