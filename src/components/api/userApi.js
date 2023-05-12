@@ -33,12 +33,9 @@ export const postLogout = async ({name, surname, email, password, tel, company, 
 }
 
 export const getUser = async () => {
-    const bearerToken = createBearerToken();
-    const resp = await axios.get(`http://localhost:3001/user`,{
-        headers: {
-            Authorization: bearerToken
-        }
-    })
+    const resp = await axios.get(`http://localhost:3001/user`,
+        {withCredentials: true}
+    )
     return resp;
 }
 
