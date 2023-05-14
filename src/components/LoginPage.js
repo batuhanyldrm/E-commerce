@@ -404,6 +404,22 @@ const LoginPage = (props) => {
       }
       setRedirect(true)
   }
+
+  const checkUserSession = () => {
+    const loggedInUser = document.cookie.includes("user_token");
+  
+    if (loggedInUser) {
+      // Kullanıcı oturumu açık, "all-products" sayfasına yönlendir
+      window.location = window.location.origin + "/all-products";
+    } else {
+      // Kullanıcı oturumu kapalı, normal akışa devam et
+      // ...
+    }
+  };
+  
+  // Sayfa yüklendiğinde oturum kontrolü yap
+  checkUserSession();
+
   useEffect(() => {
       /* loginUser() */
     }, [])

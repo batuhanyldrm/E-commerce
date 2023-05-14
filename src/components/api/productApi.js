@@ -10,17 +10,18 @@ export const getSearch = async (data) => {
     return resp;
 }
 
-export const postProduct = async ({productName,description,price,amount, image}) => {
-   
-        const resp = await axios.post("http://localhost:3001/stocks", {
-            productName: productName,
-            description: description,
-            price: price,
-            amount: amount,
-            image: image,
-        })
-        return resp; 
-}
+export const postProduct = async (formData) => {
+    try {
+      const resp = await axios.post("http://localhost:3001/stocks", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+      return resp;
+    } catch (error) {
+      throw error;
+    }
+  };
 
 export const removeProduct = async (id) => {
     const resp = await axios.delete(`http://localhost:3001/stocks/${id}`)

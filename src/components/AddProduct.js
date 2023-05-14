@@ -33,20 +33,19 @@ function AddProduct(props) {
     const [price, setPrice] = useState(0)
     const [amount, setAmount] = useState(0)
     const [image, setImage] = useState(null)
-console.log(image,"wwwww")
 
 const handleCreateProduct = async () => {
-  var formData = new FormData();
+  const formData = new FormData();
   formData.append('productName', productName);
   formData.append('description', description);
   formData.append('price', price);
   formData.append('amount', amount);
   formData.append('image', image[0]);
+  
   try {
     const res = await postProduct(formData);
     addProduct(res.data);
   } catch (error) {
-    console.error(error,"rrrdrdrd");
   } finally {
     handleClose(false);
   }
