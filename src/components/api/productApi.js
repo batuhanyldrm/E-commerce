@@ -13,9 +13,6 @@ export const getSearch = async (data) => {
 export const postProduct = async (formData) => {
     try {
       const resp = await axios.post("http://localhost:3001/stocks", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
       });
       return resp;
     } catch (error) {
