@@ -25,13 +25,32 @@ function ResponsiveAppBar(props) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const userLogout = async () => {
+  /* const userLogout = async () => {
     try {
         await postLogout()
     } catch (error) {
         console.log(error, "catch error")
     }
-}
+  } */
+
+  const [redirect, setRedirect] = useState(false)
+
+  const userLogout = async () => {
+    try {
+      document.cookie = "user_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      if (!document.cookie) {
+        setTimeout(() => {
+          window.location = window.location.origin + "/login";
+        }, 500);
+        setRedirect(true);
+      }else{
+        console.log("error");
+      }
+    } catch (error) {
+      console.log(error, "catch error");
+    }
+  };
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

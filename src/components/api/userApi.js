@@ -1,15 +1,13 @@
 import axios from "axios";
 import { createBearerToken, getUserId } from "./auth";
 
-export const postRegister = async ({name, surname, email, password, tel, company, role}) => {
+export const postRegister = async ({name, surname, email, password, tel}) => {
     const resp = await axios.post("http://localhost:3001/register", {
         name: name,
         surname: surname,
         email: email,
         password: password,
         tel: tel,
-        /* company: company,
-        role: role, */
     })
 
     return resp.status === 201 ? resp : false
@@ -23,11 +21,10 @@ export const postLogin = async ({ email, password }) => {
     return resp.status === 201 ? resp : false;
   };
 
-export const postLogout = async (/* {name, surname, email, password, tel, company, role} */) => {
+export const postLogout = async () => {
     const resp = await axios.post("http://localhost:3001/logout", {
-       /*  email: email,
-        password: password */
-    }, {withCredentials: true})
+        withCredentials: true
+    })
 
     return resp.status === 201 ? resp : false
 }

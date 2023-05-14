@@ -10,13 +10,14 @@ export const getSearch = async (data) => {
     return resp;
 }
 
-export const postProduct = async ({productName,description,price,amount}) => {
+export const postProduct = async ({productName,description,price,amount, image}) => {
    
         const resp = await axios.post("http://localhost:3001/stocks", {
             productName: productName,
             description: description,
             price: price,
             amount: amount,
+            image: image,
         })
         return resp; 
 }
