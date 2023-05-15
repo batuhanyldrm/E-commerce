@@ -1,4 +1,4 @@
-import { getProducts, removeProduct, updateProductAmount, getSearch } from "../api/productApi";
+import { getProducts, removeProduct, getSearch } from "../api/productApi";
 import { ADD_PRODUCT, FETCH_PRODUCTS, DELETE_PRODUCT, UPDATE_STOCK, UPDATE_PRODUCT_STOCK, FETCH_SEARCH_PRODUCT } from "./types";
 
 export const fetchProducts = () => async (
@@ -35,7 +35,7 @@ export const addProduct = (product) => async (
 export const deleteProduct = (id) => async (
     dispatch
 ) => {
-    const resp = await removeProduct(id)
+    await removeProduct(id)
         dispatch({
             type: DELETE_PRODUCT,
             payload: id
