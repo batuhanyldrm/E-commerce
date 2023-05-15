@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"strconv"
 
@@ -119,6 +121,45 @@ func (api *Api) UpdateStocksHandler(c *fiber.Ctx) error {
 		c.Status(fiber.StatusInternalServerError)
 	}
 
+	return nil
+}
+
+var ImageNotFoundError error = errors.New("Image not found")
+
+func (api *Api) GetImageHandler(c *fiber.Ctx) error {
+
+	imageID := c.Params("id")
+	ctx := context.Background()
+	sa := option.WithCredentialsFile("serviceAccountKey.json")
+	app, err := firebase.NewApp(ctx, nil, sa)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	client, err := app.Firestore(ctx)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer client.Close()
+
+	dsnap, err := client.Collection("products").Doc(imageID).Get(ctx)
+	if err != nil {
+		return err
+	}
+	m := dsnap.Data()
+	fmt.Printf("Document data: %#v\n", m)
+
+	/* image, err := api.Service.GetImage(imageID)
+
+	switch err {
+	case nil:
+		c.JSON(image)
+		c.Status(fiber.StatusOK)
+	case ImageNotFoundError:
+		c.Status(fiber.StatusNotFound)
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	} */
 	return nil
 }
 

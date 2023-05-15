@@ -317,12 +317,11 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps) (LoginPage) */
 
 
-import {useEffect, useState} from 'react';
+import { useState} from 'react';
 import { connect } from 'react-redux';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { postLogin } from './api/userApi';
-/* import { loginUser } from './actions/userActions'; */
 import loginVideo from "./video/login.mp4"
 import { makeStyles } from '@mui/styles';
 import * as React from 'react';
@@ -379,7 +378,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginPage = (props) => {
 
-  const {user,loginUser} = props;
+  const {user} = props;
   const classes = useStyles();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -419,10 +418,6 @@ const LoginPage = (props) => {
   
   // Sayfa yüklendiğinde oturum kontrolü yap
   checkUserSession();
-
-  useEffect(() => {
-      /* loginUser() */
-    }, [])
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -512,9 +507,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-   /*  loginUser: (user) => {
-    dispatch(loginUser(user));
-  }, */
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (LoginPage)

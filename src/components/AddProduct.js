@@ -10,7 +10,6 @@ import { addProduct } from './actions/productActions';
 import { postProduct } from './api/productApi';
 import { makeStyles } from '@mui/styles';
 import BackupIcon from "@material-ui/icons/Backup";
-//import FormData from 'form-data'
 
 const useStyles = makeStyles((theme) => ({
   root: {
