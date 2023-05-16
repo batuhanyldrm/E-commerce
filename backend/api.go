@@ -127,39 +127,45 @@ func (api *Api) UpdateStocksHandler(c *fiber.Ctx) error {
 var ImageNotFoundError error = errors.New("Image not found")
 
 func (api *Api) GetImageHandler(c *fiber.Ctx) error {
-
-	imageID := c.Params("id")
 	ctx := context.Background()
+
+	// Initialize the Firebase app
 	sa := option.WithCredentialsFile("serviceAccountKey.json")
 	app, err := firebase.NewApp(ctx, nil, sa)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalf("Failed to initialize Firebase app: %v", err)
 	}
 
-	client, err := app.Firestore(ctx)
+	// Initialize the Firebase Storage client
+	client, err := app.Storage(ctx)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalf("Failed to initialize Firebase Storage client: %v", err)
 	}
-	defer client.Close()
+	fmt.Println("aa")
+	// Specify the bucket and image URL
+	// Specify the bucket and image URL
+	bucket, err := client.Bucket("graduation-project-5ff56.appspot.com")
+	if err != nil {
+		log.Fatalf("Failed to get default bucket: %v", err)
+	}
+	imageURL := "03248ba4-f3d2-4190-9d4b-3eead0e0ebfb" // Replace with the extracted image path
 
-	dsnap, err := client.Collection("products").Doc(imageID).Get(ctx)
+	// Get the file from Firebase Storage
+	reader, err := bucket.Object(imageURL).NewReader(ctx)
 	if err != nil {
 		return err
 	}
-	m := dsnap.Data()
-	fmt.Printf("Document data: %#v\n", m)
+	defer reader.Close()
 
-	/* image, err := api.Service.GetImage(imageID)
+	// Set the Content-Type header for the response
+	c.Set("Content-Type", reader.ContentType())
 
-	switch err {
-	case nil:
-		c.JSON(image)
-		c.Status(fiber.StatusOK)
-	case ImageNotFoundError:
-		c.Status(fiber.StatusNotFound)
-	default:
-		c.Status(fiber.StatusInternalServerError)
-	} */
+	// Stream the file data as the response to the client
+	if _, err := io.Copy(c, reader); err != nil {
+		return err
+	}
+
+	fmt.Println("Image streamed successfully.")
 	return nil
 }
 

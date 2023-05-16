@@ -27,7 +27,7 @@ func SetupApp(api *Api) *fiber.App {
 
 	//stock
 	app.Get("/stocks", api.GetStocksHandler)
-	app.Get("/image/:id", api.GetImageHandler)
+	app.Get("/image", api.GetImageHandler)
 	app.Put("stocks/:id/amount", api.UpdateStocksAmountHandler)
 	app.Get("/stocks/:id", api.GetStockHandler)
 	app.Put("/stocks/:id", api.UpdateStocksHandler)
