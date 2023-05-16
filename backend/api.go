@@ -127,6 +127,8 @@ func (api *Api) UpdateStocksHandler(c *fiber.Ctx) error {
 var ImageNotFoundError error = errors.New("Image not found")
 
 func (api *Api) GetImageHandler(c *fiber.Ctx) error {
+
+	imageID := c.Params("imageID")
 	ctx := context.Background()
 
 	// Initialize the Firebase app
@@ -144,11 +146,12 @@ func (api *Api) GetImageHandler(c *fiber.Ctx) error {
 	fmt.Println("aa")
 	// Specify the bucket and image URL
 	// Specify the bucket and image URL
-	bucket, err := client.Bucket("graduation-project-5ff56.appspot.com")
+	bucket, err := client.Bucket(os.Getenv("BUCKET_NAME"))
 	if err != nil {
 		log.Fatalf("Failed to get default bucket: %v", err)
 	}
-	imageURL := "03248ba4-f3d2-4190-9d4b-3eead0e0ebfb" // Replace with the extracted image path
+
+	imageURL := imageID // Replace with the extracted image path
 
 	// Get the file from Firebase Storage
 	reader, err := bucket.Object(imageURL).NewReader(ctx)
