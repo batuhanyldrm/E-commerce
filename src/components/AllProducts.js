@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
 import { postLogout } from './api/userApi';
 import { loginUser } from './actions/userActions';
-import { fetchProducts } from './actions/productActions';
+import { fetchProducts, fetchSearchProducts } from './actions/productActions';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
+import { IconButton, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 const useStyles = makeStyles((theme) => ({
   allProduct:{
@@ -69,9 +71,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AllProducts = (props) => {
-
-  const {user,loginUser,products,fetchProducts} = props
   const classes = useStyles();
+  
+  const {
+    user,
+    loginUser,
+    products,
+    fetchProducts,
+    fetchSearchProducts
+  } = props
+
+  const [search, setSearch] = useState("");
+
+  const handleSearch = () => {
+      fetchSearchProducts(search)
+  }
+
+  const checkPressedEnter = (key) => {
+      if (key === "Enter") {
+          fetchSearchProducts(search)
+      }
+    };
 
   useEffect(() => {
     fetchProducts()
@@ -88,6 +108,26 @@ const AllProducts = (props) => {
     <>
     <div>
       <ResponsiveAppBar/>
+      <TextField 
+                className={classes.root} 
+                style={{ marginTop:"5px",}}
+                id="outlined-basic" 
+                label="Search" 
+                size='small'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyPress={(e) => checkPressedEnter(e.key)}
+                variant="outlined" 
+                InputProps={{
+                    endAdornment: (
+                        <>
+                        <IconButton size="small" onClick={() => handleSearch()}>
+                            <SearchIcon/>
+                        </IconButton>
+                        </>
+                    ),
+             }}
+            />
       <div className={classes.allProduct}>
         <div className={classes.grid} style={{marginBottom:"5%"}}>
           {products && products.map((product, index) => (
@@ -130,6 +170,9 @@ loginUser: (user) => {
 },
 fetchProducts: () => {
   dispatch(fetchProducts());
+},
+fetchSearchProducts: (data) => {
+  dispatch(fetchSearchProducts(data));
 },
 });
 

@@ -71,26 +71,26 @@ function Product(props) {
         <Button variant="contained" color="primary" style={{margin:"5px"}} onClick={() => setOpen(true)}>
             ADD PRODUCT
         </Button>
-             <TextField 
-             className={classes.root} 
-             style={{ marginTop:"5px",}}
-             id="outlined-basic" 
-             label="Search" 
-             size='small'
-             value={search}
-             onChange={(e) => setSearch(e.target.value)}
-             onKeyPress={(e) => checkPressedEnter(e.key)}
-             variant="outlined" 
-             InputProps={{
-                 endAdornment: (
-                     <>
-                     <IconButton size="small" onClick={() => handleSearch()}>
-                         <SearchIcon/>
-                     </IconButton>
-                     </>
-                 ),
+            <TextField 
+                className={classes.root} 
+                style={{ marginTop:"5px",}}
+                id="outlined-basic" 
+                label="Search" 
+                size='small'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyPress={(e) => checkPressedEnter(e.key)}
+                variant="outlined" 
+                InputProps={{
+                    endAdornment: (
+                        <>
+                        <IconButton size="small" onClick={() => handleSearch()}>
+                            <SearchIcon/>
+                        </IconButton>
+                        </>
+                    ),
              }}
-             />
+            />
         <ProductList
             products={products}
         />
