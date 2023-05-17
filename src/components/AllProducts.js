@@ -5,6 +5,7 @@ import { postLogout } from './api/userApi';
 import { loginUser } from './actions/userActions';
 import { fetchProducts } from './actions/productActions';
 import ResponsiveAppBar from './ResponsiveAppBar';
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
 const useStyles = makeStyles((theme) => ({
   allProduct:{
@@ -41,7 +42,22 @@ const useStyles = makeStyles((theme) => ({
   },
   productName:{
     display:"flex", 
-    marginLeft:"5px"
+    marginLeft:"5px",
+  },
+  listImgBlock: {
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    color: "#d4d4d4",
+    boxShadow: "1px 1px 15px #8d8f91",
+    borderRadius: "10px",
+    /* transition: "100ms all",
+    "&:hover": {
+      transform: "scale(2, 2)",
+    }, */
   },
 }));
 
@@ -68,16 +84,17 @@ const AllProducts = (props) => {
       <div className={classes.allProduct}>
         <div className={classes.grid}>
           {products && products.map((product, index) => (
-            //<a href='dsfsdf'>
               <div key={index} className={classes.products}>
+                {product.image ?
+              <img src={product.image}  alt={product.productName} className={classes.listImgBlock}></img> : <CameraAltIcon className={classes.listImgBlock} />
+            }
                 <div className={classes.productName}>
                   Product Name: {product.productName}
                 </div>
-                <div className={classes.productName}>
+                <div className={classes.productName} style={{marginBottom:15}}>
                   Product Description: {product.description}
                 </div>
               </div>
-            //</a>
           ))}
         </div>
       </div>

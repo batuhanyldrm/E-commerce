@@ -10,6 +10,11 @@ export const getSearch = async (data) => {
     return resp;
 }
 
+export const getSingleImage = async (id) => {
+    const resp = await axios.get(`http://localhost:3001/image/${id}`)
+    return resp;
+}
+
 export const postProduct = async (formData) => {
     try {
       const resp = await axios.post("http://localhost:3001/stocks", formData, {
