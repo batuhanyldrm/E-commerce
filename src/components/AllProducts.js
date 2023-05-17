@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "cover",
     color: "#d4d4d4",
     boxShadow: "1px 1px 15px #8d8f91",
-    borderRadius: "10px",
+    borderRadius: 5,
     /* transition: "100ms all",
     "&:hover": {
       transform: "scale(2, 2)",
@@ -82,9 +82,9 @@ const AllProducts = (props) => {
     <div>
       <ResponsiveAppBar/>
       <div className={classes.allProduct}>
-        <div className={classes.grid}>
+        <div className={classes.grid} style={{marginBottom:"5%"}}>
           {products && products.map((product, index) => (
-              <div key={index} className={classes.products}>
+              <div key={index} className={classes.products} style={{marginBottom:"10%"}}>
                 {product.image ?
               <img src={product.image}  alt={product.productName} className={classes.listImgBlock}></img> : <CameraAltIcon className={classes.listImgBlock} />
             }
