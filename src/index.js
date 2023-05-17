@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import Product from './components/Product';
+import Product from './components/companyProducts/Product';
 import configureStore from './components/reducer/store';
 import { Provider } from 'react-redux';
 import LeftDrawer from './components/company/LeftDrawer';

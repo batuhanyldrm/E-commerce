@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AddProduct from './AddProduct';
 import ProductList from './ProductList';
 import Order from './Order';
-import { fetchProducts, fetchSearchProducts } from './actions/productActions';
+import { fetchProducts, fetchSearchProducts } from '../actions/productActions';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({

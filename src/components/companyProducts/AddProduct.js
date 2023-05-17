@@ -6,8 +6,8 @@ import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 import DialogContent from '@mui/material/DialogContent';
-import { addProduct } from './actions/productActions';
-import { postProduct } from './api/productApi';
+import { addProduct } from '../actions/productActions';
+import { postProduct } from '../api/productApi';
 import { makeStyles } from '@mui/styles';
 import BackupIcon from "@material-ui/icons/Backup";
 

@@ -5,7 +5,7 @@ import TableRow from '@mui/material/TableRow';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
-import { deleteProduct } from './actions/productActions';
+import { deleteProduct } from '../actions/productActions';
 import EditProduct from './EditProduct';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import { makeStyles } from '@mui/styles';

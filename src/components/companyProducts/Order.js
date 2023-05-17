@@ -12,8 +12,8 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { updateProductAmount } from './api/productApi';
-import { updateProductStock } from './actions/productActions';
+import { updateProductAmount } from '../api/productApi';
+import { updateProductStock } from '../actions/productActions';
 
 function Order(props) {
 
