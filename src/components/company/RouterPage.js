@@ -5,6 +5,7 @@ import Page from "../common/Page";
 import LoginPage from "../LoginPage";
 import AllProducts from "../AllProducts";
 import SignUp from "../SignUp";
+import ProductDetails from "../ProductDetails";
 
 const RouterPage = () => {
   return (
@@ -15,8 +16,9 @@ const RouterPage = () => {
             <Route path="/login" element={<LoginPage component={LoginPage} title={"Home"} />}></Route>
           </Route>
           <Route path="/sign-up" element={<SignUp component={SignUp} title={"Home"} />}></Route>
-          <Route path="/all-products" element={<AllProducts component={AllProducts} title={"AllProducts"} />}></Route>
+          <Route path="/all-products" element={<AllProducts component={AllProducts} title={"All Products"} />}></Route>
           <Route exact path="/stock" element={<Page component={Product} title={"Mevcut Stoklar"} />}></Route>
+          <Route exact path="/product-details/:id" element={<ProductDetails component={ProductDetails} title={"Product Details"} />}></Route>
         </Routes>
           
     </BrowserRouter>

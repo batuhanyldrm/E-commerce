@@ -132,18 +132,18 @@ const AllProducts = (props) => {
         <div className={classes.grid} style={{marginBottom:"5%"}}>
           {products && products.map((product, index) => (
               <div key={index} className={classes.products} style={{marginBottom:"10%"}}>
-                <a href={`/product-detail/${product.id}`} className={classes.link}>
+                <a href={`/product-details/${product.id}`} className={classes.link}>
                 {product.image ?
               <img src={product.image}  alt={product.productName} className={classes.listImgBlock}></img> : <CameraAltIcon className={classes.listImgBlock} />
             }
             </a>
                 <div className={classes.productName}>
-                <a href={`/product-detail/${product.id}`} className={classes.link}>
+                <a href={`/product-details/${product.id}`} className={classes.link}>
                   Product Name: {product.productName}
                   </a>
                 </div>
                 <div className={classes.productName} style={{marginBottom:15}}>
-                <a href={`/product-detail/${product.id}`} className={classes.link}>
+                <a href={`/product-details/${product.id}`} className={classes.link}>
                   Product Description: {product.description}
                   </a>
                 </div>
