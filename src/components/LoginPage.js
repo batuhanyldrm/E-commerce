@@ -332,7 +332,7 @@ import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
-import Link from '@mui/joy/Link';
+import { Link } from 'react-router-dom';
 import IconButton from '@mui/joy/IconButton';
 
 
@@ -427,10 +427,13 @@ const LoginPage = (props) => {
 
   return (
     <>
-            <video className={classes.video} autoPlay muted loop id="background-video">
-                <source src={loginVideo} type="video/mp4" />
-            </video>
-            <CssVarsProvider>
+      <video className={classes.video} autoPlay muted loop id="background-video">
+        <source src={loginVideo} type="video/mp4" />
+      </video>
+      <Link to="/all-products">
+        <Button variant="outlined" style={{borderRadius:20, }}>Products</Button>,
+      </Link>
+      <CssVarsProvider>
       <main>
             <Sheet
               sx={{
