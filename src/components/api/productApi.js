@@ -5,6 +5,11 @@ export const getProducts = async () => {
     return resp;
 }
 
+export const getProduct = async (id) => {
+    const resp = await axios.get(`http://localhost:3001/stocks/${id}`)
+    return resp;
+}
+
 export const getSearch = async (data) => {
     const resp = await axios.get(`http://localhost:3001/search?q=${data}`)
     return resp;

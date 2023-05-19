@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { makeStyles } from '@mui/styles';
-import { fetchProducts } from './actions/productActions';
+import { fetchProduct } from './actions/productActions';
 import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,18 +19,16 @@ const ProductDetails = (props) => {
 
   const {
     products,
-    fetchProducts
+    fetchProduct
   } = props;
 
   useEffect(() => {
-    fetchProducts()
+    fetchProduct(window.location.href.split("/")[4])
   }, [])
-  
+
   return (
-    <div className={classes.root}>
-      {products && products.map((product) => {
-        
-      })}
+    <div >
+      <img className={classes.root} src={products.image}></img>
     </div>
   )
 }
@@ -40,8 +38,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-fetchProducts: () => {
-  dispatch(fetchProducts());
+fetchProduct: (id) => {
+  dispatch(fetchProduct(id));
 },
 });
 
