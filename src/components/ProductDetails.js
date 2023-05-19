@@ -28,6 +28,9 @@ const ProductDetails = (props) => {
   
   return (
     <div className={classes.root}>
+      {products && products.map((product) => {
+        
+      })}
     </div>
   )
 }
