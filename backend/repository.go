@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"example/models"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -247,7 +248,7 @@ func (repository *Repository) GetUserID(ID string) (models.Register, error) {
 	defer cancel()
 
 	user := models.Register{}
-	err := collection.FindOne(ctx, bson.M{"id": ID}).Decode(&user)
+	err := collection.FindOne(ctx, bson.M{"email": ID}).Decode(&user)
 
 	if err != nil {
 		log.Fatal(err)

@@ -40,7 +40,7 @@ func SetupApp(api *Api) *fiber.App {
 	app.Post("/login", api.PostLoginHandler)
 	app.Get("/users", api.GetUsersHandler)
 	app.Get("/users/:email", api.GetUserHandler) //kontrol edilecek
-	app.Get("/user/:id", api.GetUserIDHandler)
+	app.Get("/user/:id", api.GetUserHandler)
 	app.Post("/logout", api.GetUserLogoutHandler)
 	app.Get("/user", api.GetUserAuthenticationHandler)
 
