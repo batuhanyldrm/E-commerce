@@ -247,7 +247,7 @@ func (repository *Repository) GetUserID(ID string) (models.Register, error) {
 	defer cancel()
 
 	user := models.Register{}
-	err := collection.FindOne(ctx, bson.M{"email": ID}).Decode(&user)
+	err := collection.FindOne(ctx, bson.M{"id": ID}).Decode(&user)
 
 	if err != nil {
 		log.Fatal(err)

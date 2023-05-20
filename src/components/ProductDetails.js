@@ -26,9 +26,11 @@ const ProductDetails = (props) => {
     fetchProduct(window.location.href.split("/")[4])
   }, [])
 
+  console.log(window.location.href.split("/")[4])
+
   return (
     <div >
-      <img className={classes.root} src={products.image}></img>
+      <img className={classes.root} /* src={products.image} */></img>
     </div>
   )
 }
