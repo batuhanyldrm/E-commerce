@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
 import { fetchProduct } from './actions/productActions';
+import ResponsiveAppBar from './ResponsiveAppBar';
+import { Button } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,14 +12,20 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 400,
     border: '1px solid lightgray',
     borderRadius: 5,
+    ["@media (max-width: 400px)"]:{
+      display:"flex",
+    },
   },
   image: {
     margin: '5px',
-    minWidth: 200,
+    //minWidth: 200,
     maxWidth: 250,
     minHeight: 300,
     border: '1px solid lightgray',
     borderRadius: 5,
+    ["@media (max-width: 400px)"]:{
+      display:"flex",
+    },
   },
 }));
 
@@ -52,25 +60,29 @@ const ProductDetails = (props) => {
   };
 
   return (
-    <div className={classes.root}>
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>Error loading image</div>}
-      {!isLoading && !isError && (
-        <div style={{ display: "flex" }}>
-          <img
-            className={classes.image}
-            src={products.image}
-            alt="Product"
-            onLoad={handleImageLoad}
-            onError={handleImageError}
-          />
-          <div style={{ marginLeft: "10px" }}>
-            <p>{products.productName}</p>
-            <p>{products.description}</p>
+    <>
+      <ResponsiveAppBar/>
+      <div className={classes.root}>
+        {isLoading && <div>Loading...</div>}
+        {isError && <div>Error loading image</div>}
+        {!isLoading && !isError && (
+          <div style={{ display: "flex" }}>
+            <img
+              className={classes.image}
+              src={products.image}
+              alt="Product"
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+            />
+            <div style={{ marginLeft: "10px" }}>
+              <p>{products.productName}</p>
+              <p>{products.description}</p>
+              <Button variant="contained" color="primary" style={{minWidth:100}}>Buy</Button>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

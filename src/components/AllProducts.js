@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   products:{
     marginLeft:"5px", 
-    minWidth:200, 
+    //minWidth:200, 
     maxWidth:250, 
     minHeight:300, 
     border:'1px solid lightgray', 
