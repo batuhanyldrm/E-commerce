@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchProduct } from './actions/productActions';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import { Button } from '@mui/material';
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,23 @@ const useStyles = makeStyles((theme) => ({
     ["@media (max-width: 400px)"]:{
       display:"flex",
     },
+  },
+  listImgBlock: {
+    margin: '2%',
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    width: 250,
+    height: 300,
+    //overflow:"hidden",
+    //objectFit: "cover",
+    color: "#d4d4d4",
+    boxShadow: "1px 1px 15px #8d8f91",
+    borderRadius: 5,
+    /* transition: "100ms all",
+    "&:hover": {
+      transform: "scale(2, 2)",
+    }, */
   },
 }));
 
@@ -67,13 +85,15 @@ const ProductDetails = (props) => {
         {isError && <div>Error loading image</div>}
         {!isLoading && !isError && (
           <div style={{ display: "flex" }}>
-            <img
-              className={classes.image}
-              src={products.image}
-              alt="Product"
-              onLoad={handleImageLoad}
-              onError={handleImageError}
-            />
+            {products.image ?
+              <img
+                className={classes.listImgBlock}
+                src={products.image}
+                alt="Product"
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+              /> : <CameraAltIcon className={classes.listImgBlock} />
+            }
             <div style={{ marginLeft: "10px" }}>
               <p>{products.productName}</p>
               <p>{products.description}</p>

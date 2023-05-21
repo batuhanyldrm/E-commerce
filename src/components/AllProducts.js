@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth:250, 
     minHeight:300, 
     border:'1px solid lightgray', 
-    borderRadius:5
+    borderRadius:5,
+
   },
   productName:{
     display:"flex", 
@@ -59,7 +60,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     width: "100%",
     height: "100%",
-    objectFit: "cover",
+    //overflow:"hidden",
+    //objectFit: "cover",
     color: "#d4d4d4",
     boxShadow: "1px 1px 15px #8d8f91",
     borderRadius: 5,
