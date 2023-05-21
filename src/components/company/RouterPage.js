@@ -6,6 +6,7 @@ import LoginPage from "../LoginPage";
 import AllProducts from "../AllProducts";
 import SignUp from "../SignUp";
 import ProductDetails from "../ProductDetails";
+import Profile from "../Profile";
 
 const RouterPage = () => {
   return (
@@ -19,6 +20,7 @@ const RouterPage = () => {
           <Route path="/all-products" element={<AllProducts component={AllProducts} title={"All Products"} />}></Route>
           <Route exact path="/stock" element={<Page component={Product} title={"Mevcut Stoklar"} />}></Route>
           <Route exact path="/product-details/:id" element={<ProductDetails component={ProductDetails} title={"Product Details"} />}></Route>
+          <Route exact path="/profile" element={<Profile component={ProductDetails} title={"Profile"} />}></Route>
         </Routes>
           
     </BrowserRouter>

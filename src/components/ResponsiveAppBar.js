@@ -179,7 +179,7 @@ function ResponsiveAppBar(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem  onClick={handleCloseUserMenu}>
+                <MenuItem component={Link} to="/profile"  onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
                 <MenuItem component={Link} to="/stock" onClick={handleCloseUserMenu}>
