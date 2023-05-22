@@ -17,7 +17,7 @@ function ProductList(props) {
     return(
     <div>
         {/* <TableContainer component={Paper}> */}
-      <Table component={Paper} sx={{ minWidth: 5 }} aria-label="simple table">
+      <Table component={Paper} sx={{ minWidth: 5, marginTop:2, maxWidth:1150 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Product Image</TableCell>

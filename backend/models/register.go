@@ -8,7 +8,7 @@ import (
 
 type Register struct {
 	ID        string    `json:"id" bson:"id"`
-	Company   []string  `json:"company" bson:"company"`
+	Company   string  `json:"company" bson:"company"`
 	Name      string    `json:"name" bson:"name"`
 	Surname   string    `json:"surname" bson:"surname"`
 	Email     string    `json:"email" bson:"email"`
@@ -20,7 +20,7 @@ type Register struct {
 }
 
 type RegisterDTO struct {
-	Company   []string  `json:"company" bson:"company"`
+	Company   string  `json:"company" bson:"company"`
 	Name      string    `json:"name" bson:"name"`
 	Surname   string    `json:"surname" bson:"surname"`
 	Email     string    `json:"email" bson:"email"`

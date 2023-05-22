@@ -65,10 +65,11 @@ const useStyles = makeStyles((theme) => ({
     color: "#d4d4d4",
     boxShadow: "1px 1px 15px #8d8f91",
     borderRadius: 5,
-    /* transition: "100ms all",
+    transition: "100ms all",
     "&:hover": {
-      transform: "scale(2, 2)",
-    }, */
+      transform: "scale(0.99, 0.99)",
+      opacity:0.9,
+    },
   },
 }));
 
@@ -110,26 +111,25 @@ const AllProducts = (props) => {
     <>
     <div>
       <ResponsiveAppBar/>
-      <TextField 
-                className={classes.root} 
-                style={{ marginTop:"5px",}}
-                id="outlined-basic" 
-                label="Search" 
-                size='small'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                onKeyPress={(e) => checkPressedEnter(e.key)}
-                variant="outlined" 
-                InputProps={{
-                    endAdornment: (
-                        <>
-                        <IconButton size="small" onClick={() => handleSearch()}>
-                            <SearchIcon/>
-                        </IconButton>
-                        </>
-                    ),
-             }}
-            />
+      <TextField  
+        style={{ marginTop:"5px", marginBottom:10}}
+        id="outlined-basic" 
+        label="Search" 
+        size='small'
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        onKeyPress={(e) => checkPressedEnter(e.key)}
+        variant="outlined" 
+        InputProps={{
+          endAdornment: (
+              <>
+              <IconButton size="small" onClick={() => handleSearch()}>
+                  <SearchIcon/>
+              </IconButton>
+              </>
+          ),
+        }}
+      />
       <div className={classes.allProduct}>
         <div className={classes.grid} style={{marginBottom:"5%"}}>
           {products && products.map((product, index) => (
