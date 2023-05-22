@@ -1,11 +1,11 @@
-import { useState} from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { postLogin } from './api/userApi';
 import loginVideo from "./video/login.mp4"
 import { makeStyles } from '@mui/styles';
-import * as React from 'react';
 import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 import Sheet from '@mui/joy/Sheet';
 import Typography from '@mui/joy/Typography';
@@ -15,15 +15,16 @@ import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import { Link } from 'react-router-dom';
 import IconButton from '@mui/joy/IconButton';
+import { Alert, Snackbar } from '@mui/material';
 
 
 function ModeToggle() {
   const { mode, setMode } = useColorScheme();
-  const [mounted, setMounted] = React.useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // necessary for server-side rendering
   // because mode is undefined on the server
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
   if (!mounted) {
@@ -67,6 +68,7 @@ const LoginPage = (props) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("")
   const [redirect, setRedirect] = useState(false)
+  const [alert, setAlert] = useState({ open: false, message: "", status: "" });
 
   const handleloginUser = async () => {
       const data = {
@@ -80,6 +82,7 @@ const LoginPage = (props) => {
               }, 500);
             })
       } catch (error) {
+        setAlert({ open: true, message: "Wrong email or password", status: "error" })
           console.log(error, "catch error")
       }
       setRedirect(true)
@@ -182,6 +185,13 @@ const LoginPage = (props) => {
             </Sheet>
       </main>
     </CssVarsProvider>
+    <Snackbar
+      open={alert.open}
+      autoHideDuration={3000}
+      onClose={() => setAlert({ open: false, message: "", status: "" })}
+    >
+      <Alert severity={alert.status || "info"}>{alert.message}</Alert>
+    </Snackbar>
     </>
   )
 }
