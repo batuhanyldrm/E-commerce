@@ -80,7 +80,7 @@ const ProductDetails = (props) => {
   return (
     <>
       <ResponsiveAppBar/>
-      <div className={classes.root}>
+      <div className={classes.root} style={{margin:"auto"}}>
         {isLoading && <div>Loading...</div>}
         {isError && <div>Error loading image</div>}
         {!isLoading && !isError && (

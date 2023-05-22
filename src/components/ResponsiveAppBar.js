@@ -179,6 +179,8 @@ function ResponsiveAppBar(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+               {document.cookie ? (
+                <div>
                 <MenuItem component={Link} to="/profile"  onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
@@ -188,6 +190,17 @@ function ResponsiveAppBar(props) {
                 <MenuItem component={Link} to="" onClick={userLogout}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
+                </div>
+                ) : (
+                  <div>
+                <MenuItem component={Link} to="/login"  onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Login</Typography>
+                </MenuItem>
+                <MenuItem component={Link} to="/sign-up" onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Register</Typography>
+                </MenuItem>
+                </div>
+                )}
             </Menu>
           </Box>
         </Toolbar>
