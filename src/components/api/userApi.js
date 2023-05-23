@@ -22,9 +22,11 @@ export const postLogin = async ({ email, password }) => {
   };
 
 export const postLogout = async () => {
-    const resp = await axios.post("http://localhost:3001/logout", {
+    const resp = await axios({
+        method: "post",
+        url: "http://localhost:3001/logout",
         withCredentials: true
-    })
+     });
 
     return resp.status === 201 ? resp : false
 }

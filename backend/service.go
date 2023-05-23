@@ -204,7 +204,7 @@ func (service *Service) GetUserID(ID string) (models.Register, error) {
 	return user, nil
 }
 
-func (service *Service) PostLogout(loginUser models.RegisterDTO) (*models.Register, error) {
+/* func (service *Service) PostLogout(loginUser models.RegisterDTO) (*models.Register, error) {
 
 	userEmail, err := service.Repository.GetUser(loginUser.Email)
 
@@ -213,7 +213,7 @@ func (service *Service) PostLogout(loginUser models.RegisterDTO) (*models.Regist
 	}
 
 	return &userEmail, nil
-}
+} */
 
 func (service *Service) GetUserAuth(userId string) (*models.Register, error) {
 
