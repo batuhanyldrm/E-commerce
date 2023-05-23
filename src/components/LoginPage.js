@@ -176,7 +176,7 @@ const LoginPage = (props) => {
 
               <Button sx={{ mt: 1}} onClick={handleloginUser}>Log in</Button>
               <Typography
-                endDecorator={<Link href="/sign-up">Sign up</Link>}
+                endDecorator={<Link to="/sign-up">Sign up</Link>}
                 fontSize="sm"
                 sx={{ alignSelf: 'center' }}
               >
