@@ -27,13 +27,24 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     marginBottom: "10px",
   },
+  company: {
+    display:"flex",
+    justifyContent:"start",
+    fontSize: "16px",
+    marginBottom: "5px",
+  },
   name: {
+    display:"flex",
+    justifyContent:"start",
     fontSize: "16px",
     marginBottom: "5px",
   },
   tel: {
+    display:"flex",
+    justifyContent:"start",
     fontSize: "14px",
     color: "gray",
+    marginBottom: "5px",
   },
 }));
 
@@ -57,7 +68,9 @@ const Profile = (props) => {
           <Avatar style={{ width: 100, height: 100 }} src="/static/images/avatar/2.jpg" />
         </div>
         <div className={classes.title}>Profile</div>
+        <div className={classes.company}>Company: {user ? user.company : ''}</div>
         <div className={classes.name}>Name: {user ? `${user.name} ${user.surname}` : ''}</div>
+        <div className={classes.tel}>Email: {user ? user.email : ''}</div>
         <div className={classes.tel}>Tel: {user ? user.tel : ''}</div>
       </div>
     </>
