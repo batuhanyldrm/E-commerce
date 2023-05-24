@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
       padding: 0,
       overflowX: "auto"
     },
+    btn:{
+        margin:"5px",
+        backgroundColor:"rgba(39,38,152,255)"
+    }
   }));
 
 function Product(props) {
@@ -65,10 +69,10 @@ function Product(props) {
             handleClose={handleClose}
         />
 
-        <Button variant="contained" color="primary" style={{margin:"5px"}} onClick={() => setOrder(true)}>
+        <Button variant="contained" style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOrder(true)}>
             USE PRODUCT
         </Button>
-        <Button variant="contained" color="primary" style={{margin:"5px"}} onClick={() => setOpen(true)}>
+        <Button variant="contained" color="primary" style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOpen(true)}>
             ADD PRODUCT
         </Button>
             <TextField 

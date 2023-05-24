@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { postLogout } from './api/userApi';
 import { connect } from 'react-redux';
+import logo from "./logo/aslan2.png"
 
 const pages = ['Products', 'Pricing', 'Blog'];
 
@@ -71,28 +72,12 @@ function ResponsiveAppBar(props) {
   };
 
   return (
-    <AppBar position="sticky" style={{marginBottom:20}}>
+    <AppBar position="sticky" sx={{marginBottom:2, backgroundColor:"rgba(39,38,152,255)"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-
+          <a href='/all-products'>
+          <img src={logo}  style={{maxWidth:70, maxHeight:70}} />
+          </a>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"

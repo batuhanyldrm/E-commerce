@@ -25,7 +25,7 @@ function LeftDrawer(props) {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{
+        sx={{ backgroundColor:"rgba(39,38,152,255)",
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
@@ -40,7 +40,7 @@ function LeftDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Trendmoda
+            Qasis Wholesale
           </Typography>
         </Toolbar>
         </AppBar>
