@@ -170,7 +170,7 @@ const SignUp = (props) => {
               // html input attribute
               name="email"
               type="email"
-              placeholder="johndoe@email.com"
+              placeholder="qasis@gmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -227,7 +227,7 @@ const SignUp = (props) => {
 
           <Button sx={{ mt: 1 }} onClick={createUser}>Sign up</Button>
           <Typography
-            endDecorator={<Link href="/login">Login</Link>}
+            endDecorator={<Link href="/login">Sign in</Link>}
             fontSize="sm"
             sx={{ alignSelf: 'center' }}
           >
