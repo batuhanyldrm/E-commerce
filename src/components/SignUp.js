@@ -135,7 +135,7 @@ const SignUp = (props) => {
         >
           <div>
             <Typography level="h4" component="h1">
-              <b>Welcome!</b>
+              <b>Welcome to Qasis</b>
             </Typography>
             <Typography level="body2">
               Sign in to continue.

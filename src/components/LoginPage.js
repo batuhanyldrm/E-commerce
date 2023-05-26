@@ -136,7 +136,7 @@ const LoginPage = (props) => {
             >
               <div>
                 <Typography level="h4" component="h1">
-                  <b>Welcome!</b>
+                  <b>Welcome to Qasis</b>
                 </Typography>
                 <Typography level="body2">
                   Sign in to continue.
@@ -149,7 +149,7 @@ const LoginPage = (props) => {
                   // html input attribute
                   name="email"
                   type="email"
-                  placeholder="johndoe@email.com"
+                  placeholder="qasis@gmail.com"
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
                 />

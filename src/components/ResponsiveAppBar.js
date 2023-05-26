@@ -78,6 +78,24 @@ function ResponsiveAppBar(props) {
           <a href='/all-products'>
           <img src={logo}  style={{maxWidth:70, maxHeight:70}} />
           </a>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/all-products"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+              marginLeft:2
+            }}
+          >
+            Qasis
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
