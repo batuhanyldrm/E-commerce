@@ -45,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
       transform: "scale(2, 2)",
     }, */
   },
+  btn: {
+    "&:hover": {
+      opacity:0.8
+    },
+  }
 }));
 
 const ProductDetails = (props) => {
@@ -95,9 +100,12 @@ const ProductDetails = (props) => {
               /> : <CameraAltIcon className={classes.listImgBlock} />
             }
             <div style={{ marginLeft: "10px" }}>
-              <p>{products.productName}</p>
-              <p>{products.description}</p>
-              <Button variant="contained" color="primary" style={{minWidth:100}}>Buy</Button>
+              <p>Product Name:  {products.productName}</p>
+              <p>Product Details: {products.description}</p>
+              <p>Price: {products.price}</p>
+              <p>Stock: {products.amount}</p>
+              <Button variant="contained" className={classes.btn} style={{minWidth:100, backgroundColor:"rgba(39,38,152,255)"}}>Add to Cart</Button>
+              <Button variant="contained" color="primary" className={classes.btn} style={{marginLeft:5 ,minWidth:100, backgroundColor:"rgba(186,130,57,255)"}}>Buy Now</Button>
             </div>
           </div>
         )}

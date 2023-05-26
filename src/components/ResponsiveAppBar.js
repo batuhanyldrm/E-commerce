@@ -16,12 +16,24 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { postLogout } from './api/userApi';
 import { connect } from 'react-redux';
 import logo from "./logo/aslan2.png"
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+  cart: {
+    "&:hover": {
+      color:"rgba(186,130,57,255)"
+    },
+  }
+}));
 
 const pages = ['Products', 'Pricing', 'Blog'];
 
 function ResponsiveAppBar(props) {
 
   const {} = props
+
+  const classes = useStyles();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -163,6 +175,9 @@ function ResponsiveAppBar(props) {
             ))}
           </Box>
 
+          <IconButton style={{color:"white"}} sx={{ p: 2 }}>
+            <ShoppingCartOutlinedIcon className={classes.cart}/>
+          </IconButton>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

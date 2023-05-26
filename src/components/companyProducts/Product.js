@@ -20,8 +20,9 @@ const useStyles = makeStyles((theme) => ({
       overflowX: "auto"
     },
     btn:{
-        margin:"5px",
-        backgroundColor:"rgba(39,38,152,255)"
+        "&:hover": {
+            opacity:0.8
+        },
     }
   }));
 
@@ -69,10 +70,10 @@ function Product(props) {
             handleClose={handleClose}
         />
 
-        <Button variant="contained" style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOrder(true)}>
+        <Button variant="contained" className={classes.btn} style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOrder(true)}>
             USE PRODUCT
         </Button>
-        <Button variant="contained" color="primary" style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOpen(true)}>
+        <Button variant="contained" color="primary" className={classes.btn} style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOpen(true)}>
             ADD PRODUCT
         </Button>
             <TextField 
