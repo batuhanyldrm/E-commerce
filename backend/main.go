@@ -35,6 +35,9 @@ func SetupApp(api *Api) *fiber.App {
 	app.Delete("/stocks/:id", api.DeleteStocksHandler)
 	app.Get("/search", api.GetSearchHandler)
 
+	//cart
+	//app.Put("user/:userId/product/:productId", api.UpdateProductInfoHandler)
+
 	//auth
 	app.Post("/register", api.PostRegisterHandler)
 	app.Post("/login", api.PostLoginHandler)

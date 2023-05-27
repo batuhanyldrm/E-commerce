@@ -101,6 +101,20 @@ func (api *Api) UpdateStocksAmountHandler(c *fiber.Ctx) error {
 	return nil
 }
 
+/* func (api *Api) UpdateProductInfoHandler(c *fiber.Ctx) error {
+	userId := c.Params("userId")
+	productId := c.Params("productId")
+
+	product := models.ProductDTO{}
+	err := c.BodyParser(&product)
+
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+	}
+
+	updateProduct, err := api.Service.UpdateProduct
+} */
+
 func (api *Api) UpdateStocksHandler(c *fiber.Ctx) error {
 
 	ID := c.Params("id")
