@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 import { Box, Dialog, DialogTitle, Drawer, CircularProgress, Button } from '@mui/material';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/userActions';
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
 const useStyles = makeStyles((theme) => ({
   drawerMobilePaper: {
@@ -99,11 +100,12 @@ const Carts = (props) => {
           <div>
             {productDetail ? (
               <>
+              {productDetail.image ? (
                 <img
                   className={classes.listImgBlock}
                   src={productDetail.image}
                   alt="Product"
-                />
+                /> ) :  ( <CameraAltIcon className={classes.listImgBlock}/> )}
                 <p>Product Name: {productDetail.productName}</p>
                 <p>Product Details: {productDetail.description}</p>
                 <p>Price: {productDetail.price}</p>
