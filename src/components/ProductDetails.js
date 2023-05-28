@@ -113,7 +113,7 @@ const ProductDetails = (props) => {
             <Button
               variant="contained"
               className={classes.btn}
-              style={{ minWidth: 100, backgroundColor: 'rgba(39,38,152,255)' }}
+              style={{ minWidth: 100, marginBottom: 5, backgroundColor: 'rgba(39,38,152,255)' }}
             >
               Add to Cart
             </Button>
@@ -121,7 +121,7 @@ const ProductDetails = (props) => {
               variant="contained"
               color="primary"
               className={classes.btn}
-              style={{ marginLeft: 5, minWidth: 100, backgroundColor: 'rgba(186,130,57,255)' }}
+              style={{ marginLeft: 5, marginBottom: 5, minWidth: 100, backgroundColor: 'rgba(186,130,57,255)' }}
             >
               Buy Now
             </Button>
