@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 import logo from "./logo/aslan2.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { makeStyles } from '@mui/styles';
+import Carts from './cart/Carts';
 
 const useStyles = makeStyles((theme) => ({
   cart: {
@@ -39,6 +40,7 @@ function ResponsiveAppBar(props) {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const [redirect, setRedirect] = useState(false)
+  const [carts, setCarts] = useState(false)
 
   const userLogout = async () => {
     try {
@@ -83,7 +85,13 @@ function ResponsiveAppBar(props) {
     setAnchorElUser(null);
   };
 
+  const handleChange = () => {
+    setCarts((prev) => !prev);
+  };
+
   return (
+    <>
+    <Carts open={carts} close={handleChange}/>
     <AppBar position="sticky" sx={{marginBottom:2, backgroundColor:"rgba(39,38,152,255)"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -144,25 +152,6 @@ function ResponsiveAppBar(props) {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -175,7 +164,7 @@ function ResponsiveAppBar(props) {
             ))}
           </Box>
 
-          <IconButton style={{color:"white"}} sx={{ p: 2 }}>
+          <IconButton style={{color:"white"}} sx={{ p: 2 }} onClick={() => setCarts(true)}>
             <ShoppingCartOutlinedIcon className={classes.cart}/>
           </IconButton>
           <Box sx={{ flexGrow: 0 }}>
@@ -227,6 +216,7 @@ function ResponsiveAppBar(props) {
         </Toolbar>
       </Container>
     </AppBar>
+    </>
   );
 }
 
