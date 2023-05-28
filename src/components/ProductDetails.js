@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetails = (props) => {
-  const { productDetail, fetchProduct } = props;
+  const { productDetail, fetchProduct, userId } = props;
 
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(true);
@@ -84,6 +84,11 @@ const ProductDetails = (props) => {
       clearTimeout(loadingTimeout);
     };
   }, []);
+
+  const handleAddToCart = () => {
+    // Save productDetail to localStorage when "Add to Cart" is clicked
+    localStorage.setItem(`productDetail_${userId}`, JSON.stringify(productDetail));
+  };
 
   return (
     <>
@@ -114,6 +119,7 @@ const ProductDetails = (props) => {
               variant="contained"
               className={classes.btn}
               style={{ minWidth: 100, marginBottom: 5, backgroundColor: 'rgba(39,38,152,255)' }}
+              onClick={handleAddToCart} // Call handleAddToCart when the button is clicked
             >
               Add to Cart
             </Button>
@@ -134,6 +140,7 @@ const ProductDetails = (props) => {
 
 const mapStateToProps = (state) => ({
   productDetail: state.productDetail,
+  userId: state.user.id, // Assuming you have the user ID stored in the Redux store
 });
 
 const mapDispatchToProps = (dispatch) => ({

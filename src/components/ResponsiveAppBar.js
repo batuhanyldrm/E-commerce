@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       color:"rgba(186,130,57,255)"
     },
+  },
+  logo: {
+    textDecoration:"none",
+    color:"white"
   }
 }));
 
@@ -98,11 +102,11 @@ function ResponsiveAppBar(props) {
           <Link to='/all-products'>
           <img src={logo}  style={{maxWidth:70, maxHeight:70}} />
           </Link>
+          <Link className={classes.logo} to={"/all-products"}>
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/all-products"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -116,6 +120,7 @@ function ResponsiveAppBar(props) {
           >
             Qasis
           </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
