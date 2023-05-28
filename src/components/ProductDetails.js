@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
-import { fetchProduct } from './actions/productActions';
+import { fetchProduct } from './actions/productDetailActions';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import { Button } from '@mui/material';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
@@ -53,11 +53,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetails = (props) => {
+  const { productDetail, fetchProduct } = props;
+
   const classes = useStyles();
+
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+/*   const [cartItems, setCartItems] = useState([] || "");
 
-  const { products, fetchProduct } = props;
+  const handleAddToCart = (product) => {
+    setCartItems([...cartItems, product]);
+  };
+  console.log(cartItems,"www") */
 
   //tekrar kontrol edilecek
   useEffect(() => {
@@ -90,20 +97,20 @@ const ProductDetails = (props) => {
         {isError && <div>Error loading image</div>}
         {!isLoading && !isError && (
           <div style={{ display: "flex" }}>
-            {products.image ?
+            {productDetail.image ?
               <img
                 className={classes.listImgBlock}
-                src={products.image}
+                src={productDetail.image}
                 alt="Product"
                 onLoad={handleImageLoad}
                 onError={handleImageError}
               /> : <CameraAltIcon className={classes.listImgBlock} />
             }
             <div style={{ marginLeft: "10px" }}>
-              <p>Product Name:  {products.productName}</p>
-              <p>Product Details: {products.description}</p>
-              <p>Price: {products.price}</p>
-              <p>Stock: {products.amount}</p>
+              <p>Product Name:  {productDetail.productName}</p>
+              <p>Product Details: {productDetail.description}</p>
+              <p>Price: {productDetail.price}</p>
+              <p>Stock: {productDetail.amount}</p>
               <Button variant="contained" className={classes.btn} style={{minWidth:100, backgroundColor:"rgba(39,38,152,255)"}}>Add to Cart</Button>
               <Button variant="contained" color="primary" className={classes.btn} style={{marginLeft:5 ,minWidth:100, backgroundColor:"rgba(186,130,57,255)"}}>Buy Now</Button>
             </div>
@@ -115,7 +122,7 @@ const ProductDetails = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  products: state.products.products,
+  productDetail: state.productDetail,
 });
 
 const mapDispatchToProps = (dispatch) => ({

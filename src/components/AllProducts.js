@@ -8,6 +8,7 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import { IconButton, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   allProduct:{
@@ -134,20 +135,20 @@ const AllProducts = (props) => {
         <div className={classes.grid} style={{marginBottom:"5%"}}>
           {products && products.map((product, index) => (
               <div key={index} className={classes.products} style={{marginBottom:"10%"}}>
-                <a href={`/product-details/${product.id}`} className={classes.link}>
+                <Link to={`/product-details/${product.id}`} className={classes.link}>
                 {product.image ?
               <img src={product.image}  alt={product.productName} className={classes.listImgBlock}></img> : <CameraAltIcon className={classes.listImgBlock} />
             }
-            </a>
+            </Link>
                 <div className={classes.productName}>
-                <a href={`/product-details/${product.id}`} className={classes.link}>
+                <Link to={`/product-details/${product.id}`} className={classes.link}>
                   Product Name: {product.productName}
-                  </a>
+                  </Link>
                 </div>
                 <div className={classes.productName} style={{marginBottom:15}}>
-                <a href={`/product-details/${product.id}`} className={classes.link}>
+                <Link to={`/product-details/${product.id}`} className={classes.link}>
                   Product Description: {product.description}
-                  </a>
+                  </Link>
                 </div>
               </div>
           ))}
@@ -159,7 +160,7 @@ const AllProducts = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user.user,
+  user: state.user,
   products: state.products.products
 });
 

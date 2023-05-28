@@ -1,12 +1,10 @@
-import { ADD_PRODUCT, FETCH_PRODUCTS, DELETE_PRODUCT, UPDATE_STOCK, UPDATE_PRODUCT_STOCK, FETCH_SEARCH_PRODUCT, FETCH_PRODUCT } from "../actions/types";
+import { ADD_PRODUCT, FETCH_PRODUCTS, DELETE_PRODUCT, UPDATE_STOCK, UPDATE_PRODUCT_STOCK, FETCH_SEARCH_PRODUCT } from "../actions/types";
 
 const Reducer = (state = {}, action) => {
     switch (action.type) {
         case ADD_PRODUCT:
             return {...state, products:  [...state.products, action.payload]};
         case FETCH_PRODUCTS:
-            return {...state, products: action.payload}
-        case FETCH_PRODUCT:
             return {...state, products: action.payload}
         case FETCH_SEARCH_PRODUCT:
             return {...state, products: action.payload}

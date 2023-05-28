@@ -78,7 +78,7 @@ const Profile = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user.user,
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({

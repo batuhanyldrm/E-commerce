@@ -91,13 +91,13 @@ function ResponsiveAppBar(props) {
 
   return (
     <>
-    <Carts open={carts} close={handleChange}/>
+    <Carts open={carts} close={handleChange} />
     <AppBar position="sticky" sx={{marginBottom:2, backgroundColor:"rgba(39,38,152,255)"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <a href='/all-products'>
+          <Link to='/all-products'>
           <img src={logo}  style={{maxWidth:70, maxHeight:70}} />
-          </a>
+          </Link>
           <Typography
             variant="h6"
             noWrap
