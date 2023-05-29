@@ -182,6 +182,7 @@ const AllProducts = (props) => {
             <Link to={`/product-details/${product.id}`} className={classes.link}>
               {product.image ?
                 <img className={classes.listImgBlock}
+                  style={{objectFit: "fill"}}
                   src={product.image}
                   loading="lazy"
                   alt={product.productName}
