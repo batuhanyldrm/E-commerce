@@ -86,8 +86,15 @@ const ProductDetails = (props) => {
   }, []);
 
   const handleAddToCart = () => {
-    // Save productDetail to localStorage when "Add to Cart" is clicked
-    localStorage.setItem(`productDetail_${userId}`, JSON.stringify(productDetail));
+    // Save productDetail as an array to localStorage when "Add to Cart" is clicked
+    let cartItems = JSON.parse(localStorage.getItem(`productDetail_${userId}`));
+    
+    if (!Array.isArray(cartItems)) {
+      cartItems = [];
+    }
+    
+    const updatedCartItems = [...cartItems, productDetail];
+    localStorage.setItem(`productDetail_${userId}`, JSON.stringify(updatedCartItems));
   };
 
   return (

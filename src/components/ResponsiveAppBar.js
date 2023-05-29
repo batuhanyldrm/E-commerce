@@ -169,7 +169,7 @@ function ResponsiveAppBar(props) {
             ))}
           </Box>
 
-          <IconButton style={{color:"white"}} sx={{ p: 2 }} onClick={() => setCarts(true)}>
+          <IconButton style={{color:"white"}} sx={{ p: 2, marginRight:2 }} onClick={() => setCarts(true)}>
             <ShoppingCartOutlinedIcon className={classes.cart}/>
           </IconButton>
           <Box sx={{ flexGrow: 0 }}>

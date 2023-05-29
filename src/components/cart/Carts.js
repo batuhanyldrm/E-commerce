@@ -48,13 +48,25 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
     fontStyle: "italic",
   },
+  cartStyle: {
+    border:"1px solid lightgray", 
+    width:200, 
+    display:"grid", 
+    justifyContent:"center", 
+    margin:5, 
+    borderRadius:5, 
+    padding:10,
+  },
+  textStyle: {
+    margin:5
+  }
 }));
 
 const Carts = (props) => {
   const { open, close, userId, loginUser } = props;
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(true);
-  const [productDetail, setProductDetail] = useState(null);
+  const [productDetail, setProductDetail] = useState([]);
 
   useEffect(() => {
     // Simulating loading delay
@@ -98,21 +110,39 @@ const Carts = (props) => {
           </div>
         ) : (
           <div>
-            {productDetail ? (
-              <>
-              {productDetail.image ? (
-                <img
-                  className={classes.listImgBlock}
-                  src={productDetail.image}
-                  alt="Product"
-                /> ) :  ( <CameraAltIcon className={classes.listImgBlock}/> )}
-                <p>Product Name: {productDetail.productName}</p>
-                <p>Product Details: {productDetail.description}</p>
-                <p>Price: {productDetail.price}</p>
-                <p>Stock: {productDetail.amount}</p>
-                <Button variant="outlined" style={{ marginRight: 5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)'}}>Buy</Button>
-                <Button variant="outlined" style={{ marginRight: 5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)'}} onClick={handleDeleteFromCart}>Delete</Button>
-              </>
+            {productDetail.length > 0 ? (
+              productDetail.map((product, index) => (
+                <div key={index} className={classes.cartStyle}>
+                  {product.image ? (
+                    <img
+                      className={classes.listImgBlock}
+                      src={product.image}
+                      alt="Product"
+                    />
+                  ) : (
+                    <CameraAltIcon className={classes.listImgBlock} />
+                  )}
+                  <div>
+                  <p className={classes.textStyle}>Product Name: {product.productName}</p>
+                  <p className={classes.textStyle}>Product Details: {product.description}</p>
+                  <p className={classes.textStyle}>Price: {product.price}</p>
+                  <p className={classes.textStyle}>Stock: {product.amount}</p>
+                  </div>
+                  <Button
+                    variant="outlined"
+                    style={{ marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
+                  >
+                    Buy
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    style={{ marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
+                    onClick={handleDeleteFromCart} // Assuming you have a function to handle delete
+                  >
+                    Delete
+                  </Button>
+                </div>
+              ))
             ) : (
               <p className={classes.emptyCartText}>Cart is empty</p>
             )}
