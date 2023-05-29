@@ -9,6 +9,12 @@ import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import { IconButton, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
+import AspectRatio from '@mui/joy/AspectRatio';
+import Box from '@mui/joy/Box';
+import Button from '@mui/joy/Button';
+import Card from '@mui/joy/Card';
+import Typography from '@mui/joy/Typography';
+import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
 
 const useStyles = makeStyles((theme) => ({
   allProduct:{
@@ -24,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
     gridTemplateColumns:"1fr 1fr 1fr",
     marginLeft:"25px", 
     justifyContent:"center",
-    ["@media (max-width: 760px)"]:{
+    ["@media (max-width: 950px)"]:{
       display:"grid", 
       gridGap:"25px", 
       gridTemplateColumns:"1fr 1fr",
     },
-    ["@media (max-width: 500px)"]:{
+    ["@media (max-width: 640px)"]:{
       display:"grid", 
       gridGap:"25px", 
       gridTemplateColumns:"1fr",
@@ -62,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     //overflow:"hidden",
-    //objectFit: "cover",
+    objectFit: "fill",
     color: "#d4d4d4",
     boxShadow: "1px 1px 15px #8d8f91",
     borderRadius: 5,
@@ -72,13 +78,18 @@ const useStyles = makeStyles((theme) => ({
       opacity:0.9,
     },
   },
+  btn:{
+    "&:hover": {
+        opacity:0.8,
+    },
+}
 }));
 
 const AllProducts = (props) => {
   const classes = useStyles();
   
   const {
-    user,
+    userId,
     loginUser,
     products,
     fetchProducts,
@@ -102,11 +113,20 @@ const AllProducts = (props) => {
   }, [])
 
   useEffect(() => {
-    return () => {
       loginUser()
-    }
   }, [])
+
+  const handleAddToCart = (productId) => {
+    // Save productId to localStorage when "Bookmark Add" is clicked
+    let cartItems = JSON.parse(localStorage.getItem(`productDetail_${userId}`));
   
+    if (!Array.isArray(cartItems)) {
+      cartItems = [];
+    }
+  
+    const updatedCartItems = [...cartItems, productId];
+    localStorage.setItem(`productDetail_${userId}`, JSON.stringify(updatedCartItems));
+  };
 
   return (
     <>
@@ -134,7 +154,63 @@ const AllProducts = (props) => {
       <div className={classes.allProduct}>
         <div className={classes.grid} style={{marginBottom:"5%"}}>
           {products && products.map((product, index) => (
-              <div key={index} className={classes.products} style={{marginBottom:"10%"}}>
+            <Card variant="outlined" key={index} sx={{ width: 250 }}>
+              <div className={classes.productName}>
+               <Link to={`/product-details/${product.id}`} className={classes.link}>
+                <Typography level="h2" fontSize="md" sx={{ mb: 0.5 }}>
+                  Product Name: {product.productName}
+                </Typography>
+              </Link>
+              </div>
+              <div className={classes.productName}>
+                <Link to={`/product-details/${product.id}`} className={classes.link}>
+                <Typography className={classes.link} level="body2">Product Description: {product.description}</Typography>
+                </Link>
+              </div>
+            <IconButton
+              title='Add to cart'
+              aria-label="bookmark Bahamas Islands"
+              variant="plain"
+              color="neutral"
+              size="sm"
+              sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
+              onClick={() => handleAddToCart(product)}
+            >
+              <BookmarkAdd />
+            </IconButton>
+            <AspectRatio className={classes.products}  minHeight="300px"  sx={{ my: 2 }}>
+            <Link to={`/product-details/${product.id}`} className={classes.link}>
+              {product.image ?
+                <img className={classes.listImgBlock}
+                  src={product.image}
+                  loading="lazy"
+                  alt={product.productName}
+                />  : <CameraAltIcon className={classes.listImgBlock} />
+              }
+              </Link>
+            </AspectRatio>
+            <Box sx={{ display: 'flex' }}>
+              <div>
+                <Typography level="body3">Total price:</Typography>
+                <Typography fontSize="lg" fontWeight="lg">
+                ${product.price}
+                </Typography>
+              </div>
+              <Button
+                component={Link}
+                to={`/product-details/${product.id}`}
+                variant="solid"
+                size="sm"
+                color="primary"
+                aria-label="Explore Bahamas Islands"
+                className={classes.btn}
+                sx={{ ml: 'auto', fontWeight: 600, backgroundColor:"rgba(39,38,152,255)" }}
+              >
+                Explore
+              </Button>
+            </Box>
+          </Card>
+             /*  <div key={index} className={classes.products} style={{marginBottom:"10%"}}>
                 <Link to={`/product-details/${product.id}`} className={classes.link}>
                 {product.image ?
               <img src={product.image}  alt={product.productName} className={classes.listImgBlock}></img> : <CameraAltIcon className={classes.listImgBlock} />
@@ -150,7 +226,7 @@ const AllProducts = (props) => {
                   Product Description: {product.description}
                   </Link>
                 </div>
-              </div>
+              </div> */
           ))}
         </div>
       </div>
@@ -160,7 +236,7 @@ const AllProducts = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  userId: state.user.id,
   products: state.products.products
 });
 
