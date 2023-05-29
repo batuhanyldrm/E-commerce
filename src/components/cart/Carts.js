@@ -87,10 +87,18 @@ const Carts = (props) => {
     loginUser();
   }, []);
 
-  const handleDeleteFromCart = () => {
-    localStorage.removeItem(`productDetail_${userId}`);
-    window.location.reload();
-  };
+  const handleDeleteFromCart = (productId) => {
+  const updatedProductDetail = productDetail.filter(
+    (product) => product.id !== productId
+  );
+
+  setProductDetail(updatedProductDetail);
+
+  localStorage.setItem(
+    `productDetail_${userId}`,
+    JSON.stringify(updatedProductDetail)
+  );
+};
 
   return (
     <Drawer
@@ -137,7 +145,7 @@ const Carts = (props) => {
                   <Button
                     variant="outlined"
                     style={{ marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
-                    onClick={handleDeleteFromCart} // Assuming you have a function to handle delete
+                    onClick={() => handleDeleteFromCart(product.id)} // Assuming you have a function to handle delete
                   >
                     Delete
                   </Button>
