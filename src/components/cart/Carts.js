@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     fontWeight: "bold",
+    fontSize:25
   },
   body: {
     display: "flex",
@@ -88,17 +89,17 @@ const Carts = (props) => {
   }, []);
 
   const handleDeleteFromCart = (productId) => {
-  const updatedProductDetail = productDetail.filter(
-    (product) => product.id !== productId
-  );
+    const updatedProductDetail = productDetail.filter(
+      (product) => product.id !== productId
+    );
 
-  setProductDetail(updatedProductDetail);
+    setProductDetail(updatedProductDetail);
 
-  localStorage.setItem(
-    `productDetail_${userId}`,
-    JSON.stringify(updatedProductDetail)
-  );
-};
+    localStorage.setItem(
+      `productDetail_${userId}`,
+      JSON.stringify(updatedProductDetail)
+    );
+  };
 
   return (
     <Drawer
@@ -118,6 +119,14 @@ const Carts = (props) => {
           </div>
         ) : (
           <div>
+            <div style={{display:"grid"}}>
+            <Button
+              variant="outlined"
+              style={{ marginLeft: 5, marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
+            >
+              Buy Products
+            </Button>
+            </div>
             {productDetail.length > 0 ? (
               productDetail.map((product, index) => (
                 <div key={index} className={classes.cartStyle}>
@@ -139,12 +148,6 @@ const Carts = (props) => {
                   <Button
                     variant="outlined"
                     style={{ marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
-                  >
-                    Buy
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    style={{ marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
                     onClick={() => handleDeleteFromCart(product.id)} // Assuming you have a function to handle delete
                   >
                     Delete
@@ -154,6 +157,14 @@ const Carts = (props) => {
             ) : (
               <p className={classes.emptyCartText}>Cart is empty</p>
             )}
+            <div style={{display:"grid"}}>
+            <Button
+              variant="outlined"
+              style={{ marginLeft: 5, marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
+            >
+              Buy Products
+            </Button>
+            </div>
           </div>
         )}
       </div>
