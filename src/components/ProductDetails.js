@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     display:"flex",
     ["@media (max-width: 400px)"]:{
       display:"grid",
+      justifyContent:"space-around",
     },
   },
   image: {
@@ -118,10 +119,10 @@ const ProductDetails = (props) => {
             </>
           )}
           <div style={{ marginLeft: '10px' }}>
-            <p>Product Name: {productDetail.productName}</p>
-            <p>Product Details: {productDetail.description}</p>
-            <p>Price: {productDetail.price}</p>
-            <p>Stock: {productDetail.amount}</p>
+            <p> <b>Product Name:</b> {productDetail.productName} </p>
+            <p> <b>Product Details:</b> {productDetail.description} </p>
+            <p> <b>Total Price:</b> ${productDetail.price} </p>
+            <p> <b> Stock:</b> {productDetail.amount} </p>
             <Button
               variant="contained"
               className={classes.btn}
