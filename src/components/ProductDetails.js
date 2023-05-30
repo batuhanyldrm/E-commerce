@@ -122,7 +122,9 @@ const ProductDetails = (props) => {
             <p> <b>Product Name:</b> {productDetail.productName} </p>
             <p> <b>Product Details:</b> {productDetail.description} </p>
             <p> <b>Total Price:</b> ${productDetail.price} </p>
-            <p> <b> Stock:</b> {productDetail.amount} </p>
+            {productDetail.amount < 5 ? 
+            <p> <b> Last:</b> {productDetail.amount} <b>products</b> </p> : "" 
+            }
             <Button
               variant="contained"
               className={classes.btn}
