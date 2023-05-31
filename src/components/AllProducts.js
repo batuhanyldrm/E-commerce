@@ -211,23 +211,6 @@ const AllProducts = (props) => {
               </Button>
             </Box>
           </Card>
-             /*  <div key={index} className={classes.products} style={{marginBottom:"10%"}}>
-                <Link to={`/product-details/${product.id}`} className={classes.link}>
-                {product.image ?
-              <img src={product.image}  alt={product.productName} className={classes.listImgBlock}></img> : <CameraAltIcon className={classes.listImgBlock} />
-            }
-            </Link>
-                <div className={classes.productName}>
-                <Link to={`/product-details/${product.id}`} className={classes.link}>
-                  Product Name: {product.productName}
-                  </Link>
-                </div>
-                <div className={classes.productName} style={{marginBottom:15}}>
-                <Link to={`/product-details/${product.id}`} className={classes.link}>
-                  Product Description: {product.description}
-                  </Link>
-                </div>
-              </div> */
           ))}
         </div>
       </div>
