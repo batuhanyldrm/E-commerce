@@ -193,7 +193,7 @@ function ResponsiveAppBar(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-               {document.cookie ? (
+               {document.cookie.includes("user_token") ? (
                 <div>
                 <MenuItem component={Link} to="/profile"  onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Profile</Typography>

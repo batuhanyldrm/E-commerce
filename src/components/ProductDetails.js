@@ -5,6 +5,8 @@ import { fetchProduct } from './actions/productDetailActions';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import { Button, CircularProgress } from '@mui/material';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
+import Stripe from './payment/Stripe';
+//import './payment/Payment.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,6 +72,7 @@ const ProductDetails = (props) => {
 
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
     const productId = window.location.href.split('/')[4];
@@ -125,6 +128,7 @@ const ProductDetails = (props) => {
             {productDetail.amount < 5 ? 
             <p> <b> Last:</b> {productDetail.amount} <b>products</b> </p> : "" 
             }
+           {/*  <div style={{display:"flex", justifyContent:"center"}}> */}
             <Button
               variant="contained"
               className={classes.btn}
@@ -133,14 +137,19 @@ const ProductDetails = (props) => {
             >
               Add to Cart
             </Button>
+            <div className="Payment">
+            {showForm ? <Stripe/> : <>
             <Button
               variant="contained"
               color="primary"
               className={classes.btn}
               style={{ marginLeft: 5, marginBottom: 5, minWidth: 100, backgroundColor: 'rgba(186,130,57,255)' }}
+              onClick={()=>setShowForm(true)}
             >
               Buy Now
-            </Button>
+            </Button></>}
+            {/* </div> */}
+            </div>
           </div>
         </div>
       </div>

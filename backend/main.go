@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -55,9 +54,9 @@ func SetupApp(api *Api) *fiber.App {
 	//stripe payment you can control stripe web site
 	app.Post("/create-payment-intent", api.HandleCreatePaymentIntent)
 
-	addr := "localhost:3001"
+	/* addr := "localhost:3001"
 	log.Printf("Listening on %s ...", addr)
-	log.Fatal(app.Listen(addr))
+	log.Fatal(app.Listen(addr)) */
 
 	return app
 }
