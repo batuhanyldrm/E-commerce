@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net/http"
 	"os"
 	"strconv"
 
@@ -17,6 +18,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
 	"github.com/google/uuid"
+	"github.com/stripe/stripe-go/v74"
+	"github.com/stripe/stripe-go/v74/paymentintent"
 	"google.golang.org/api/option"
 )
 
@@ -28,6 +31,57 @@ func NewApi(service *Service) Api {
 	return Api{
 		Service: service,
 	}
+}
+
+type item struct {
+	ID string `json:"id"`
+}
+
+func calculateOrderAmount(items []item) int64 {
+	// Replace this constant with a calculation of the order's amount
+	// Calculate the order total on the server to prevent
+	// people from directly manipulating the amount on the client
+	return 1400
+}
+
+func (api *Api) HandleCreatePaymentIntent(c *fiber.Ctx) error {
+
+	if c.Method() != "POST" {
+		return c.Status(http.StatusMethodNotAllowed).SendString("Method Not Allowed")
+	}
+
+	var req struct {
+		Items []item `json:"items"`
+	}
+
+	if err := c.BodyParser(&req); err != nil {
+		return c.Status(http.StatusInternalServerError).SendString(err.Error())
+	}
+
+	// Create a PaymentIntent with amount and currency
+	params := &stripe.PaymentIntentParams{
+		Amount:   stripe.Int64(calculateOrderAmount(req.Items)),
+		Currency: stripe.String(string(stripe.CurrencyUSD)),
+		AutomaticPaymentMethods: &stripe.PaymentIntentAutomaticPaymentMethodsParams{
+			Enabled: stripe.Bool(true),
+		},
+	}
+	
+
+	pi, err := paymentintent.New(params)
+	log.Printf("pi.New: %v", pi.ClientSecret)
+
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).SendString(err.Error())
+	}
+
+	resp := struct {
+		ClientSecret string `json:"clientSecret"`
+	}{
+		ClientSecret: pi.ClientSecret,
+	}
+
+	return c.JSON(resp)
 }
 
 func (api *Api) GetStocksHandler(c *fiber.Ctx) error {

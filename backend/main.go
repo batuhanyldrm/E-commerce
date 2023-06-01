@@ -1,10 +1,12 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/stripe/stripe-go/v74"
 )
 
 func main() {
@@ -18,6 +20,7 @@ func main() {
 func SetupApp(api *Api) *fiber.App {
 	app := fiber.New()
 	os.Setenv("BUCKET_NAME", "graduation-project-5ff56.appspot.com")
+	stripe.Key = "sk_test_51NDVcUJVbJVgaTyyWRJxS0zPxpTaHJvmriQ5jJbFf7dbBTizwlQdp4xooJy8iqnVNmL8FQAC0WlVX6gySg1FurN200VTizr6dz"
 
 	app.Use(cors.New(cors.Config{
 		AllowCredentials: true,
@@ -46,6 +49,15 @@ func SetupApp(api *Api) *fiber.App {
 	app.Get("/user/:id", api.GetUserHandler)
 	app.Post("/logout", api.GetUserLogoutHandler)
 	app.Get("/user", api.GetUserAuthenticationHandler)
+
+	//app.Static("/", "./public")
+
+	//stripe payment you can control stripe web site
+	app.Post("/create-payment-intent", api.HandleCreatePaymentIntent)
+
+	addr := "localhost:3001"
+	log.Printf("Listening on %s ...", addr)
+	log.Fatal(app.Listen(addr))
 
 	return app
 }
