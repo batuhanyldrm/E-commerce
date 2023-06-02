@@ -4,6 +4,7 @@ import { Box, Dialog, DialogTitle, Drawer, CircularProgress, Button } from '@mui
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/userActions';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
+import Stripe from '../payment/Stripe';
 
 const useStyles = makeStyles((theme) => ({
   drawerMobilePaper: {
@@ -65,9 +66,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Carts = (props) => {
   const { open, close, userId, loginUser } = props;
+
   const classes = useStyles();
+
   const [isLoading, setIsLoading] = useState(true);
   const [productDetail, setProductDetail] = useState([]);
+  const [showForm, setShowForm] = useState(false)
+  const [showFormDown, setShowFormDown] = useState(false)
 
   useEffect(() => {
     // Simulating loading delay
@@ -120,12 +125,14 @@ const Carts = (props) => {
         ) : (
           <div>
             <div style={{display:"grid"}}>
+            {showForm ? <Stripe productDetail={productDetail} /> : <>
             <Button
               variant="outlined"
+              onClick={()=>setShowForm(true)}
               style={{ marginLeft: 5, marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
             >
               Buy Products
-            </Button>
+            </Button></>}
             </div>
             {productDetail.length > 0 ? (
               productDetail.map((product, index) => (
@@ -158,12 +165,14 @@ const Carts = (props) => {
               <p className={classes.emptyCartText}>Cart is empty</p>
             )}
             <div style={{display:"grid"}}>
+            {showFormDown ? <Stripe productDetail={productDetail} /> : <>
             <Button
               variant="outlined"
+              onClick={()=>setShowFormDown(true)}
               style={{ marginLeft: 5, marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
             >
               Buy Products
-            </Button>
+            </Button></>}
             </div>
           </div>
         )}
