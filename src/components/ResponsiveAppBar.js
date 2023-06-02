@@ -18,6 +18,7 @@ import logo from "./logo/aslan2.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { makeStyles } from '@mui/styles';
 import Carts from './cart/Carts';
+import { deepPurple } from '@mui/material/colors';
 
 const useStyles = makeStyles((theme) => ({
   cart: {
@@ -167,15 +168,22 @@ function ResponsiveAppBar(props) {
             ))}
           </Box>
 
-          <IconButton style={{color:"white"}} sx={{ p: 2, marginRight:2 }} onClick={() => setCarts(true)}>
+          <IconButton size='small' style={{color:"white"}} sx={{ p: 0, marginRight:1 }} onClick={() => setCarts(true)}>
             <ShoppingCartOutlinedIcon className={classes.cart}/>
           </IconButton>
           <Box sx={{ flexGrow: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Typography style={{ textAlign: "center", marginRight:5 }}>
+              {user.name}
+            </Typography>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar  src="/static/images/avatar/2.jpg" />
+                <Avatar sx={{  }}>
+                  {user && user.name && user.surname && `${user.name.charAt(0)}${user.surname.charAt(0)}`}
+                </Avatar>
               </IconButton>
             </Tooltip>
+          </div>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
