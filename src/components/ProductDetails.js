@@ -138,7 +138,7 @@ const ProductDetails = (props) => {
               Add to Cart
             </Button>
             <div className="Payment">
-            {showForm ? <Stripe/> : <>
+            {showForm ? <Stripe productDetail={productDetail} /> : <>
             <Button
               variant="contained"
               color="primary"
