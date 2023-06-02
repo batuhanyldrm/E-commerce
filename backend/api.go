@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"net/http"
 	"os"
 	"strconv"
 
@@ -18,8 +17,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
 	"github.com/google/uuid"
-	"github.com/stripe/stripe-go/v74"
-	"github.com/stripe/stripe-go/v74/paymentintent"
 	"google.golang.org/api/option"
 )
 
@@ -46,43 +43,68 @@ func calculateOrderAmount(items []item) int64 {
 
 func (api *Api) HandleCreatePaymentIntent(c *fiber.Ctx) error {
 
-	if c.Method() != "POST" {
-		return c.Status(http.StatusMethodNotAllowed).SendString("Method Not Allowed")
+	type PaymentData struct {
+		Amount int64  `json:"amount"`
+		ID     string `json:"id"`
 	}
 
-	var req struct {
-		Items []item `json:"items"`
+	paymentData := new(PaymentData)
+	if err := c.BodyParser(paymentData); err != nil {
+		return err
 	}
 
-	if err := c.BodyParser(&req); err != nil {
-		return c.Status(http.StatusInternalServerError).SendString(err.Error())
-	}
+	// Access the paymentData fields: paymentData.Amount and paymentData.ID
 
-	// Create a PaymentIntent with amount and currency
-	params := &stripe.PaymentIntentParams{
-		Amount:   stripe.Int64(calculateOrderAmount(req.Items)),
-		Currency: stripe.String(string(stripe.CurrencyUSD)),
-		AutomaticPaymentMethods: &stripe.PaymentIntentAutomaticPaymentMethodsParams{
-			Enabled: stripe.Bool(true),
-		},
-	}
-	
+	// Perform necessary operations with the payment data, e.g., create payment intent
+	// ...
 
-	pi, err := paymentintent.New(params)
-	log.Printf("pi.New: %v", pi.ClientSecret)
-
-	if err != nil {
-		return c.Status(http.StatusInternalServerError).SendString(err.Error())
-	}
-
-	resp := struct {
-		ClientSecret string `json:"clientSecret"`
+	response := struct {
+		Success bool   `json:"success"`
+		Message string `json:"message"`
 	}{
-		ClientSecret: pi.ClientSecret,
+		Success: true,
+		Message: "Payment was successful",
 	}
 
-	return c.JSON(resp)
+	return c.JSON(response)
 }
+
+/* if c.Method() != "POST" {
+	return c.Status(http.StatusMethodNotAllowed).SendString("Method Not Allowed")
+}
+
+var req struct {
+	Items []item `json:"items"`
+}
+
+if err := c.BodyParser(&req); err != nil {
+	return c.Status(http.StatusInternalServerError).SendString(err.Error())
+}
+
+// Create a PaymentIntent with amount and currency
+params := &stripe.PaymentIntentParams{
+	Amount:   stripe.Int64(calculateOrderAmount(req.Items)),
+	Currency: stripe.String(string(stripe.CurrencyUSD)),
+	AutomaticPaymentMethods: &stripe.PaymentIntentAutomaticPaymentMethodsParams{
+		Enabled: stripe.Bool(true),
+	},
+}
+
+
+pi, err := paymentintent.New(params)
+log.Printf("pi.New: %v", pi.ClientSecret)
+
+if err != nil {
+	return c.Status(http.StatusInternalServerError).SendString(err.Error())
+}
+
+resp := struct {
+	ClientSecret string `json:"clientSecret"`
+}{
+	ClientSecret: pi.ClientSecret,
+}
+
+return c.JSON(resp) */
 
 func (api *Api) GetStocksHandler(c *fiber.Ctx) error {
 

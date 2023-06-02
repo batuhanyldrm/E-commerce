@@ -35,8 +35,7 @@ const pages = ['Products', 'Pricing', 'Blog'];
 
 function ResponsiveAppBar(props) {
 
-  const {} = props
-
+  const {user} = props
   const classes = useStyles();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -198,9 +197,11 @@ function ResponsiveAppBar(props) {
                 <MenuItem component={Link} to="/profile"  onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
+                {user.company ?
                 <MenuItem component={Link} to="/stock" onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">Account</Typography>
-                </MenuItem>
+                </MenuItem> : ""
+                }
                 <MenuItem component={Link} to="" onClick={userLogout}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>
@@ -225,6 +226,7 @@ function ResponsiveAppBar(props) {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({

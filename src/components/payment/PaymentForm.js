@@ -1,8 +1,66 @@
-import React, { useState } from 'react'
-import { CardNumberElement, CardCvcElement, CardExpiryElement, useStripe, useElements} from '@stripe/react-stripe-js';
-import axios from 'axios'
+import React, { useState } from 'react';
+import { CardNumberElement, CardCvcElement, CardExpiryElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import axios from 'axios';
+import { Button } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        minHeight: '100vh',
+        padding: '20px',
+        backgroundColor: '#f5f5f5',
+    },
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  formFieldset: {
+    width: '250px',
+    marginBottom: '20px',
+    padding: '10px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    display: 'flex',
+    alignItems: 'center',
+    background: '#f5f5f5',
+  },
+  formInput: {
+    width: '100%',
+    border: 'none',
+    outline: 'none',
+    fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+    fontSize: '16px',
+    fontSmoothing: 'antialiased',
+    '::placeholder': {
+      color: 'rgba(0, 0, 0, 0.6)',
+    },
+  },
+  formTitle: {
+    marginBottom: '20px',
+    fontWeight: 'bold',
+    fontSize: '18px',
+    textAlign: 'center',
+  },
+  btn: {
+    "&:hover": {
+      opacity: 0.8,
+    },
+    minWidth: '150px',
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    padding: '10px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+  },
+}));
 
 const PaymentForm = () => {
+    const classes = useStyles();
     
     const [success, setSuccess] = useState(false)
     const stripe = useStripe()
@@ -18,7 +76,7 @@ const PaymentForm = () => {
         if(!error){
             try {
                 const {id} = paymentMethod
-                const response = await axios.post("http://localhost:3000/create-payment-intent", {
+                const response = await axios.post("http://localhost:3001/create-payment-intent", {
                     amount: 0,
                     id
                 })
@@ -57,33 +115,30 @@ const PaymentForm = () => {
     }
 
   return (
-    <>
-        {!success ? 
-            <form onSubmit={handleSubmit}>
-                <fieldset className='FormGroup'>
-                    <div className="FormRow">
-                        <CardNumberElement options={CARD_OPTIONS} />
-                    </div>
-                </fieldset>
-                <fieldset className='FormGroup'>
-                    <div className="FormRow">
-                        <CardExpiryElement options={CARD_OPTIONS} />
-                    </div>
-                </fieldset>
-                <fieldset className='FormGroup'>
-                    <div className="FormRow">
-                        <CardCvcElement options={CARD_OPTIONS} />
-                    </div>
-                </fieldset>
-                <button>Pay</button>
-            </form>
-            :
-            <div className="payment-success">
-                <h2>Payment successful</h2>
-                <h3 className='Thank-you'>Thank you for your patronage</h3>
-            </div>
-        }
-    </>
+    <div className={classes.formContainer}>
+      {!success ? (
+        <form style={{display:"contents"}} onSubmit={handleSubmit}>
+          <h2 className={classes.formTitle}>Payment Product</h2>
+          <fieldset className={classes.formFieldset}>
+            <CardNumberElement options={CARD_OPTIONS} className={classes.formInput} />
+          </fieldset>
+          <fieldset className={classes.formFieldset}>
+            <CardExpiryElement options={CARD_OPTIONS} className={classes.formInput} />
+          </fieldset>
+          <fieldset className={classes.formFieldset}>
+          <CardCvcElement options={CARD_OPTIONS} className={classes.formInput} />
+          </fieldset>
+          <Button className={classes.btn} style={{marginBottom:5, backgroundColor: 'rgba(186,130,57,255)'}} variant="contained" color="primary" type="submit">
+            Buy
+          </Button>
+        </form>
+      ) : (
+        <div>
+          <h2 className={classes.formTitle}>Payment successful</h2>
+          <h3 className={classes.formTitle}>Thank you for your patronage</h3>
+        </div>
+      )}
+    </div>
   )
 }
 
