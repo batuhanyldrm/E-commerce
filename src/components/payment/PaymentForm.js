@@ -77,7 +77,7 @@ const PaymentForm = () => {
             try {
                 const {id} = paymentMethod
                 const response = await axios.post("http://localhost:3001/create-payment-intent", {
-                    amount: 0,
+                    amount: 10000,
                     id
                 })
 
