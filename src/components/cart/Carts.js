@@ -179,7 +179,7 @@ const Carts = (props) => {
               <p className={classes.emptyCartText}>Cart is empty</p>
             )}
             <div style={{display:"grid"}}>
-            {showFormDown ? <Stripe productDetail={productDetail} /> : <>
+            {showFormDown ? <Stripe productDetail={productDetail} calculateTotalPrice={calculateTotalPrice()} /> : <>
             <Button
               variant="outlined"
               onClick={()=>setShowFormDown(true)}

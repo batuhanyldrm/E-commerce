@@ -70,7 +70,7 @@ func (api *Api) HandleCreatePaymentIntent(c *fiber.Ctx) error {
 		Description:   stripe.String("Payment"),
 	}
 
-	pi, err := paymentintent.New(params)
+	_, err := paymentintent.New(params)
 	if err != nil {
 		log.Println("Error creating payment intent:", err)
 		return c.JSON(fiber.Map{
@@ -79,7 +79,7 @@ func (api *Api) HandleCreatePaymentIntent(c *fiber.Ctx) error {
 		})
 	}
 
-	log.Println("Payment:", pi)
+	//log.Println("Payment:", pi)
 	return c.JSON(fiber.Map{
 		"message": "Payment was successful",
 		"success": true,
