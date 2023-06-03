@@ -62,7 +62,10 @@ const useStyles = makeStyles((theme) => ({
 const PaymentForm = (props) => {
     const classes = useStyles();
 
-    const {productDetail} = props;
+    const {
+      productDetail,
+      calculateTotalPrice
+    } = props;
     
     const [success, setSuccess] = useState(false)
     const stripe = useStripe()
@@ -79,7 +82,7 @@ const PaymentForm = (props) => {
             try {
                 const {id} = paymentMethod
                 const response = await axios.post("http://localhost:3001/create-payment-intent", {
-                    amount: productDetail.price,
+                    amount: calculateTotalPrice || productDetail.price,
                     id
                 })
 

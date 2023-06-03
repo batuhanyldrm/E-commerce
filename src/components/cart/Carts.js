@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
-import { Box, Dialog, DialogTitle, Drawer, CircularProgress, Button } from '@mui/material';
+import { Drawer, CircularProgress, Button, Typography } from '@mui/material';
 import { connect } from 'react-redux';
 import { loginUser } from '../actions/userActions';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
@@ -73,7 +73,7 @@ const Carts = (props) => {
   const [productDetail, setProductDetail] = useState([]);
   const [showForm, setShowForm] = useState(false)
   const [showFormDown, setShowFormDown] = useState(false)
-
+  
   useEffect(() => {
     // Simulating loading delay
     setTimeout(() => {
@@ -92,6 +92,14 @@ const Carts = (props) => {
   useEffect(() => {
     loginUser();
   }, []);
+
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    productDetail.map(product => {
+      totalPrice += product.price;
+    })
+    return totalPrice
+  }
 
   const handleDeleteFromCart = (productId) => {
     const updatedProductDetail = productDetail.filter(
@@ -125,7 +133,13 @@ const Carts = (props) => {
         ) : (
           <div>
             <div style={{display:"grid"}}>
-            {showForm ? <Stripe productDetail={productDetail} /> : <>
+            {showForm ? <Stripe calculateTotalPrice={calculateTotalPrice()} /> : <>
+            <div>
+                <Typography level="body3">Total price:</Typography>
+                <Typography fontSize="lg" fontWeight="lg">
+                  <b>${calculateTotalPrice()}</b>
+                </Typography>
+              </div>
             <Button
               variant="outlined"
               onClick={()=>setShowForm(true)}
@@ -149,7 +163,7 @@ const Carts = (props) => {
                   <div>
                   <p className={classes.textStyle}>Product Name: {product.productName}</p>
                   <p className={classes.textStyle}>Product Details: {product.description}</p>
-                  <p className={classes.textStyle}>Price: {product.price}</p>
+                  <p className={classes.textStyle}>Price: ${product.price}</p>
                   <p className={classes.textStyle}>Stock: {product.amount}</p>
                   </div>
                   <Button

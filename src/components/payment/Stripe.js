@@ -7,11 +7,17 @@ const stripePromise = loadStripe("pk_test_51NDVcUJVbJVgaTyynzt3eEFYmAaUMhwBvFUB3
 
 function Stripe(props) {
 
-  const {productDetail} = props;
+  const {
+    productDetail,
+    calculateTotalPrice
+  } = props;
 
   return (
     <Elements stripe={stripePromise}>
-        <PaymentForm productDetail={productDetail} />
+        <PaymentForm 
+          productDetail={productDetail}
+          calculateTotalPrice={calculateTotalPrice} 
+        />
     </Elements>
    )
 }
