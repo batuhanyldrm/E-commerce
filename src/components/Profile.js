@@ -68,7 +68,7 @@ const Profile = (props) => {
         <div className={classes.avatar}>
           <Avatar style={{ width: 100, height: 100 }}>
           <Typography variant="h4" style={{ fontSize: 40 }}>
-            {`${user.name.charAt(0)}${user.surname.charAt(0)}`}
+            {`${user.name && user.name.charAt(0)}${user.surname &&user.surname.charAt(0)}`}
           </Typography>
           </Avatar>
         </div>
