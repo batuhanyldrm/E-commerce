@@ -3,6 +3,7 @@ import { CardNumberElement, CardCvcElement, CardExpiryElement, useStripe, useEle
 import axios from 'axios';
 import { Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -119,32 +120,40 @@ const PaymentForm = (props) => {
         }
     }
 
-  return (
-    <div className={classes.formContainer}>
-      {!success ? (
-        <form style={{display:"contents"}} onSubmit={handleSubmit}>
-          <h2 className={classes.formTitle}>Payment Product</h2>
-          <fieldset className={classes.formFieldset}>
-            <CardNumberElement options={CARD_OPTIONS} className={classes.formInput} />
-          </fieldset>
-          <fieldset className={classes.formFieldset}>
-            <CardExpiryElement options={CARD_OPTIONS} className={classes.formInput} />
-          </fieldset>
-          <fieldset className={classes.formFieldset}>
-          <CardCvcElement options={CARD_OPTIONS} className={classes.formInput} />
-          </fieldset>
-          <Button className={classes.btn} style={{marginBottom:5, backgroundColor: 'rgba(186,130,57,255)'}} variant="contained" color="primary" type="submit">
-            Buy
-          </Button>
-        </form>
-      ) : (
-        <div>
-          <h2 className={classes.formTitle}>Payment successful</h2>
-          <h3 className={classes.formTitle}>Thank you for your patronage</h3>
-        </div>
-      )}
-    </div>
-  )
-}
-
-export default PaymentForm
+    return (
+      <div className={classes.formContainer}>
+        {!success ? (
+          <form style={{ display: "contents" }} onSubmit={handleSubmit}>
+            <h2 className={classes.formTitle}>Payment Product</h2>
+            <CreditCardIcon style={{ fontSize: '60px', marginBottom: '5px' }} />
+            <fieldset className={classes.formFieldset}>
+              <CardNumberElement options={CARD_OPTIONS} className={classes.formInput} />
+            </fieldset>
+            <fieldset className={classes.formFieldset}>
+              <CardExpiryElement options={CARD_OPTIONS} className={classes.formInput} />
+            </fieldset>
+            <fieldset className={classes.formFieldset}>
+              <CardCvcElement options={CARD_OPTIONS} className={classes.formInput} />
+            </fieldset>
+            <Button
+              className={classes.btn}
+              style={{ marginBottom: 5, backgroundColor: 'rgba(186,130,57,255)' }}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
+              <CreditCardIcon style={{ marginRight: '5px' }} />
+              Buy
+            </Button>
+          </form>
+        ) : (
+          <div>
+            <h2 className={classes.formTitle}>Payment successful</h2>
+            <h3 className={classes.formTitle}>Thank you for your patronage</h3>
+          </div>
+        )}
+      </div>
+    );
+  }
+  
+  export default PaymentForm;

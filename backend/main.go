@@ -37,9 +37,6 @@ func SetupApp(api *Api) *fiber.App {
 	app.Delete("/stocks/:id", api.DeleteStocksHandler)
 	app.Get("/search", api.GetSearchHandler)
 
-	//cart
-	//app.Put("user/:userId/product/:productId", api.UpdateProductInfoHandler)
-
 	//auth
 	app.Post("/register", api.PostRegisterHandler)
 	app.Post("/login", api.PostLoginHandler)
@@ -49,14 +46,8 @@ func SetupApp(api *Api) *fiber.App {
 	app.Post("/logout", api.GetUserLogoutHandler)
 	app.Get("/user", api.GetUserAuthenticationHandler)
 
-	//app.Static("/", "./public")
-
 	//stripe payment you can control stripe web site
 	app.Post("/create-payment-intent", api.HandleCreatePaymentIntent)
-
-	/* addr := "localhost:3001"
-	log.Printf("Listening on %s ...", addr)
-	log.Fatal(app.Listen(addr)) */
 
 	return app
 }

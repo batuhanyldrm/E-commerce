@@ -6,7 +6,6 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 import { Button, CircularProgress } from '@mui/material';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import Stripe from './payment/Stripe';
-//import './payment/Payment.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -125,9 +124,15 @@ const ProductDetails = (props) => {
             <p> <b>Product Name:</b> {productDetail.productName} </p>
             <p> <b>Product Details:</b> {productDetail.description} </p>
             <p> <b>Total Price:</b> ${productDetail.price} </p>
-            {productDetail.amount < 5 ? 
-            <p> <b> Last:</b> {productDetail.amount} <b>products</b> </p> : "" 
-            }
+            {productDetail.amount === 0 ? (
+                    <p>Ürün Tükendi</p>
+                    ) : productDetail.amount < 5 ? (
+                    <p>
+                      <b>Last:</b> {productDetail.amount} <b>products</b>
+                    </p>
+                    ) : (
+                    ""
+                  )}
            {/*  <div style={{display:"flex", justifyContent:"center"}}> */}
             <Button
               variant="contained"

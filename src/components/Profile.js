@@ -4,8 +4,7 @@ import { loginUser } from './actions/userActions';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import Avatar from '@mui/material/Avatar';
 import { makeStyles } from '@mui/styles';
-import { IconButton } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
+import { Button, Typography } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     marginBottom: "10px",
-    marginLeft: "5%"
+    marginLeft: "5%",
+    display:"flex",
+    justifyContent:"center"
   },
   title: {
     fontSize: "20px",
@@ -65,14 +66,34 @@ const Profile = (props) => {
       <ResponsiveAppBar />
       <div className={classes.container}>
         <div className={classes.avatar}>
-          <Avatar style={{ width: 100, height: 100 }} src="/static/images/avatar/2.jpg" />
+          <Avatar style={{ width: 100, height: 100 }}>
+          <Typography variant="h4" style={{ fontSize: 40 }}>
+            {`${user.name.charAt(0)}${user.surname.charAt(0)}`}
+          </Typography>
+          </Avatar>
         </div>
         <div className={classes.title}>Profile</div>
-        <div className={classes.company}>Company: {user ? user.company : ''}</div>
-        <div className={classes.name}>Name: {user ? `${user.name} ${user.surname}` : ''}</div>
-        <div className={classes.tel}>Email: {user ? user.email : ''}</div>
-        <div className={classes.tel}>Tel: {user ? user.tel : ''}</div>
+        {user.company ? 
+          <div className={classes.company}>Company: {user.company}</div> : ""
+        }
+        <div className={classes.name}>Name: {user.name}</div>
+        <div className={classes.name}>Surname: {user.surname}</div>
+        <div className={classes.tel}>Email: {user.email}</div>
+        <div className={classes.tel}>Tel: {user.tel}</div>
       </div>
+      <Button style={{
+        display:"grid",
+        margin:"auto",
+        marginTop:10,
+        maxWidth:340,
+        color: 'rgba(186,130,57,255)',
+        borderColor: 'rgba(186,130,57,255)',
+        }}
+        variant='outlined'
+        fullWidth
+      >
+        Edit
+      </Button>
     </>
   );
 };

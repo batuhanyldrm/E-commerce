@@ -133,12 +133,12 @@ const Carts = (props) => {
         ) : (
           <div>
             <div style={{display:"grid"}}>
+            <Typography level="body3">Total price:</Typography>
+            <Typography fontSize="lg" fontWeight="lg">
+              <b>${calculateTotalPrice()}</b>
+            </Typography>
             {showForm ? <Stripe calculateTotalPrice={calculateTotalPrice()} /> : <>
             <div>
-                <Typography level="body3">Total price:</Typography>
-                <Typography fontSize="lg" fontWeight="lg">
-                  <b>${calculateTotalPrice()}</b>
-                </Typography>
               </div>
             <Button
               variant="outlined"
@@ -164,7 +164,15 @@ const Carts = (props) => {
                   <p className={classes.textStyle}>Product Name: {product.productName}</p>
                   <p className={classes.textStyle}>Product Details: {product.description}</p>
                   <p className={classes.textStyle}>Price: ${product.price}</p>
-                  <p className={classes.textStyle}>Stock: {product.amount}</p>
+                  {product.amount === 0 ? (
+                    <p>Tükendi</p>
+                    ) : product.amount < 5 ? (
+                    <p>
+                      <b>Last:</b> {product.amount} <b>products</b>
+                    </p>
+                    ) : (
+                    ""
+                  )}
                   </div>
                   <Button
                     variant="outlined"

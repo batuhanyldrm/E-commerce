@@ -18,7 +18,6 @@ import logo from "./logo/aslan2.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { makeStyles } from '@mui/styles';
 import Carts from './cart/Carts';
-import { deepPurple } from '@mui/material/colors';
 
 const useStyles = makeStyles((theme) => ({
   cart: {
@@ -42,7 +41,6 @@ function ResponsiveAppBar(props) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const [redirect, setRedirect] = useState(false)
   const [carts, setCarts] = useState(false)
 
   const userLogout = async () => {
@@ -51,27 +49,10 @@ function ResponsiveAppBar(props) {
       setTimeout(() => {
         window.location = window.location.origin + "/login";
       }, 500);
-      setRedirect(true);
     } catch (error) {
       console.log(error,"error")
     }
   }
-  /* const userLogout = async () => {
-    try {
-      document.cookie = "user_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      if (!document.cookie) {
-        setTimeout(() => {
-          window.location = window.location.origin + "/login";
-        }, 500);
-        setRedirect(true);
-      }else{
-        console.log("error");
-      }
-    } catch (error) {
-      console.log(error, "catch error");
-    }
-  }; */
-
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
