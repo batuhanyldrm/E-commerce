@@ -5,6 +5,7 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 import Avatar from '@mui/material/Avatar';
 import { makeStyles } from '@mui/styles';
 import { Button, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -60,6 +61,18 @@ const Profile = (props) => {
   useEffect(() => {
     loginUser();
   }, [loginUser]);
+
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const hasCookie = document.cookie.includes('user_token');
+    if (!hasCookie) {
+      navigate('/login');
+    }
+    else{
+      
+    }
+  }, [navigate]); 
 
   return (
     <>

@@ -9,6 +9,8 @@ import ProductList from './ProductList';
 import Order from './Order';
 import { fetchProducts, fetchSearchProducts } from '../actions/productActions';
 import { makeStyles } from '@mui/styles';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../actions/userActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 function Product(props) {
     const classes = useStyles();
 
-    const {fetchProducts, products, fetchSearchProducts} = props;
+    const {fetchProducts, products, fetchSearchProducts, loginUser, user} = props;
 
     const [open, setOpen] = useState(false);
     const [order, setOrder] = useState(false);
@@ -56,6 +58,22 @@ function Product(props) {
     const handleClose = () => {
     setOpen(false);
     };
+
+    useEffect(() => {
+        loginUser();
+      }, [loginUser]);
+
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      const hasCookie = document.cookie.includes('user_token');
+      if (!hasCookie) {
+        navigate('/login');
+      }
+      else{
+        
+      }
+    }, [navigate]); 
 
     return(
     <div>
@@ -104,7 +122,8 @@ function Product(props) {
 }
 
 const mapStateToProps = (state) => ({
-    products: state.products
+    products: state.products,
+    user: state.user
   });
   
   const mapDispatchToProps = (dispatch) => ({
@@ -113,7 +132,10 @@ const mapStateToProps = (state) => ({
     },
     fetchSearchProducts: (data) => {
         dispatch(fetchSearchProducts(data));
-      },
+    },
+    loginUser: () => {
+        dispatch(loginUser());
+    },
   });
 
 export default  connect(mapStateToProps,mapDispatchToProps) (Product)
