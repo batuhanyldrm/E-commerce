@@ -173,6 +173,7 @@ const AllProducts = (props) => {
               variant="plain"
               color="neutral"
               size="sm"
+              disabled={product.amount === 0}
               sx={{ position: 'absolute', top: '0.5rem', right: '0.5rem' }}
               onClick={() => handleAddToCart(product)}
             >
