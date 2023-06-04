@@ -4,16 +4,19 @@ import axios from 'axios';
 import { Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
+import { updateProductAmount } from '../api/productApi';
+import { fetchProducts, updateProductStock } from '../actions/productActions';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        minHeight: '100vh',
-        padding: '20px',
-        backgroundColor: '#f5f5f5',
-    },
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minHeight: '100vh',
+    padding: '20px',
+    backgroundColor: '#f5f5f5',
+  },
   formContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -65,7 +68,10 @@ const PaymentForm = (props) => {
 
     const {
       productDetail,
-      calculateTotalPrice
+      calculateTotalPrice,
+      fetchProduct,
+      updateProductStock,
+      fetchProducts
     } = props;
     
     const [success, setSuccess] = useState(false)
@@ -87,9 +93,24 @@ const PaymentForm = (props) => {
                     id
                 })
 
-                if(response.data.success){
-                    console.log("Successful Payment")
-                    setSuccess(true)
+                if (response.data.success) {
+                  console.log("Successful Payment");
+                  setSuccess(true);
+                  if (productDetail.amount > 0) {
+                    const newAmount =  1;
+                
+                    try {
+                      await updateProductAmount(productDetail.id,newAmount)
+                      .then(() => {
+                          updateProductStock(productDetail.id,newAmount)
+                      }).finally(() => {
+                        fetchProduct(productDetail.id)
+                        fetchProducts()
+                      })
+                    } catch (error) {
+                      console.log("Error updating product amount:", error);
+                    }
+                  }
                 }
 
             } catch (error) {
@@ -155,5 +176,16 @@ const PaymentForm = (props) => {
       </div>
     );
   }
+  const mapStateToProps = (state) => ({
+  });
   
-  export default PaymentForm;
+  const mapDispatchToProps = (dispatch) => ({
+    updateProductStock: (id, amount) => {
+        dispatch(updateProductStock(id, amount))
+    },
+    fetchProducts: () => {
+      dispatch(fetchProducts());
+    },
+  });
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(PaymentForm);

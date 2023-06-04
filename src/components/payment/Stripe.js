@@ -9,14 +9,16 @@ function Stripe(props) {
 
   const {
     productDetail,
-    calculateTotalPrice
+    calculateTotalPrice,
+    fetchProduct
   } = props;
 
   return (
     <Elements stripe={stripePromise}>
         <PaymentForm 
           productDetail={productDetail}
-          calculateTotalPrice={calculateTotalPrice} 
+          calculateTotalPrice={calculateTotalPrice}
+          fetchProduct={fetchProduct}
         />
     </Elements>
    )

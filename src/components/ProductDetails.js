@@ -143,7 +143,7 @@ const ProductDetails = (props) => {
               Add to Cart
             </Button>
             <div className="Payment">
-            {showForm ? <Stripe productDetail={productDetail} /> : <>
+            {showForm ? <Stripe productDetail={productDetail} fetchProduct={fetchProduct} /> : <>
             <Button
               variant="contained"
               color="primary"
