@@ -87,7 +87,7 @@ const Carts = (props) => {
       const parsedProductDetail = JSON.parse(storedProductDetail);
       setProductDetail(parsedProductDetail); // Set the value to the state
     }
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     loginUser();
