@@ -1,14 +1,14 @@
 import { getUser } from "../api/userApi";
-import { ADD_USER, LOGIN_USER } from "./types";
+import { ADD_USER, LOGIN_USER, UPDATE_USER } from "./types";
 
-export const addUser = (user) => (
+/* export const addUser = (user) => (
     dispatch
     ) => {
         dispatch({
             type: ADD_USER,
             payload: user
         })
-    }
+    } */
 
 export const loginUser = () => async (
 dispatch
@@ -18,4 +18,13 @@ dispatch
         type: LOGIN_USER,
         payload: resp.data
     })
-}    
+}
+
+export const updateUser = (data) => async (
+    dispatch
+) => {
+    dispatch({
+        type: UPDATE_USER,
+        payload: data
+    })
+}

@@ -9,3 +9,4 @@ export const FETCH_PRODUCT = "FETCH_PRODUCT";
 //user
 export const ADD_USER = "ADD_USER";
 export const LOGIN_USER = "LOGIN_USER"
+export const UPDATE_USER = "UPDATE_USER"

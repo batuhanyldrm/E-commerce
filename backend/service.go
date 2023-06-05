@@ -133,14 +133,14 @@ func (service *Service) UpdateUser(userId string, userDTO models.RegisterDTO) (*
 		return nil, err
 	}
 
-	password, _ := bcrypt.GenerateFromPassword([]byte(userDTO.Password), 14)
+	//password, _ := bcrypt.GenerateFromPassword([]byte(userDTO.Password), 14)
 
 	user.Company = userDTO.Company
 	user.Name = userDTO.Name
 	user.Surname = userDTO.Surname
 	user.Email = userDTO.Email
 	user.Tel = userDTO.Tel
-	user.Password = string(password)
+	//user.Password = string(password)
 	user.UpdatedAt = time.Now().UTC().Round(time.Second)
 
 	err = service.Repository.UpdateUser(userId, user)
@@ -153,6 +153,11 @@ func (service *Service) UpdateUser(userId string, userDTO models.RegisterDTO) (*
 }
 
 func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Register {
+
+	_, err := service.Repository.GetUser(registerDTO.Email)
+	if err == nil {
+		return nil
+	}
 
 	userRegister := models.Register{}
 
@@ -169,7 +174,7 @@ func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Reg
 	userRegister.CreatedAt = time.Now().UTC().Round(time.Second)
 	userRegister.UpdatedAt = time.Now().UTC().Round(time.Second)
 
-	err := service.Repository.PostRegister(userRegister)
+	err = service.Repository.PostRegister(userRegister)
 
 	if err != nil {
 		return nil

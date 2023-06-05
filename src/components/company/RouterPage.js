@@ -6,7 +6,7 @@ import LoginPage from "../LoginPage";
 import AllProducts from "../AllProducts";
 import SignUp from "../SignUp";
 import ProductDetails from "../ProductDetails";
-import Profile from "../Profile";
+import Profile from "../user/Profile"
 
 const RouterPage = () => {
   return (

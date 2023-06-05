@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from './actions/userActions';
-import ResponsiveAppBar from './ResponsiveAppBar';
+import { loginUser } from '../actions/userActions';
+import ResponsiveAppBar from '../ResponsiveAppBar';
 import Avatar from '@mui/material/Avatar';
 import { makeStyles } from '@mui/styles';
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import EditProfile from './EditProfile';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -58,6 +59,10 @@ const Profile = (props) => {
 
   const classes = useStyles();
 
+  const [open, setOpen] = useState(false)
+
+  const handleClose = () => { setOpen(false) };
+
   useEffect(() => {
     loginUser();
   }, [loginUser]);
@@ -76,6 +81,11 @@ const Profile = (props) => {
 
   return (
     <>
+      <EditProfile
+        open={open}
+        handleClose={handleClose}
+        user={user}
+      />
       <ResponsiveAppBar />
       <div className={classes.container}>
         <div className={classes.avatar}>
@@ -104,6 +114,7 @@ const Profile = (props) => {
         }}
         variant='outlined'
         fullWidth
+        onClick={() => setOpen(true)}
       >
         Edit
       </Button>

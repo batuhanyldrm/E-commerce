@@ -367,19 +367,18 @@ func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 		c.Status(fiber.StatusInternalServerError)
 	}
 
-	cookie := fiber.Cookie{
-		Name:     "user_token",
-		Value:    token,
-		Expires:  time.Now().Add(time.Hour * 24),
-		HTTPOnly: false,
-	}
-
-	c.Cookie(&cookie)
-
 	userLogin, err := api.Service.PostLogin(loginUser)
 
 	switch err {
 	case nil:
+		cookie := fiber.Cookie{
+			Name:     "user_token",
+			Value:    token,
+			Expires:  time.Now().Add(time.Hour * 24),
+			HTTPOnly: false,
+		}
+	
+		c.Cookie(&cookie)	
 		c.JSON(userLogin)
 		c.Status(fiber.StatusCreated)
 	case UserNotFoundError:

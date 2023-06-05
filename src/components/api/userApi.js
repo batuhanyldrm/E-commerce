@@ -37,3 +37,16 @@ export const getUser = async () => {
     return resp;
 }
 
+export const updateUserApi = async (data) => {
+   
+    const resp = await axios.put(`http://localhost:3001/user/${data.id}`, {
+        company: data.company,
+        name: data.name,
+        surname: data.surname,
+        email: data.email,
+        tel: data.tel,
+        //password: data.password
+    })
+    return resp; 
+}
+
