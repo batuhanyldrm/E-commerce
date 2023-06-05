@@ -37,12 +37,15 @@ func SetupApp(api *Api) *fiber.App {
 	app.Delete("/stocks/:id", api.DeleteStocksHandler)
 	app.Get("/search", api.GetSearchHandler)
 
+	//edit user
+	app.Put("/user/:userId", api.UpdateUserHandler)
+
 	//auth
 	app.Post("/register", api.PostRegisterHandler)
 	app.Post("/login", api.PostLoginHandler)
 	app.Get("/users", api.GetUsersHandler)
 	app.Get("/users/:email", api.GetUserHandler) //kontrol edilecek
-	app.Get("/user/:id", api.GetUserHandler)
+	app.Get("/user/:id", api.GetUserIDHandler)
 	app.Post("/logout", api.GetUserLogoutHandler)
 	app.Get("/user", api.GetUserAuthenticationHandler)
 

@@ -126,6 +126,32 @@ func (service *Service) DeleteStocks(stockId string) error {
 	return nil
 }
 
+func (service *Service) UpdateUser(userId string, userDTO models.RegisterDTO) (*models.Register, error) {
+
+	user, err := service.Repository.GetUserID(userId)
+	if err != nil {
+		return nil, err
+	}
+
+	password, _ := bcrypt.GenerateFromPassword([]byte(userDTO.Password), 14)
+
+	user.Company = userDTO.Company
+	user.Name = userDTO.Name
+	user.Surname = userDTO.Surname
+	user.Email = userDTO.Email
+	user.Tel = userDTO.Tel
+	user.Password = string(password)
+	user.UpdatedAt = time.Now().UTC().Round(time.Second)
+
+	err = service.Repository.UpdateUser(userId, user)
+
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+
+}
+
 func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Register {
 
 	userRegister := models.Register{}
@@ -204,20 +230,9 @@ func (service *Service) GetUserID(ID string) (models.Register, error) {
 	return user, nil
 }
 
-/* func (service *Service) PostLogout(loginUser models.RegisterDTO) (*models.Register, error) {
-
-	userEmail, err := service.Repository.GetUser(loginUser.Email)
-
-	if err != nil {
-		return nil, UserNotFoundError
-	}
-
-	return &userEmail, nil
-} */
-
 func (service *Service) GetUserAuth(userId string) (*models.Register, error) {
 
-	user, err := service.Repository.GetUserID(userId)
+	user, err := service.Repository.GetUser(userId)
 
 	if err != nil {
 		return nil, UserNotFoundError

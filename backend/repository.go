@@ -175,6 +175,21 @@ func (repository *Repository) DeleteStocks(stockId string) error {
 
 }
 
+func (repository *Repository) UpdateUser(userId string, user models.Register) error {
+	collection := repository.client.Database("register").Collection("register")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	result := collection.FindOneAndReplace(ctx, bson.M{"id": userId}, user)
+
+	if result == nil {
+		return result.Err()
+	}
+
+	return nil
+	
+}
+
 func (repository *Repository) PostRegister(userRegister models.Register) error {
 	collection := repository.client.Database("register").Collection("register")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -187,19 +202,6 @@ func (repository *Repository) PostRegister(userRegister models.Register) error {
 	}
 	return nil
 }
-
-/* func (repository *Repository) PostLogin(userRegister models.Register) error {
-	collection := repository.client.Database("register").Collection("register")
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	_, err := collection.InsertOne(ctx, userRegister)
-
-	if err != nil {
-		return err
-	}
-	return nil
-} */
 
 func (repository *Repository) GetUsers() ([]models.Register, error) {
 	collection := repository.client.Database("register").Collection("register")
@@ -248,7 +250,7 @@ func (repository *Repository) GetUserID(ID string) (models.Register, error) {
 	defer cancel()
 
 	user := models.Register{}
-	err := collection.FindOne(ctx, bson.M{"email": ID}).Decode(&user)
+	err := collection.FindOne(ctx, bson.M{"id": ID}).Decode(&user)
 
 	if err != nil {
 		log.Fatal(err)

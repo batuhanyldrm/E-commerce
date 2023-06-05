@@ -32,17 +32,6 @@ func NewApi(service *Service) Api {
 	}
 }
 
-type item struct {
-	ID string `json:"id"`
-}
-
-/* func calculateOrderAmount(items []item) int64 {
-	// Replace this constant with a calculation of the order's amount
-	// Calculate the order total on the server to prevent
-	// people from directly manipulating the amount on the client
-	return 1400
-} */
-
 type PaymentData struct {
 	Amount int64  `json:"amount"`
 	ID     string `json:"id"`
@@ -156,20 +145,6 @@ func (api *Api) UpdateStocksAmountHandler(c *fiber.Ctx) error {
 
 	return nil
 }
-
-/* func (api *Api) UpdateProductInfoHandler(c *fiber.Ctx) error {
-	userId := c.Params("userId")
-	productId := c.Params("productId")
-
-	product := models.ProductDTO{}
-	err := c.BodyParser(&product)
-
-	if err != nil {
-		c.Status(fiber.StatusBadRequest)
-	}
-
-	updateProduct, err := api.Service.UpdateProduct
-} */
 
 func (api *Api) UpdateStocksHandler(c *fiber.Ctx) error {
 
@@ -322,6 +297,28 @@ func (api *Api) DeleteStocksHandler(c *fiber.Ctx) error {
 		c.Status(fiber.StatusInternalServerError)
 	}
 
+	return nil
+}
+
+func (api *Api) UpdateUserHandler(c *fiber.Ctx) error {
+	userId := c.Params("userId")
+
+	userDTO := models.RegisterDTO{}
+	err := c.BodyParser(&userDTO)
+
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+	}
+
+	updatedUser, err := api.Service.UpdateUser(userId, userDTO)
+
+	switch err {
+	case nil:
+		c.JSON(updatedUser)
+		c.Status(fiber.StatusOK)
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
 	return nil
 }
 
