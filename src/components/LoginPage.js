@@ -187,7 +187,7 @@ const LoginPage = (props) => {
     </CssVarsProvider>
     <Snackbar
       open={alert.open}
-      autoHideDuration={3000}
+      autoHideDuration={1000}
       onClose={() => setAlert({ open: false, message: "", status: "" })}
     >
       <Alert severity={alert.status || "info"}>{alert.message}</Alert>
