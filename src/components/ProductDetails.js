@@ -100,6 +100,13 @@ const ProductDetails = (props) => {
     localStorage.setItem(`productDetail_${userId}`, JSON.stringify(updatedCartItems));
   };
 
+  const handleBuyNow = () => {
+    
+    if (document.cookie.includes("user_token")) {
+     setShowForm(true)
+    }
+  };
+
   return (
     <>
       <ResponsiveAppBar />
@@ -151,7 +158,7 @@ const ProductDetails = (props) => {
               className={classes.btn}
               style={{ marginLeft: 5, marginBottom: 5, minWidth: 100, backgroundColor: 'rgba(186,130,57,255)' }}
               disabled={productDetail.amount === 0}
-              onClick={()=>setShowForm(true)}
+              onClick={handleBuyNow}
             >
               Buy Now
             </Button></>}

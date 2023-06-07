@@ -114,6 +114,13 @@ const Carts = (props) => {
     );
   };
 
+  const handleBuyNow = () => {
+    
+    if (document.cookie.includes("user_token")) {
+     setShowForm(true)
+    }
+  };
+
   return (
     <Drawer
       className={classes.drawerMobile}
@@ -142,7 +149,7 @@ const Carts = (props) => {
               </div>
             <Button
               variant="outlined"
-              onClick={()=>setShowForm(true)}
+              onClick={handleBuyNow}
               style={{ marginLeft: 5, marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
             >
               Buy Products
@@ -190,7 +197,7 @@ const Carts = (props) => {
             {showFormDown ? <Stripe productDetail={productDetail} calculateTotalPrice={calculateTotalPrice()} /> : <>
             <Button
               variant="outlined"
-              onClick={()=>setShowFormDown(true)}
+              onClick={handleBuyNow}
               style={{ marginLeft: 5, marginRight: 5, marginBottom:5, borderColor: 'rgba(186,130,57,255)', color: 'rgba(186,130,57,255)' }}
             >
               Buy Products
