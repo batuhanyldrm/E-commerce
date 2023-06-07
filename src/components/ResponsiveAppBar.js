@@ -130,23 +130,19 @@ function ResponsiveAppBar(props) {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography href="/" textAlign="center">{page}</Typography>
+              <div>
+                <MenuItem component={Link} to="/all-products"  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Products</Typography>
                 </MenuItem>
-              ))}
+              </div>
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            <div>
+              <MenuItem component={Link} to="/all-products"  onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Products</Typography>
+              </MenuItem>
+            </div>
           </Box>
 
           <IconButton size='small' style={{color:"white"}} sx={{ p: 0, marginRight:1 }} onClick={() => setCarts(true)}>
