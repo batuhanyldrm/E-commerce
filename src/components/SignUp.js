@@ -75,28 +75,16 @@ const SignUp = (props) => {
     const [phone, setPhone] = useState("");
     const [alert, setAlert] = useState({ open: false, message: "", status: "" });
 
-    //const [redirect, setRedirect] = useState(false)
-    //const [company, setCompany] = useState([]);
-    //const [role, setRole] = useState("");
-
     const createUser = async () => {
         const data = {
-            /* company: company, */
             name: name,
             surname: surname,
             email: email,
             password: password,
             tel: phone,
-            /* role: role, */
         }
         try {
             await postRegister(data)
-            /* .then((res) => {
-                    console.log(res,"başarılı")
-                    addUser(res.data)
-                }).finally((err) => {
-                    console.log(err, "error")
-                }) */
         } catch (error) {
             console.log(error, "catch error")
         }
@@ -137,6 +125,7 @@ const SignUp = (props) => {
         setAlert({ open: true, message: "Invalid password format", status: "error" });
       }else{
         createUser();
+        setAlert({ open: true, message: "User succesfully registered", status: "success" });
       }
     };
 
@@ -174,7 +163,6 @@ const SignUp = (props) => {
           <FormControl>
             <FormLabel>Name</FormLabel>
             <Input
-              // html input attribute
               name="name"
               type="name"
               placeholder="name"
@@ -185,7 +173,6 @@ const SignUp = (props) => {
           <FormControl>
             <FormLabel>Surname</FormLabel>
             <Input
-              // html input attribute
               name="surname"
               type="surname"
               placeholder="surname"
@@ -196,7 +183,6 @@ const SignUp = (props) => {
           <FormControl>
             <FormLabel>Email</FormLabel>
             <Input
-              // html input attribute
               name="email"
               type="email"
               placeholder="qasis@gmail.com"
@@ -207,7 +193,6 @@ const SignUp = (props) => {
           <FormControl>
             <FormLabel>Password</FormLabel>
             <Input
-              // html input attribute
               name="password"
               placeholder="password"
               value={password}
@@ -226,7 +211,6 @@ const SignUp = (props) => {
           <FormControl>
             <FormLabel>Confirm Password</FormLabel>
             <Input
-              // html input attribute
               name="Confirm Password"
               placeholder="Confirm Password"
               value={confirmPassword}
@@ -245,7 +229,6 @@ const SignUp = (props) => {
           <FormControl>
             <FormLabel>Phone</FormLabel>
             <Input
-              // html input attribute
               name="phone"
               type="phone"
               placeholder="phone"

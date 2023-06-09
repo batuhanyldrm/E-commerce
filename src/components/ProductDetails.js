@@ -134,7 +134,7 @@ const ProductDetails = (props) => {
             <p> <b>Product Details:</b> {productDetail.description} </p>
             <p> <b>Total Price:</b> ${productDetail.price} </p>
             {productDetail.amount === 0 ? (
-                    <p>Ürün Tükendi</p>
+                    <p><b>The product sold out</b></p>
                     ) : productDetail.amount < 5 ? (
                     <p>
                       <b>Last:</b> {productDetail.amount} <b>products</b>
@@ -158,7 +158,8 @@ const ProductDetails = (props) => {
               variant="contained"
               color="primary"
               className={classes.btn}
-              style={{ marginLeft: 5, marginBottom: 5, minWidth: 100, backgroundColor: 'rgba(186,130,57,255)' }}
+              fullWidth
+              style={{ /* marginLeft: 5, */ marginBottom: 5, maxWidth:130, minWidth: 100, backgroundColor: 'rgba(186,130,57,255)' }}
               disabled={productDetail.amount === 0}
               onClick={handleBuyNow}
             >
