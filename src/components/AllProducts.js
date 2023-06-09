@@ -6,7 +6,7 @@ import { loginUser } from './actions/userActions';
 import { fetchProducts, fetchSearchProducts } from './actions/productActions';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
-import { IconButton, TextField } from '@mui/material';
+import { Alert, Snackbar, IconButton, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 import AspectRatio from '@mui/joy/AspectRatio';
@@ -97,6 +97,7 @@ const AllProducts = (props) => {
   } = props
 
   const [search, setSearch] = useState("");
+  const [alert, setAlert] = useState({ open: false, message: "", status: "" });
 
   const handleSearch = () => {
       fetchSearchProducts(search)
@@ -126,6 +127,7 @@ const AllProducts = (props) => {
   
     const updatedCartItems = [...cartItems, productId];
     localStorage.setItem(`productDetail_${userId}`, JSON.stringify(updatedCartItems));
+    setAlert({ open: true, message: "product successfully added", status: "success" })
   };
 
   return (
@@ -216,6 +218,13 @@ const AllProducts = (props) => {
         </div>
       </div>
     </div>
+       <Snackbar
+        open={alert.open}
+        autoHideDuration={1000}
+        onClose={() => setAlert({ open: false, message: "", status: "" })}
+      >
+        <Alert severity={alert.status || "info"}>{alert.message}</Alert>
+      </Snackbar>
     </>
   )
 }

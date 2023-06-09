@@ -16,6 +16,7 @@ import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import IconButton from '@mui/joy/IconButton';
+import { Alert, Snackbar } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   video:{
@@ -72,6 +73,7 @@ const SignUp = (props) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phone, setPhone] = useState("");
+    const [alert, setAlert] = useState({ open: false, message: "", status: "" });
 
     //const [redirect, setRedirect] = useState(false)
     //const [company, setCompany] = useState([]);
@@ -109,6 +111,33 @@ const SignUp = (props) => {
 
     const handleMouseDownConfirmPassword = (event) => {
       event.preventDefault();
+    };
+
+    const validateEmail = (email) => {
+      const emailRegex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+      return emailRegex.test(email);
+    };
+    const validateName = (name, surname) => {
+      const fullnameRegex = /^[a-zA-Z ]{2,40}$/;
+      return fullnameRegex.test(name, surname);
+    };
+
+    const validatePassword = (password, confirmPassword) => {
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+      return passwordRegex.test(password, confirmPassword);
+    };
+  
+    const handleCreateUser = () => {
+      if (!validateName(name, surname)) {
+        setAlert({ open: true, message: "Invalid name or surname format", status: "error" });
+      }else if (!validateEmail(email)) {
+        setAlert({ open: true, message: "Invalid email format", status: "error" });
+        return;
+      } else if (!validatePassword(password, confirmPassword)) {
+        setAlert({ open: true, message: "Invalid password format", status: "error" });
+      }else{
+        createUser();
+      }
     };
 
   return (
@@ -221,11 +250,11 @@ const SignUp = (props) => {
               type="phone"
               placeholder="phone"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value.slice(0, 11))}
             />
           </FormControl>
 
-          <Button sx={{ mt: 1 }} onClick={createUser}>Sign up</Button>
+          <Button sx={{ mt: 1 }} onClick={handleCreateUser}>Sign up</Button>
           <Typography
             endDecorator={<Link href="/login">Sign in</Link>}
             fontSize="sm"
@@ -236,6 +265,13 @@ const SignUp = (props) => {
         </Sheet>
       </main>
     </CssVarsProvider>
+      <Snackbar
+        open={alert.open}
+        autoHideDuration={1000}
+        onClose={() => setAlert({ open: false, message: "", status: "" })}
+      >
+        <Alert severity={alert.status || "info"}>{alert.message}</Alert>
+      </Snackbar>
     </>
   )
 }

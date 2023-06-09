@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
 import { fetchProduct } from './actions/productDetailActions';
 import ResponsiveAppBar from './ResponsiveAppBar';
-import { Button, CircularProgress } from '@mui/material';
+import { Alert, Snackbar, Button, CircularProgress } from '@mui/material';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import Stripe from './payment/Stripe';
 
@@ -72,6 +72,7 @@ const ProductDetails = (props) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(true);
   const [showForm, setShowForm] = useState(false)
+  const [alert, setAlert] = useState({ open: false, message: "", status: "" });
 
   useEffect(() => {
     const productId = window.location.href.split('/')[4];
@@ -98,6 +99,7 @@ const ProductDetails = (props) => {
     
     const updatedCartItems = [...cartItems, productDetail];
     localStorage.setItem(`productDetail_${userId}`, JSON.stringify(updatedCartItems));
+    setAlert({ open: true, message: "product successfully added", status: "success" })
   };
 
   const handleBuyNow = () => {
@@ -167,6 +169,13 @@ const ProductDetails = (props) => {
           </div>
         </div>
       </div>
+      <Snackbar
+        open={alert.open}
+        autoHideDuration={1000}
+        onClose={() => setAlert({ open: false, message: "", status: "" })}
+      >
+        <Alert severity={alert.status || "info"}>{alert.message}</Alert>
+      </Snackbar>
     </>
   );
 };
