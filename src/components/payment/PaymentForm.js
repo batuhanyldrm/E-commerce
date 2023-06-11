@@ -170,7 +170,7 @@ const PaymentForm = (props) => {
         ) : (
           <div>
             <h2 className={classes.formTitle}>Payment successful</h2>
-            <h3 className={classes.formTitle}>Thank you for your patronage</h3>
+            <h3 className={classes.formTitle}>Thank you for your payment</h3>
           </div>
         )}
       </div>
