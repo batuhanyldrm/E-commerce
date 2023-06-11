@@ -142,7 +142,6 @@ const ProductDetails = (props) => {
                     ) : (
                     ""
                   )}
-           {/*  <div style={{display:"flex", justifyContent:"center"}}> */}
             <Button
               variant="contained"
               className={classes.btn}
@@ -165,7 +164,6 @@ const ProductDetails = (props) => {
             >
               Buy Now
             </Button></>}
-            {/* </div> */}
             </div>
           </div>
         </div>
@@ -183,7 +181,7 @@ const ProductDetails = (props) => {
 
 const mapStateToProps = (state) => ({
   productDetail: state.productDetail,
-  userId: state.user.id, // Assuming you have the user ID stored in the Redux store
+  userId: state.user.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

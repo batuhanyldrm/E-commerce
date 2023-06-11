@@ -45,7 +45,6 @@ export const updateUserApi = async (data) => {
         surname: data.surname,
         email: data.email,
         tel: data.tel,
-        //password: data.password
     })
     return resp; 
 }

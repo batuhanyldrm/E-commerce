@@ -96,7 +96,6 @@ const LoginPage = (props) => {
       window.location = window.location.origin + "/all-products";
     } else {
       // Kullanıcı oturumu kapalı, normal akışa devam et
-      // ...
     }
   };
   

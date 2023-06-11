@@ -1,14 +1,5 @@
 import { getUser } from "../api/userApi";
-import { ADD_USER, LOGIN_USER, UPDATE_USER } from "./types";
-
-/* export const addUser = (user) => (
-    dispatch
-    ) => {
-        dispatch({
-            type: ADD_USER,
-            payload: user
-        })
-    } */
+import { LOGIN_USER, UPDATE_USER } from "./types";
 
 export const loginUser = () => async (
 dispatch

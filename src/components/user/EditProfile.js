@@ -18,7 +18,6 @@ const EditProfile = (props) => {
     const [surname, setSurname] = useState(user.surname)
     const [email, setEmail] = useState(user.email)
     const [tel, setTel] = useState(user.tel)
-    //const [password, setPassword] = useState(user.password)
 
     useEffect(() => {
       setCompany(user.company)
@@ -36,7 +35,6 @@ const EditProfile = (props) => {
             surname: surname,
             email: email,
             tel: tel,
-            //password: password
         }
         if (user.email !== email) {
             await updateUserApi(data)
@@ -120,17 +118,6 @@ const EditProfile = (props) => {
             variant="outlined"
             size='small'
         />
-        {/* <TextField
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoFocus
-            margin="normal"
-            id="password"
-            label="New Password"
-            type="password"
-            variant="outlined"
-            size='small'
-        /> */}
         <TextField
             value={tel}
             onChange={(e) => setTel(e.target.value)}
