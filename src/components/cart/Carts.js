@@ -434,6 +434,18 @@ const Carts = (props) => {
                     <Typography>
                       {`Product Count: ${productCountMap[product.id]}`}
                     </Typography>
+                    {/* <TextField
+                      type="number"
+                      label="Product Count"
+                      value={productCountMap[product.id]}
+                      onChange={(event) => {
+                        const updatedProductCountMap = { ...productCountMap };
+                        updatedProductCountMap[product.id] = Number(event.target.value);
+                        setProductCountMap(updatedProductCountMap);
+                      }}
+                      inputProps={{ min: 0 }}
+                      style={{ margin: 5 }}
+                    /> */}
                     {product.amount === 0 ? (
                       <p>Tükendi</p>
                     ) : product.amount < 5 ? (
