@@ -47,10 +47,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#d4d4d4",
     boxShadow: "1px 1px 15px #8d8f91",
     borderRadius: 5,
-    /* transition: "100ms all",
-    "&:hover": {
-      transform: "scale(2, 2)",
-    }, */
   },
   btn: {
     "&:hover": {
