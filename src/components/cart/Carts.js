@@ -431,9 +431,9 @@ const Carts = (props) => {
                       Product Details: {product.description}
                     </p>
                     <p className={classes.textStyle}>Price: ${product.price}</p>
-                    <Typography>
+                    <p className={classes.textStyle}>
                       {`Product Count: ${productCountMap[product.id]}`}
-                    </Typography>
+                    </p>
                     {/* <TextField
                       type="number"
                       label="Product Count"
