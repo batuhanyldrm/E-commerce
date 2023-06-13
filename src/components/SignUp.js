@@ -72,10 +72,25 @@ const SignUp = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [passwordMatchError, setPasswordMatchError] = useState(false);
     const [phone, setPhone] = useState("");
     const [alert, setAlert] = useState({ open: false, message: "", status: "" });
 
+    const handlePasswordChange = (e) => {
+      setPassword(e.target.value);
+      setPasswordMatchError(e.target.value !== confirmPassword);
+    };
+  
+    const handleConfirmPasswordChange = (e) => {
+      setConfirmPassword(e.target.value);
+      setPasswordMatchError(e.target.value !== password);
+    };
+
     const createUser = async () => {
+      if (password !== confirmPassword) {
+        setPasswordMatchError(true)
+        return
+      }
         const data = {
             name: name,
             surname: surname,
@@ -105,23 +120,30 @@ const SignUp = (props) => {
       const emailRegex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
       return emailRegex.test(email);
     };
-    const validateName = (name, surname) => {
+    const validateName = (name) => {
       const fullnameRegex = /^[a-zA-Z ]{2,40}$/;
-      return fullnameRegex.test(name, surname);
+      return fullnameRegex.test(name);
     };
 
-    const validatePassword = (password, confirmPassword) => {
+    const validateSurName = (surname) => {
+      const fullnameRegex = /^[a-zA-Z ]{2,40}$/;
+      return fullnameRegex.test(surname);
+    };
+
+    const validatePassword = (password) => {
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
-      return passwordRegex.test(password, confirmPassword);
+      return passwordRegex.test(password);
     };
   
     const handleCreateUser = () => {
-      if (!validateName(name, surname)) {
-        setAlert({ open: true, message: "Invalid name or surname format", status: "error" });
+      if (!validateName(name)) {
+        setAlert({ open: true, message: "Invalid name format", status: "error" });
+      }else if (!validateName(surname)) {
+        setAlert({ open: true, message: "Invalid surname format", status: "error" });
       }else if (!validateEmail(email)) {
         setAlert({ open: true, message: "Invalid email format", status: "error" });
         return;
-      } else if (!validatePassword(password, confirmPassword)) {
+      } else if (!validatePassword(password)) {
         setAlert({ open: true, message: "Invalid password format", status: "error" });
       }else{
         createUser();
@@ -196,7 +218,8 @@ const SignUp = (props) => {
               name="password"
               placeholder="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
+              error={passwordMatchError}
               type={showPassword ? 'text' : 'password'}              
               endDecorator={
                 <IconButton 
@@ -214,7 +237,8 @@ const SignUp = (props) => {
               name="Confirm Password"
               placeholder="Confirm Password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={handleConfirmPasswordChange}
+              error={passwordMatchError}
               type={showConfirmPassword ? 'text' : 'password'}              
               endDecorator={
                 <IconButton 

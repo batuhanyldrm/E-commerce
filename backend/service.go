@@ -154,10 +154,10 @@ func (service *Service) UpdateUser(userId string, userDTO models.RegisterDTO) (*
 
 func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Register {
 
-	_, err := service.Repository.GetUser(registerDTO.Email)
+	/* _, err := service.Repository.GetUser(registerDTO.Email)
 	if err == nil {
 		return nil
-	}
+	} */
 
 	userRegister := models.Register{}
 
@@ -174,7 +174,7 @@ func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Reg
 	userRegister.CreatedAt = time.Now().UTC().Round(time.Second)
 	userRegister.UpdatedAt = time.Now().UTC().Round(time.Second)
 
-	err = service.Repository.PostRegister(userRegister)
+	err := service.Repository.PostRegister(userRegister)
 
 	if err != nil {
 		return nil
