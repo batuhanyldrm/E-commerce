@@ -154,7 +154,7 @@ const ProductDetails = (props) => {
               color="primary"
               className={classes.btn}
               fullWidth
-              style={{ /* marginLeft: 5, */ marginBottom: 5, maxWidth:130, minWidth: 100, backgroundColor: 'rgba(186,130,57,255)' }}
+              style={{ marginBottom: 5, maxWidth:130, minWidth: 100, backgroundColor: 'rgba(186,130,57,255)' }}
               disabled={productDetail.amount === 0}
               onClick={handleBuyNow}
             >
