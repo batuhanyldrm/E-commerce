@@ -143,7 +143,7 @@ const ProductDetails = (props) => {
               className={classes.btn}
               style={{ minWidth: 100, marginBottom: 5, backgroundColor: 'rgba(39,38,152,255)' }}
               disabled={productDetail.amount === 0}
-              onClick={handleAddToCart} // Call handleAddToCart when the button is clicked
+              onClick={handleAddToCart}
             >
               Add to Cart
             </Button>
