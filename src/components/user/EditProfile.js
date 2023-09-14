@@ -132,8 +132,8 @@ const EditProfile = (props) => {
         </div>
         </DialogContent>
         <DialogActions>
-        <Button style={{color: 'rgba(186,130,57,255)', borderColor: 'rgba(186,130,57,255)',}} onClick={handleClose}>Cancel</Button>
-        <Button style={{color: 'rgba(186,130,57,255)', borderColor: 'rgba(186,130,57,255)',}} onClick={handleChangeUserInfo} >EDIT</Button>
+        <Button style={{color: 'rgba(186,130,57,255)', borderColor: 'rgba(186,130,57,255)'}} onClick={handleClose}>Cancel</Button>
+        <Button style={{color: 'rgba(186,130,57,255)', borderColor: 'rgba(186,130,57,255)'}} onClick={handleChangeUserInfo} >EDIT</Button>
         </DialogActions>
         </Dialog>
    </>
