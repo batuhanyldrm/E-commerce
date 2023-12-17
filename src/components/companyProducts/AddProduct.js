@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     overflowX: "auto"
   },
+  imgbutton: {
+    marginRight: 5
+  }
 }));
 
 function AddProduct(props) {
@@ -116,10 +119,7 @@ const handleCreateProduct = async () => {
             component="label"
             color={"primary"}
           >
-
-            <div>
-                Add Image
-            </div>
+            <div className={classes.imgbutton}>Add Image</div>
               <BackupIcon />
             <input
               type="file"
