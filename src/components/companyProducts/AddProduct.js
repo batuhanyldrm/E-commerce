@@ -43,7 +43,7 @@ function AddProduct(props) {
     formData.append('price', price);
     formData.append('amount', amount);
     formData.append('image', image[0]);
-    
+
     try {
       const res = await postProduct(formData);
       addProduct(res.data);
