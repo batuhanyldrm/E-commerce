@@ -39,6 +39,9 @@ export const changeStock = async (data) => {
    
     const resp = await axios.put(`http://localhost:3001/stocks/${data.id}`, {
         productName: data.productName,
+        productCode: data.productCode,
+        size: data.size,
+        color: data.color,
         description: data.description,
         price: data.price,
         amount: data.amount,

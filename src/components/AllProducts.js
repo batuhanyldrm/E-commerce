@@ -68,7 +68,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     //overflow:"hidden",
-    objectFit: "fill",
+    objectFit: "contain",
+    overflow: "visible",
     color: "#d4d4d4",
     boxShadow: "1px 1px 15px #8d8f91",
     borderRadius: 5,
@@ -130,6 +131,10 @@ const AllProducts = (props) => {
     setAlert({ open: true, message: "product successfully added", status: "success" })
   };
 
+  const priceFormat = (price) => {
+    return Intl.NumberFormat('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(price);
+  }
+
   return (
     <>
     <div>
@@ -185,7 +190,7 @@ const AllProducts = (props) => {
             <Link to={`/product-details/${product.id}`} className={classes.link}>
               {product.image ?
                 <img className={classes.listImgBlock}
-                  style={{objectFit: "fill"}}
+                  style={{objectFit: "contain"}}
                   src={product.image}
                   loading="lazy"
                   alt={product.productName}
@@ -197,7 +202,7 @@ const AllProducts = (props) => {
               <div>
                 <Typography level="body3">Total price:</Typography>
                 <Typography fontSize="lg" fontWeight="lg">
-                ${product.price}
+                ${priceFormat(product.price)}
                 </Typography>
               </div>
               <Button

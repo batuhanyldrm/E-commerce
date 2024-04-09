@@ -81,6 +81,9 @@ func (service *Service) UpdateStocks(productDTO models.ProductDTO, ID string) (*
 	}
 
 	stock.ProductName = productDTO.ProductName
+	stock.ProductCode = productDTO.ProductCode
+	stock.Size = productDTO.Size
+	stock.Color = productDTO.Color
 	stock.Description = productDTO.Description
 	stock.Price = productDTO.Price
 	stock.Amount = productDTO.Amount
@@ -102,6 +105,9 @@ func (service *Service) PostStocks(productDTO models.ProductDTO) *models.Product
 	stock.CreatedAt = time.Now().UTC().Round(time.Second)
 	stock.UpdatedAt = time.Now().UTC().Round(time.Second)
 	stock.ProductName = productDTO.ProductName
+	stock.ProductCode = productDTO.ProductCode
+	stock.Size = productDTO.Size
+	stock.Color = productDTO.Color
 	stock.Description = productDTO.Description
 	stock.Price = productDTO.Price
 	stock.Amount = productDTO.Amount

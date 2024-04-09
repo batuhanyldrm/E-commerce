@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+
+import { makeStyles } from '@mui/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 import DialogContent from '@mui/material/DialogContent';
+import BackupIcon from "@material-ui/icons/Backup";
+
 import { addProduct } from '../actions/productActions';
 import { postProduct } from '../api/productApi';
-import { makeStyles } from '@mui/styles';
-import BackupIcon from "@material-ui/icons/Backup";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +33,9 @@ function AddProduct(props) {
   const {open, handleClose, addProduct} = props
 
   const [productName, setProductName] = useState("")
+  const [productCode, setProductCode] = useState("")
+  const [size, setSize] = useState("")
+  const [color, setColor] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState(0)
   const [amount, setAmount] = useState(0)
@@ -39,6 +44,9 @@ function AddProduct(props) {
   const handleCreateProduct = async () => {
     const formData = new FormData();
     formData.append('productName', productName);
+    formData.append('productCode', productCode);
+    formData.append('size', size);
+    formData.append('color', color);
     formData.append('description', description);
     formData.append('price', price);
     formData.append('amount', amount);
@@ -77,6 +85,36 @@ function AddProduct(props) {
           type="text"
           margin="normal"
           label="Product Name"
+          variant="outlined"
+          size='small'
+        />
+        <TextField
+          id="productCode"
+          value={productCode}
+          onChange={(e) => setProductCode(e.target.value)}
+          type="text"
+          margin="normal"
+          label="Product Code"
+          variant="outlined"
+          size='small'
+        />
+        <TextField
+          id="color"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+          type="text"
+          margin="normal"
+          label="Color"
+          variant="outlined"
+          size='small'
+        />
+        <TextField
+          id="size"
+          value={size}
+          onChange={(e) => setSize(e.target.value)}
+          type="text"
+          margin="normal"
+          label="Size"
           variant="outlined"
           size='small'
         />

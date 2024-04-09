@@ -14,6 +14,9 @@ function EditProduct(props) {
     const {product, updateStock, open, handleClose, id} = props
 
     const [productName, setProductName] = useState(product.productName)
+    const [productCode, setProductCode] = useState(product.productCode)
+    const [size, setSize] = useState(product.size)
+    const [color, setColor] = useState(product.color)
     const [description, setDescription] = useState(product.description)
     const [price, setPrice] = useState(product.price)
     const [amount, setAmount] = useState(product.amount)
@@ -22,6 +25,9 @@ function EditProduct(props) {
         const data = {
             id: id,
             productName : productName,
+            productCode : productCode,
+            size : size,
+            color : color,
             description : description,
             price: price,
             amount: amount,
@@ -57,6 +63,36 @@ function EditProduct(props) {
             type="text"
             margin="normal"
             label="Product Name"
+            variant="outlined"
+            size='small'
+          />
+          <TextField
+            id="productCode"
+            value={productCode}
+            onChange={(e) => setProductCode(e.target.value)}
+            type="text"
+            margin="normal"
+            label="Product Code"
+            variant="outlined"
+            size='small'
+          />
+          <TextField
+            id="color"
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            type="text"
+            margin="normal"
+            label="Color"
+            variant="outlined"
+            size='small'
+          />
+          <TextField
+            id="size"
+            value={size}
+            onChange={(e) => setSize(e.target.value)}
+            type="text"
+            margin="normal"
+            label="Size"
             variant="outlined"
             size='small'
           />

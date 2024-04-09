@@ -263,6 +263,9 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	}
 
 	createStocks.ProductName = c.FormValue("productName")
+	createStocks.ProductCode = c.FormValue("productCode")
+	createStocks.Size = c.FormValue("size")
+	createStocks.Color = c.FormValue("color")
 	createStocks.Description = c.FormValue("description")
 	price, err := strconv.Atoi(c.FormValue("price"))
 	createStocks.Price = price
@@ -377,8 +380,8 @@ func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 			Expires:  time.Now().Add(time.Hour * 24),
 			HTTPOnly: false,
 		}
-	
-		c.Cookie(&cookie)	
+
+		c.Cookie(&cookie)
 		c.JSON(userLogin)
 		c.Status(fiber.StatusCreated)
 	case UserNotFoundError:

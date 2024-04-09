@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     width: 250,
     height: 300,
-    //overflow:"hidden",
-    //objectFit: "cover",
+    overflow:"visible",
+    objectFit: "contain",
     color: "#d4d4d4",
     boxShadow: "1px 1px 15px #8d8f91",
     borderRadius: 5,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductDetails = (props) => {
-  const { productDetail, fetchProduct, userId } = props;
+  const { productDetail, fetchProduct, userId, user } = props;
 
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(true);
@@ -126,18 +126,14 @@ const ProductDetails = (props) => {
             </>
           )}
           <div style={{ marginLeft: '10px' }}>
-            <p> <b>Product Name:</b> {productDetail.productName} </p>
-            <p> <b>Product Details:</b> {productDetail.description} </p>
-            <p> <b>Total Price:</b> ${productDetail.price} </p>
+            <p><b>Product Name: </b>{user.company + " " + productDetail.productName}</p>
+            <p><b>Product Details: </b>{productDetail.description}</p>
+            <p><b>Total Price: </b>${productDetail.price}</p>
             {productDetail.amount === 0 ? (
-                    <p><b>The product sold out</b></p>
-                    ) : productDetail.amount < 5 ? (
-                    <p>
-                      <b>Last:</b> {productDetail.amount} <b>products</b>
-                    </p>
-                    ) : (
-                    ""
-                  )}
+              <p><b>The product sold out</b></p>) : productDetail.amount < 5 ? (<p><b>Last:</b> {productDetail.amount} <b>products</b></p>
+              ) : (
+              ""
+            )}
             <Button
               variant="contained"
               className={classes.btn}
@@ -178,6 +174,7 @@ const ProductDetails = (props) => {
 const mapStateToProps = (state) => ({
   productDetail: state.productDetail,
   userId: state.user.id,
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
