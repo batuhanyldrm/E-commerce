@@ -33,8 +33,8 @@ func NewApi(service *Service) Api {
 }
 
 type PaymentData struct {
-	Amount int64  `json:"amount"`
-	ID     string `json:"id"`
+	Amount float32 `json:"amount"`
+	ID     string  `json:"id"`
 }
 
 func (api *Api) HandleCreatePaymentIntent(c *fiber.Ctx) error {
@@ -52,7 +52,7 @@ func (api *Api) HandleCreatePaymentIntent(c *fiber.Ctx) error {
 	stripe.Key = "sk_test_51NDVcUJVbJVgaTyyWRJxS0zPxpTaHJvmriQ5jJbFf7dbBTizwlQdp4xooJy8iqnVNmL8FQAC0WlVX6gySg1FurN200VTizr6dz"
 
 	params := &stripe.PaymentIntentParams{
-		Amount:        stripe.Int64(paymentData.Amount),
+		Amount:        stripe.Int64(int64(paymentData.Amount * 100)),
 		Currency:      stripe.String("USD"),
 		PaymentMethod: stripe.String(paymentData.ID),
 		Confirm:       stripe.Bool(true),
@@ -267,10 +267,14 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	createStocks.Size = c.FormValue("size")
 	createStocks.Color = c.FormValue("color")
 	createStocks.Description = c.FormValue("description")
-	price, err := strconv.Atoi(c.FormValue("price"))
-	createStocks.Price = price
+	price, err := strconv.ParseFloat(c.FormValue("price"), 32)
+	createStocks.Price = float32(price)
+	if err != nil {
+		fmt.Println("price Error!")
+		return err
+	}
 	amount, err := strconv.Atoi(c.FormValue("amount"))
-	createStocks.Amount = amount
+	createStocks.Amount = float32(amount)
 	createStocks.Image = "https://firebasestorage.googleapis.com/v0/b/graduation-project-5ff56.appspot.com/o/" + imageId.String() + "?alt=media&token=" + id.String()
 
 	stock := api.Service.PostStocks(createStocks)
@@ -484,5 +488,10 @@ func (api *Api) GetUserAuthenticationHandler(c *fiber.Ctx) error {
 		c.Status(fiber.StatusInternalServerError)
 	}
 
+	return nil
+}
+
+func (api *Api) PostMailHandler(c *fiber.Ctx) error {
+	fmt.Println("sdf")
 	return nil
 }

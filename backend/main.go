@@ -8,12 +8,40 @@ import (
 	"github.com/stripe/stripe-go/v74"
 )
 
+/* func email() {
+	from := os.Getenv("FromEmailAddr")
+	password := os.Getenv("SMTPpwd")
+
+	toEmail := os.Getenv("yildirimbatu52@gmail.com")
+	to := []string{toEmail}
+
+	host := "smtp.gmail.com"
+	port := "587"
+	address := host + ":" + port
+
+	subject := "Subject: Our Golang mail\n"
+	body := "Our first email!"
+	message := []byte(subject + body)
+
+	auth := smtp.PlainAuth("", from, password, host)
+
+	err := smtp.SendMail(address, auth, from, to, message)
+	if err != nil {
+		fmt.Println("err:", err)
+		return
+	}
+	fmt.Println("go check your email")
+
+} */
+
 func main() {
 	repository := NewRepository()
 	service := NewService(repository)
 	api := NewApi(&service)
 	app := SetupApp(&api)
 	app.Listen(":3001")
+	//email()
+
 }
 
 func SetupApp(api *Api) *fiber.App {
@@ -48,6 +76,10 @@ func SetupApp(api *Api) *fiber.App {
 	app.Get("/user/:id", api.GetUserIDHandler)
 	app.Post("/logout", api.GetUserLogoutHandler)
 	app.Get("/user", api.GetUserAuthenticationHandler)
+
+	//mail
+
+	app.Get("/mail", api.PostMailHandler)
 
 	//stripe payment you can control stripe web site
 	app.Post("/create-payment-intent", api.HandleCreatePaymentIntent)

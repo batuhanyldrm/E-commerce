@@ -7,8 +7,8 @@ type Product struct {
 	ProductName string    `json:"productName" bson:"productName"`
 	ProductCode string    `json:"productCode" bson:"productCode"`
 	Description string    `json:"description" bson:"description"`
-	Price       int       `json:"price" bson:"price"`
-	Amount      int       `json:"amount" bson:"amount"`
+	Price       float32   `json:"price" bson:"price"`
+	Amount      float32   `json:"amount" bson:"amount"`
 	Size        string    `json:"size" bson:"size"`
 	Color       string    `json:"color" bson:"color"`
 	Image       string    `json:"image" bson:"image"`
@@ -19,8 +19,8 @@ type ProductDTO struct {
 	ProductName string    `json:"productName" bson:"productName"`
 	ProductCode string    `json:"productCode" bson:"productCode"`
 	Description string    `json:"description" bson:"description"`
-	Price       int       `json:"price" bson:"price"`
-	Amount      int       `json:"amount" bson:"amount"`
+	Price       float32   `json:"price" bson:"price"`
+	Amount      float32   `json:"amount" bson:"amount"`
 	Size        string    `json:"size" bson:"size"`
 	Color       string    `json:"color" bson:"color"`
 	Image       string    `json:"image" bson:"image"`

@@ -120,7 +120,7 @@ function EditProduct(props) {
           />
           <TextField
             value={price}
-            onChange={(e) => setPrice(parseInt(e.target.value))}
+            onChange={(e) => setPrice(parseFloat(e.target.value))}
             autoFocus
             margin="normal"
             id="price"
