@@ -15,6 +15,7 @@ import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import BookmarkAdd from '@mui/icons-material/BookmarkAddOutlined';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   allProduct:{
@@ -222,6 +223,7 @@ const AllProducts = (props) => {
           ))}
         </div>
       </div>
+      <Footer/>
     </div>
        <Snackbar
         open={alert.open}
