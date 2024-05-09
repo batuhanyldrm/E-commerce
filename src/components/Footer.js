@@ -1,13 +1,62 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { makeStyles } from '@mui/styles';
-import { Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
+import BlenderIcon from '@mui/icons-material/Blender';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 const useStyles = makeStyles((theme) => ({
   main:{
+    display: "grid",
+    gridGap: "25px",
+    gridTemplateColumns: "1fr 1fr 1fr 1fr",
+    backgroundColor: '#f8f9fa',
+    marginTop: 10,
+    ["@media (max-width: 950px)"]:{
+      display: "grid",
+      gridGap: "25px",
+      gridTemplateColumns: "1fr 1fr",
+    },
+    ["@media (max-width: 640px)"]:{
+      display: "grid",
+      gridGap: "25px",
+      gridTemplateColumns: "1fr",
+    },
+  },
+  mainItems: {
+    display: "grid",
+    gridGap: "25px",
+    gridTemplateColumns: "1fr 1fr 1fr 1fr",
+    marginTop: 10,
+    ["@media (max-width: 950px)"]:{
+      display: "grid",
+      gridGap: "25px",
+      gridTemplateColumns: "1fr 1fr",
+    },
+    ["@media (max-width: 640px)"]:{
+      display: "grid",
+      gridGap: "25px",
+      gridTemplateColumns: "1fr",
+    },
+  },
+  categoryItemsLink: {
     display: 'flex',
-    justifyContent: 'space-between',
-    borderTop: "1px solid gray",
-    marginTop: 10
+    textDecoration: 'none',
+    color: 'black',
+    "&:hover": {
+      textDecoration: 'underline'
+    },
+  },
+  categoryItems: {
+    display: "flex",
+    alignItems:"end",
+    marginRight: "5px"
   },
   grid:{
     display:"grid", 
@@ -34,10 +83,26 @@ const Footer = () => {
   return (
     <>
       <div className={classes.main}>
-        <Typography m={2}>Corporate</Typography>
-        <Typography m={2}>Categories</Typography>
-        <Typography m={2}>Contact Us</Typography>
-        <Typography m={2}>Social Media</Typography>
+        <div>
+        <Typography>Corporate</Typography>
+        <Typography variant="body2">About Us</Typography>
+        </div>
+        <div>
+        <Typography>Categories</Typography>
+        <Link className={classes.categoryItemsLink}><CheckroomIcon/><Typography className={classes.categoryItems} variant="body2" ml={1}>Clothes</Typography></Link>
+        <Link className={classes.categoryItemsLink}><BlenderIcon/><Typography className={classes.categoryItems} variant="body2" ml={1}>Electronics</Typography></Link>
+        <Link className={classes.categoryItemsLink}><AutoStoriesIcon/><Typography className={classes.categoryItems}variant="body2" ml={1}>Books</Typography></Link>
+        </div>
+        <div>
+        <Typography>Contact Us</Typography>
+        </div>
+        <div>
+        <Typography>Social Media</Typography>
+        <IconButton color="inherit" size="small" title="Instagram"><InstagramIcon/></IconButton>
+        <IconButton color="inherit" size="small" title="Facebook"><FacebookIcon/></IconButton>
+        <IconButton color="inherit" size="small" title="X"><XIcon/></IconButton>
+        <IconButton color="inherit" size="small" title="LinkedIn"><LinkedInIcon/></IconButton>
+        </div>
       </div>
     </>
   )
