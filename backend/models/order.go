@@ -1,12 +1,5 @@
 package models
 
-/* type Order struct {
-	ID     string `json:"id" bson:"id"`
-	UserId string `json:"userId" bson:"userId"`
-}
-
-package models
-*/
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
 type OrderStatus string

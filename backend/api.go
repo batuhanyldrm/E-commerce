@@ -291,6 +291,11 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	return nil
 }
 
+func (api *Api) PostOrderHandler(c *fiber.Ctx) error {
+	fmt.Println("sdf")
+	return nil
+}
+
 func (api *Api) DeleteStocksHandler(c *fiber.Ctx) error {
 
 	ID := c.Params("id")
@@ -488,10 +493,5 @@ func (api *Api) GetUserAuthenticationHandler(c *fiber.Ctx) error {
 		c.Status(fiber.StatusInternalServerError)
 	}
 
-	return nil
-}
-
-func (api *Api) PostMailHandler(c *fiber.Ctx) error {
-	fmt.Println("sdf")
 	return nil
 }
