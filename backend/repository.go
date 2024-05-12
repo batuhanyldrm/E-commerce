@@ -160,6 +160,21 @@ func (repository *Repository) PostStocks(product models.Product) error {
 
 }
 
+func (repository *Repository) PostOrder(order models.Order) error {
+	collection := repository.client.Database("order").Collection("order")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	_, err := collection.InsertOne(ctx, order)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+
+}
+
 func (repository *Repository) DeleteStocks(stockId string) error {
 	collection := repository.client.Database("products").Collection("products")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -187,7 +202,7 @@ func (repository *Repository) UpdateUser(userId string, user models.Register) er
 	}
 
 	return nil
-	
+
 }
 
 func (repository *Repository) PostRegister(userRegister models.Register) error {

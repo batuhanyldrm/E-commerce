@@ -121,6 +121,30 @@ func (service *Service) PostStocks(productDTO models.ProductDTO) *models.Product
 	return &stock
 }
 
+func (service *Service) PostOrder(orderDTO models.OrderDTO, user models.Register) *models.Order {
+
+	order := models.Order{}
+	order.ID = GenerateUUID(8)
+	//userId düzelecek
+	order.UserId = user.ID
+	order.ProductList = orderDTO.ProductList
+	order.Address = orderDTO.Address
+	order.TotalPrice = orderDTO.TotalPrice
+	order.Payment = orderDTO.Payment
+	order.Discount = orderDTO.Discount
+	order.Status = orderDTO.Status
+	order.CreatedAt = time.Now().UTC().Round(time.Second)
+	order.UpdatedAt = time.Now().UTC().Round(time.Second)
+	order.AdditionalNote = orderDTO.AdditionalNote
+
+	err := service.Repository.PostOrder(order)
+	if err != nil {
+		return nil
+	}
+
+	return &order
+}
+
 func (service *Service) DeleteStocks(stockId string) error {
 
 	err := service.Repository.DeleteStocks(stockId)

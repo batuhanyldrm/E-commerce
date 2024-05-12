@@ -1,6 +1,8 @@
 package models
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"time"
+)
 
 type OrderStatus string
 
@@ -13,16 +15,17 @@ const (
 )
 
 type Order struct {
-	Id             string             `json:"id" bson:"id"`
-	UserId         string             `json:"userId" bson:"userId"`
-	ProductList    []Product          `json:"productList" bson:"productList"`
-	Address        string             `json:"address" bson:"address"`
-	TotalPrice     float32            `json:"totalPrice" bson:"totalPrice"`
-	Payment        string             `json:"payment" bson:"payment"`
-	Discount       int                `json:"discount" bson:"discount"`
-	Status         OrderStatus        `json:"status" bson:"status"`
-	CreatedAt      primitive.DateTime `json:"createdAt" bson:"createdAt"`
-	AdditionalNote string             `json:"additionalNote" bson:"additionalNote"`
+	ID             string      `json:"id" bson:"id"`
+	UserId         string      `json:"userId" bson:"userId"`
+	ProductList    []Product   `json:"productList" bson:"productList"`
+	Address        string      `json:"address" bson:"address"`
+	TotalPrice     float32     `json:"totalPrice" bson:"totalPrice"`
+	Payment        string      `json:"payment" bson:"payment"`
+	Discount       int         `json:"discount" bson:"discount"`
+	Status         OrderStatus `json:"status" bson:"status"`
+	CreatedAt      time.Time   `json:"createdAt" bson:"createdAt"`
+	UpdatedAt      time.Time   `json:"updatedAt" bson:"updatedAt"`
+	AdditionalNote string      `json:"additionalNote" bson:"additionalNote"`
 }
 
 type OrderDTO struct {

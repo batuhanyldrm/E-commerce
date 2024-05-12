@@ -292,7 +292,24 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 }
 
 func (api *Api) PostOrderHandler(c *fiber.Ctx) error {
-	fmt.Println("sdf")
+	//userId düzelecek
+	createOrders := models.OrderDTO{}
+	register := models.Register{}
+	err := c.BodyParser(&createOrders)
+	if err != nil {
+		c.Status(fiber.StatusBadRequest)
+	}
+	orders := api.Service.PostOrder(createOrders, register)
+
+	switch err {
+	case nil:
+		c.JSON(orders)
+		c.Status(fiber.StatusCreated)
+
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
+
 	return nil
 }
 
