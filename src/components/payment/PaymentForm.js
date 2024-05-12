@@ -88,7 +88,7 @@ const PaymentForm = (props) => {
         if(!error){
             try {
                 const {id} = paymentMethod
-                const response = await axios.post("http://localhost:3001/create-payment-intent", {
+                const response = await axios.post("http://localhost:8080/create-payment-intent", {
                     amount: calculateTotalPrice || productDetail.price,
                     id
                 })

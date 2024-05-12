@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const postRegister = async ({name, surname, email, password, tel}) => {
-    const resp = await axios.post("http://localhost:3001/register", {
+    const resp = await axios.post("http://localhost:8080/register", {
         name: name,
         surname: surname,
         email: email,
@@ -13,7 +13,7 @@ export const postRegister = async ({name, surname, email, password, tel}) => {
 }
 export const postLogin = async ({ email, password }) => {
     const resp = await axios.post(
-      "http://localhost:3001/login",
+      "http://localhost:8080/login",
       { email, password },
       { withCredentials: true }
     );
@@ -23,7 +23,7 @@ export const postLogin = async ({ email, password }) => {
 export const postLogout = async () => {
     const resp = await axios({
         method: "post",
-        url: "http://localhost:3001/logout",
+        url: "http://localhost:8080/logout",
         withCredentials: true
      });
 
@@ -31,7 +31,7 @@ export const postLogout = async () => {
 }
 
 export const getUser = async () => {
-    const resp = await axios.get(`http://localhost:3001/user`,
+    const resp = await axios.get(`http://localhost:8080/user`,
         {withCredentials: true}
     )
     return resp;
@@ -39,7 +39,7 @@ export const getUser = async () => {
 
 export const updateUserApi = async (data) => {
    
-    const resp = await axios.put(`http://localhost:3001/user/${data.id}`, {
+    const resp = await axios.put(`http://localhost:8080/user/${data.id}`, {
         company: data.company,
         name: data.name,
         surname: data.surname,

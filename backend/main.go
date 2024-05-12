@@ -39,7 +39,7 @@ func main() {
 	service := NewService(repository)
 	api := NewApi(&service)
 	app := SetupApp(&api)
-	app.Listen(":3001")
+	app.Listen(":8080")
 	//email()
 
 }
