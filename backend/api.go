@@ -293,13 +293,13 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 
 func (api *Api) PostOrderHandler(c *fiber.Ctx) error {
 	//userId düzelecek
+	userId := c.Params("id")
 	createOrders := models.OrderDTO{}
-	register := models.Register{}
 	err := c.BodyParser(&createOrders)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 	}
-	orders := api.Service.PostOrder(createOrders, register)
+	orders := api.Service.PostOrder(userId, createOrders)
 
 	switch err {
 	case nil:

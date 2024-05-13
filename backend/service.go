@@ -121,7 +121,13 @@ func (service *Service) PostStocks(productDTO models.ProductDTO) *models.Product
 	return &stock
 }
 
-func (service *Service) PostOrder(orderDTO models.OrderDTO, user models.Register) *models.Order {
+func (service *Service) PostOrder(userId string, orderDTO models.OrderDTO) *models.Order {
+
+	user, err := service.Repository.GetUserID(userId)
+
+	if err != nil {
+		return nil
+	}
 
 	order := models.Order{}
 	order.ID = GenerateUUID(8)
@@ -137,7 +143,7 @@ func (service *Service) PostOrder(orderDTO models.OrderDTO, user models.Register
 	order.UpdatedAt = time.Now().UTC().Round(time.Second)
 	order.AdditionalNote = orderDTO.AdditionalNote
 
-	err := service.Repository.PostOrder(order)
+	err = service.Repository.PostOrder(order)
 	if err != nil {
 		return nil
 	}
