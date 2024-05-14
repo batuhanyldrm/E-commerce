@@ -123,16 +123,15 @@ func (service *Service) PostStocks(productDTO models.ProductDTO) *models.Product
 
 func (service *Service) PostOrder(userId string, orderDTO models.OrderDTO) *models.Order {
 
-	user, err := service.Repository.GetUserID(userId)
+	/* user, err := service.Repository.GetUserID(userId)
 
 	if err != nil {
 		return nil
-	}
+	} */
 
 	order := models.Order{}
 	order.ID = GenerateUUID(8)
-	//userId düzelecek
-	order.UserId = user.ID
+	order.UserId = userId
 	order.ProductList = orderDTO.ProductList
 	order.Address = orderDTO.Address
 	order.TotalPrice = orderDTO.TotalPrice
@@ -143,7 +142,7 @@ func (service *Service) PostOrder(userId string, orderDTO models.OrderDTO) *mode
 	order.UpdatedAt = time.Now().UTC().Round(time.Second)
 	order.AdditionalNote = orderDTO.AdditionalNote
 
-	err = service.Repository.PostOrder(order)
+	err := service.Repository.PostOrder(order)
 	if err != nil {
 		return nil
 	}
