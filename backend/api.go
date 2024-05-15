@@ -293,7 +293,7 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 
 func (api *Api) PostOrderHandler(c *fiber.Ctx) error {
 
-	userId := c.Params("id")
+	userId := c.Params("userId")
 
 	createOrders := models.OrderDTO{}
 	err := c.BodyParser(&createOrders)

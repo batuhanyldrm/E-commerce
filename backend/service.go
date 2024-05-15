@@ -132,7 +132,7 @@ func (service *Service) PostOrder(userId string, orderDTO models.OrderDTO) *mode
 	order := models.Order{}
 	order.ID = GenerateUUID(8)
 	order.UserId = userId
-	order.ProductList = orderDTO.ProductList
+	order.ProductList = []models.Product{} //control edilecek
 	order.Address = orderDTO.Address
 	order.TotalPrice = orderDTO.TotalPrice
 	order.Payment = orderDTO.Payment
