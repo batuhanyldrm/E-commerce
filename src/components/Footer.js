@@ -10,6 +10,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import BlenderIcon from '@mui/icons-material/Blender';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 const useStyles = makeStyles((theme) => ({
   main:{
@@ -85,7 +86,7 @@ const Footer = () => {
       <div className={classes.main}>
         <div>
         <Typography>Corporate</Typography>
-        <Typography variant="body2">About Us</Typography>
+        <Link className={classes.categoryItemsLink}><MenuBookIcon/><Typography className={classes.categoryItems} variant="body2" ml={1}>About Us</Typography></Link>
         </div>
         <div>
         <Typography>Categories</Typography>
