@@ -121,18 +121,36 @@ func (service *Service) PostStocks(productDTO models.ProductDTO) *models.Product
 	return &stock
 }
 
-func (service *Service) PostOrder(userId string, orderDTO models.OrderDTO) *models.Order {
+func (service *Service) PostOrder(userId, productId string, orderDTO models.OrderDTO) *models.Order {
 
-	/* user, err := service.Repository.GetUserID(userId)
-
+	user, err := service.Repository.GetUserID(userId)
 	if err != nil {
 		return nil
-	} */
+	}
+
+	product, err := service.Repository.GetStock(productId)
+	if err != nil {
+		return nil
+	}
 
 	order := models.Order{}
 	order.ID = GenerateUUID(8)
-	order.UserId = userId
-	order.ProductList = []models.Product{} //control edilecek
+	order.UserId = user.ID
+	order.ProductList = []models.Product{
+		{
+			ID:          product.ID,
+			ProductName: product.ProductName,
+			ProductCode: product.ProductCode,
+			Description: product.Description,
+			Price:       product.Price,
+			Amount:      product.Amount,
+			Size:        product.Size,
+			Color:       product.Color,
+			Image:       product.Image,
+			CreatedAt:   product.CreatedAt,
+			UpdatedAt:   product.UpdatedAt,
+		},
+	} //control edilecek
 	order.Address = orderDTO.Address
 	order.TotalPrice = orderDTO.TotalPrice
 	order.Payment = orderDTO.Payment
@@ -142,7 +160,7 @@ func (service *Service) PostOrder(userId string, orderDTO models.OrderDTO) *mode
 	order.UpdatedAt = time.Now().UTC().Round(time.Second)
 	order.AdditionalNote = orderDTO.AdditionalNote
 
-	err := service.Repository.PostOrder(order)
+	err = service.Repository.PostOrder(order)
 	if err != nil {
 		return nil
 	}

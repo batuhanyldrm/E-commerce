@@ -78,7 +78,7 @@ func SetupApp(api *Api) *fiber.App {
 	app.Get("/user", api.GetUserAuthenticationHandler)
 
 	//order
-	app.Post("/order/:id", api.PostOrderHandler)
+	app.Post("/order/:id/:productId", api.PostOrderHandler)
 
 	//stripe payment you can control stripe web site
 	app.Post("/create-payment-intent", api.HandleCreatePaymentIntent)
