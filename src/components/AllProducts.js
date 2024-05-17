@@ -116,7 +116,7 @@ const AllProducts = (props) => {
   }, [])
 
   useEffect(() => {
-      loginUser()
+    loginUser()
   }, [])
 
   const handleAddToCart = (productId) => {

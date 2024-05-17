@@ -122,6 +122,15 @@ function LeftDrawer(props) {
                   </ListItemButton>
                 </ListItem>
               </Link>
+              <Link style={{ textDecoration: 'none', color: 'black' }} to="/order">
+                <Divider />
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon></ListItemIcon>
+                    <ListItemText primary="Order" />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
             </List>
             <Divider />
           </Drawer>
