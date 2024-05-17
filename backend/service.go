@@ -128,29 +128,19 @@ func (service *Service) PostOrder(userId, productId string, orderDTO models.Orde
 		return nil
 	}
 
-	product, err := service.Repository.GetStock(productId)
-	if err != nil {
-		return nil
+	productList := []models.Product{}
+	for _, products := range orderDTO.ProductList {
+		product, err := service.Repository.GetStock(products.ID)
+		if err != nil {
+			return nil
+		}
+		productList = append(productList, product)
 	}
 
 	order := models.Order{}
 	order.ID = GenerateUUID(8)
 	order.UserId = user.ID
-	order.ProductList = []models.Product{
-		{
-			ID:          product.ID,
-			ProductName: product.ProductName,
-			ProductCode: product.ProductCode,
-			Description: product.Description,
-			Price:       product.Price,
-			Amount:      product.Amount,
-			Size:        product.Size,
-			Color:       product.Color,
-			Image:       product.Image,
-			CreatedAt:   product.CreatedAt,
-			UpdatedAt:   product.UpdatedAt,
-		},
-	} //control edilecek
+	order.ProductList = productList
 	order.Address = orderDTO.Address
 	order.TotalPrice = orderDTO.TotalPrice
 	order.Payment = orderDTO.Payment
