@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
 import { fetchProduct } from './actions/productDetailActions';
+/* import Footer from './Footer'; */
 import ResponsiveAppBar from './ResponsiveAppBar';
 import { Alert, Snackbar, Button, CircularProgress } from '@mui/material';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
@@ -160,6 +161,7 @@ const ProductDetails = (props) => {
           </div>
         </div>
       </div>
+      {/* <Footer/> */}
       <Snackbar
         open={alert.open}
         autoHideDuration={1000}

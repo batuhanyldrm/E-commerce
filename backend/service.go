@@ -226,20 +226,20 @@ func (service *Service) PostRegister(registerDTO models.RegisterDTO) *models.Reg
 	return &userRegister
 }
 
-var UserNotFoundError error = errors.New("User not found")
+var ErrUserNotFound error = errors.New("user not found")
 
 func (service *Service) PostLogin(loginUser models.RegisterDTO) (*models.Register, error) {
 
 	userEmail, err := service.Repository.GetUser(loginUser.Email)
 
 	if err != nil {
-		return nil, UserNotFoundError
+		return nil, ErrUserNotFound
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(userEmail.Password), []byte(loginUser.Password))
 
 	if err != nil {
-		return nil, UserNotFoundError
+		return nil, ErrUserNotFound
 	}
 
 	return &userEmail, nil
@@ -283,7 +283,7 @@ func (service *Service) GetUserAuth(userId string) (*models.Register, error) {
 	user, err := service.Repository.GetUser(userId)
 
 	if err != nil {
-		return nil, UserNotFoundError
+		return nil, ErrUserNotFound
 	}
 	return &user, nil
 }

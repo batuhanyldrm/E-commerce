@@ -169,7 +169,7 @@ func (api *Api) UpdateStocksHandler(c *fiber.Ctx) error {
 	return nil
 }
 
-var ImageNotFoundError error = errors.New("Image not found")
+var ErrImageNotFound error = errors.New("image not found")
 
 func (api *Api) GetImageHandler(c *fiber.Ctx) error {
 
@@ -241,6 +241,9 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 	}
 
 	file, err := c.FormFile("image")
+	if err == nil { //kontrol et
+		return nil
+	}
 
 	f, err := file.Open()
 
@@ -412,7 +415,7 @@ func (api *Api) PostLoginHandler(c *fiber.Ctx) error {
 		c.Cookie(&cookie)
 		c.JSON(userLogin)
 		c.Status(fiber.StatusCreated)
-	case UserNotFoundError:
+	case ErrUserNotFound:
 		c.Status(fiber.StatusUnauthorized)
 	default:
 		c.Status(fiber.StatusInternalServerError)
