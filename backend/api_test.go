@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"example/models"
+
 	"github.com/gofiber/fiber/v2"
 	. "github.com/smartystreets/goconvey/convey"
 )
@@ -208,6 +209,7 @@ func TestAddProduct(t *testing.T) {
 		Convey("When the post request sent", func() {
 
 			reqBody, err := json.Marshal(stock)
+			So(err, ShouldBeNil) //kontrol et
 
 			req, _ := http.NewRequest(http.MethodPost, "/stocks", bytes.NewReader(reqBody))
 			req.Header.Add("Content-Type", "application/json")
