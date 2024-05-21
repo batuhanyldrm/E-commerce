@@ -254,8 +254,17 @@ func (repository *Repository) GetUser(email string) (models.Register, error) {
 	err := collection.FindOne(ctx, bson.M{"email": email}).Decode(&user)
 
 	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return user, ErrUserNotFound
+		}
+		/* log.Println("Error fetching user:", err)
+		return user, err */
 		log.Fatal(err)
 	}
+
+	/* if err != nil {//sistemi direkt patlatıyor
+		log.Fatal(err)
+	} */
 	return user, nil
 }
 

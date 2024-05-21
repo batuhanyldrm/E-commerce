@@ -83,7 +83,6 @@ const LoginPage = (props) => {
             })
       } catch (error) {
         setAlert({ open: true, message: "Wrong email or password", status: "error" })
-          console.log(error, "catch error")
       }
       setRedirect(true)
   }
