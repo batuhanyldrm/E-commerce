@@ -84,7 +84,10 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
         opacity:0.8,
     },
-}
+  },
+  /* errorSnackBar: {
+    zIndex: "10001",
+  } */
 }));
 
 const AllProducts = (props) => {
@@ -225,9 +228,11 @@ const AllProducts = (props) => {
       </div>
       <Footer/>
     </div>
-       <Snackbar
+      <Snackbar
         open={alert.open}
         autoHideDuration={1000}
+        /* className={classes.errorSnackBar} */
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         onClose={() => setAlert({ open: false, message: "", status: "" })}
       >
         <Alert severity={alert.status || "info"}>{alert.message}</Alert>

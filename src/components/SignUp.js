@@ -275,6 +275,7 @@ const SignUp = (props) => {
       <Snackbar
         open={alert.open}
         autoHideDuration={1000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         onClose={() => setAlert({ open: false, message: "", status: "" })}
       >
         <Alert severity={alert.status || "info"}>{alert.message}</Alert>

@@ -95,6 +95,7 @@ function Order(props) {
               open={updateAlert.open}
               autoHideDuration={1000}
               style={{zIndex:"1001"}}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
               onClose={() => setUpdateAlert({ open: false, message: "", status: "" })}
           >
               <Alert severity={updateAlert.status || "info"}>
