@@ -318,6 +318,21 @@ func (api *Api) PostOrderHandler(c *fiber.Ctx) error {
 	return nil
 }
 
+func (api *Api) GetOrdersHandler(c *fiber.Ctx) error {
+
+	orders, err := api.Service.GetOrders()
+
+	switch err {
+	case nil:
+		c.JSON(orders)
+		c.Status(fiber.StatusOK)
+	default:
+		c.Status(fiber.StatusInternalServerError)
+	}
+
+	return nil
+}
+
 func (api *Api) DeleteStocksHandler(c *fiber.Ctx) error {
 
 	ID := c.Params("id")

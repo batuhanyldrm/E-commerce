@@ -130,6 +130,33 @@ func (repository *Repository) GetStock(ID string) (models.Product, error) {
 	return stock, nil
 }
 
+func (repository *Repository) GetOrders() ([]models.Order, error) {
+	collection := repository.client.Database("order").Collection("order")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	cur, err := collection.Find(ctx, bson.M{})
+
+	if err != nil {
+		return nil, err
+	}
+
+	orders := []models.Order{}
+	for cur.Next(ctx) {
+		var order models.Order
+		err := cur.Decode(&order)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		orders = append(orders, order)
+
+	}
+
+	return orders, nil
+
+}
+
 func (repository *Repository) UpdateStocks(stock models.Product, ID string) error {
 	collection := repository.client.Database("products").Collection("products")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
