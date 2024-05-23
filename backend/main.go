@@ -79,6 +79,7 @@ func SetupApp(api *Api) *fiber.App {
 
 	//order
 	app.Get("/orders", api.GetOrdersHandler)
+	app.Get("/order/:id", api.GetOrderHandler)
 	app.Post("/order/:id", api.PostOrderHandler)
 
 	//stripe payment you can control stripe web site

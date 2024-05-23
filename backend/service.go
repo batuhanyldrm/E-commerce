@@ -169,6 +169,17 @@ func (service *Service) GetOrders() ([]models.Order, error) {
 	return orders, nil
 }
 
+func (service *Service) GetOrder(ID string) (models.Order, error) {
+
+	order, err := service.Repository.GetOrder(ID)
+
+	if err != nil {
+		return models.Order{}, nil
+	}
+
+	return order, nil
+}
+
 func (service *Service) DeleteStocks(stockId string) error {
 
 	err := service.Repository.DeleteStocks(stockId)
