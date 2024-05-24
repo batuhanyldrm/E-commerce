@@ -70,7 +70,7 @@ func (api *Api) HandleCreatePaymentIntent(c *fiber.Ctx) error {
 
 	//log.Println("Payment:", pi)
 	return c.JSON(fiber.Map{
-		"message": "Payment was successful",
+		"message": "Payment successfully",
 		"success": true,
 	})
 }
