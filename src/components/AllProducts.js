@@ -231,7 +231,6 @@ const AllProducts = (props) => {
       <Snackbar
         open={alert.open}
         autoHideDuration={1000}
-        /* className={classes.errorSnackBar} */
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         onClose={() => setAlert({ open: false, message: "", status: "" })}
       >
