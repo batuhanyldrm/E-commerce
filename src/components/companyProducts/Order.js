@@ -29,19 +29,19 @@ function Order(props) {
   const [updateAlert, setUpdateAlert] = useState({ open: false, message: "", status: "" })
 
   const handleSave = async () => {
-      if (amount > selectedProduct.amount) {
-        setUpdateAlert({ open: true, message: "There are not enough products", status: "error" })
-      }
-      else{
-          await updateProductAmount(selectedProduct.id,amount)
-          .then(() => {
-              updateProductStock(selectedProduct.id,amount)
-              setUpdateAlert({ open: true, message: "saved succesfully", status: "success" })
-          }).finally(() => {
-              fetchProducts()
-              orderPopUpClose(false)
-          })
-      }
+    if (amount > selectedProduct.amount) {
+      setUpdateAlert({ open: true, message: "There are not enough products", status: "error" })
+    }
+    else{
+      await updateProductAmount(selectedProduct.id,amount)
+      .then(() => {
+        updateProductStock(selectedProduct.id,amount)
+        setUpdateAlert({ open: true, message: "saved succesfully", status: "success" })
+      }).finally(() => {
+        fetchProducts()
+        orderPopUpClose(false)
+      })
+    }
   }
 
 
