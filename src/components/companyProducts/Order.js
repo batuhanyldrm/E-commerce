@@ -47,61 +47,61 @@ function Order(props) {
 
   return(
   <div>
-      <Dialog
-        open={open}
-        onClose={orderPopUpClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        fullWidth
-      >
-        <DialogTitle id="alert-dialog-title">
-          <div style={{ textAlign : "center" }}>
-            Use Product
-          </div>
-        </DialogTitle>
-        <DialogContent>
-          <div style={{display:"grid"}}>
-                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-standard-label">Product Name</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                    value={selectedProduct.productName || ""}
-                    label="Product Name"
-                  >
-                  {products.products && products.products.map((product) => {
-                      return <MenuItem key={product.id} value={product.productName} onClick={() => setSelectedProduct(product)}>{product.productName}</MenuItem>
-                  })}
-                  </Select>
-                </FormControl>
-        <TextField
-          value={amount}
-          onChange={(e) => setAmount(parseInt(e.target.value))}
-          autoFocus
-          margin="normal"
-          id="amount"
-          label="Amount"
-          type="number"
-          variant="outlined"
-          size='small'
-        />
+    <Dialog
+      open={open}
+      onClose={orderPopUpClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+      fullWidth
+    >
+      <DialogTitle id="alert-dialog-title">
+        <div style={{ textAlign : "center" }}>
+          Use Product
         </div>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={orderPopUpClose}>Cancel</Button>
-          <Button onClick={() => handleSave()}>Save</Button>
-        </DialogActions>
-        <Snackbar
-              open={updateAlert.open}
-              autoHideDuration={1000}
-              style={{zIndex:"1001"}}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-              onClose={() => setUpdateAlert({ open: false, message: "", status: "" })}
-          >
-              <Alert severity={updateAlert.status || "info"}>
-                  {updateAlert.message}
-              </Alert>
-          </Snackbar>
+      </DialogTitle>
+      <DialogContent>
+        <div style={{display:"grid"}}>
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-standard-label">Product Name</InputLabel>
+            <Select
+              labelId="demo-simple-select-standard-label"
+              id="demo-simple-select-standard"
+              value={selectedProduct.productName || ""}
+              label="Product Name"
+            >
+              {products.products && products.products.map((product) => {
+                return <MenuItem key={product.id} value={product.productName} onClick={() => setSelectedProduct(product)}>{product.productName}</MenuItem>
+              })}
+            </Select>
+          </FormControl>
+          <TextField
+            value={amount}
+            onChange={(e) => setAmount(parseInt(e.target.value))}
+            autoFocus
+            margin="normal"
+            id="amount"
+            label="Amount"
+            type="number"
+            variant="outlined"
+            size='small'
+          />
+        </div>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={orderPopUpClose}>Cancel</Button>
+        <Button onClick={() => handleSave()}>Save</Button>
+      </DialogActions>
+      <Snackbar
+        open={updateAlert.open}
+        autoHideDuration={1000}
+        style={{zIndex:"1001"}}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        onClose={() => setUpdateAlert({ open: false, message: "", status: "" })}
+      >
+        <Alert severity={updateAlert.status || "info"}>
+          {updateAlert.message}
+        </Alert>
+      </Snackbar>
     </Dialog>
   </div>
   );

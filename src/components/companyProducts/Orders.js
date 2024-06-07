@@ -3,34 +3,35 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { fetchOrders } from '../actions/orderActions';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import OrderListItem from './OrderListItem';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        marginTop:"5px",
+  root: {
+    marginTop:"5px",
+  },
+  content: {
+    flexGrow: 1,
+    padding: 0,
+    overflowX: "auto"
+  },
+  btn:{
+    "&:hover": {
+      opacity:0.8
     },
-    content: {
-      flexGrow: 1,
-      padding: 0,
-      overflowX: "auto"
-    },
-    btn:{
-        "&:hover": {
-            opacity:0.8
-        },
-    }
-  }));
+  }
+}));
 
 function Orders(props) {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const {fetchOrders} = props;
+  const {fetchOrders, orders} = props;
 
-    useEffect(() => {
-        fetchOrders()
-      }, [])
+  useEffect(() => {
+    fetchOrders()
+  }, [])
 
-    return(
-    <div>
+  return(
+    <div>{console.log(orders,"uuu")}
       {/* <TableContainer component={Paper}> */}
         <Table component={Paper} sx={{ minWidth: 5, marginTop:2, maxWidth:1150 }} aria-label="simple table">
           <TableHead>
@@ -45,26 +46,27 @@ function Orders(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {products.products && products.products.map((product, index) => (
-              <ProductListItem
-              product={product}
-              index={index}
-              key={product.id + "" + index}
+            {/* {orders && orders.map((order, index) => (
+              <OrderListItem
+                order={order}
+                index={index}
+                key={order.id + "" + index}
               />
             ))} */}
           </TableBody>
         </Table>
       {/* </TableContainer> */}
     </div>
-    );
+  );
 }
 
-const mapStateToProps = (state) => ({
+  const mapStateToProps = (state) => ({
+    orders: state.orders
   });
   
   const mapDispatchToProps = (dispatch) => ({
     fetchOrders: () => {
-        dispatch(fetchOrders());
+      dispatch(fetchOrders());
     },
   });
 
