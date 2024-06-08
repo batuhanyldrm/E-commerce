@@ -36,13 +36,13 @@ function Orders(props) {
         <Table component={Paper} sx={{ minWidth: 5, marginTop:2, maxWidth:1150 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Product Name</TableCell>
-              <TableCell align="left">Product Code</TableCell>
-              <TableCell align="left">Address</TableCell>
-              <TableCell align="right">Total Price</TableCell>
-              <TableCell align="right">Payment</TableCell>
-              <TableCell align="right">Discount</TableCell>
-              <TableCell align="right">Additional Note</TableCell>
+              <TableCell align="center">Product Name</TableCell>
+              <TableCell align="center">Product Code</TableCell>
+              <TableCell align="center">Address</TableCell>
+              <TableCell align="center">Total Price</TableCell>
+              <TableCell align="center">Payment</TableCell>
+              <TableCell align="center">Discount</TableCell>
+              <TableCell align="center">Additional Note</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

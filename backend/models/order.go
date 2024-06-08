@@ -23,9 +23,9 @@ type Order struct {
 	Payment        string      `json:"payment" bson:"payment"`
 	Discount       int         `json:"discount" bson:"discount"`
 	Status         OrderStatus `json:"status" bson:"status"`
+	AdditionalNote string      `json:"additionalNote" bson:"additionalNote"`
 	CreatedAt      time.Time   `json:"createdAt" bson:"createdAt"`
 	UpdatedAt      time.Time   `json:"updatedAt" bson:"updatedAt"`
-	AdditionalNote string      `json:"additionalNote" bson:"additionalNote"`
 }
 
 type OrderDTO struct {
