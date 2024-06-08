@@ -31,13 +31,13 @@ function Orders(props) {
   }, [])
 
   return(
-    <div>{console.log(orders,"uuu")}
+    <div>
       {/* <TableContainer component={Paper}> */}
         <Table component={Paper} sx={{ minWidth: 5, marginTop:2, maxWidth:1150 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Product Name</TableCell>
-              <TableCell>Product Code</TableCell>
+              <TableCell align="left">Product Name</TableCell>
+              <TableCell align="left">Product Code</TableCell>
               <TableCell align="left">Address</TableCell>
               <TableCell align="right">Total Price</TableCell>
               <TableCell align="right">Payment</TableCell>
@@ -46,13 +46,13 @@ function Orders(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {orders && orders.map((order, index) => (
+            {orders && orders.map((order, index) => (
               <OrderListItem
                 order={order}
                 index={index}
                 key={order.id + "" + index}
               />
-            ))} */}
+            ))}
           </TableBody>
         </Table>
       {/* </TableContainer> */}
@@ -61,7 +61,7 @@ function Orders(props) {
 }
 
   const mapStateToProps = (state) => ({
-    orders: state.orders
+    orders: state.orders.orders
   });
   
   const mapDispatchToProps = (dispatch) => ({
