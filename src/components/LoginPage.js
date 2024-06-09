@@ -71,20 +71,26 @@ const LoginPage = (props) => {
   const [alert, setAlert] = useState({ open: false, message: "", status: "" });
 
   const handleloginUser = async () => {
-      const data = {
-          email: loginEmail,
-          password: loginPassword,
-      }
-      try {
-          await postLogin(data).then((res) => {
-              setTimeout(() => {
-                window.location = window.location.origin + "/all-products";
-              }, 500);
-            })
-      } catch (error) {
-        setAlert({ open: true, message: "Wrong email or password", status: "error" })
-      }
-      setRedirect(true)
+    const data = {
+      email: loginEmail,
+      password: loginPassword,
+    }
+    try {
+      await postLogin(data).then((res) => {
+        setTimeout(() => {
+          window.location = window.location.origin + "/all-products";
+        }, 500);
+      })
+    } catch (error) {
+      setAlert({ open: true, message: "Wrong email or password", status: "error" })
+    }
+    setRedirect(true)
+  }
+
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      handleloginUser()
+    }
   }
 
   const checkUserSession = () => {
@@ -160,6 +166,7 @@ const LoginPage = (props) => {
                   placeholder="password"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
+                  onKeyPress={handleKeyPress}
                   type={showPassword ? 'text' : 'password'}              
                   endDecorator={
                     <IconButton 
