@@ -297,14 +297,14 @@ func (api *Api) PostStocksHandler(c *fiber.Ctx) error {
 func (api *Api) PostOrderHandler(c *fiber.Ctx) error {
 
 	userId := c.Params("id")
-	productId := c.Params("productId")
+	/* productId := c.Params("productId") */
 
 	createOrders := models.OrderDTO{}
 	err := c.BodyParser(&createOrders)
 	if err != nil {
 		c.Status(fiber.StatusBadRequest)
 	}
-	orders := api.Service.PostOrder(userId, productId, createOrders)
+	orders := api.Service.PostOrder(userId /* productId, */, createOrders)
 
 	switch err {
 	case nil:

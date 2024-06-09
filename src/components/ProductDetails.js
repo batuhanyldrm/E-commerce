@@ -100,11 +100,14 @@ const ProductDetails = (props) => {
   };
 
   const handleBuyNow = () => {
-    
     if (document.cookie.includes("user_token")) {
      setShowForm(true)
     }
   };
+
+  const priceFormat = (price) => {
+    return Intl.NumberFormat('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(price);
+  }
 
   return (
     <>
@@ -129,7 +132,7 @@ const ProductDetails = (props) => {
           <div style={{ marginLeft: '10px' }}>
             <p><b>Product Name: </b>{user.company + " " + productDetail.productName}</p>
             <p><b>Product Details: </b>{productDetail.description}</p>
-            <p><b>Total Price: </b>${productDetail.price}</p>
+            <p><b>Total Price: </b>{priceFormat(productDetail.price)} $</p>
             {productDetail.amount === 0 ? (
               <p><b>The product sold out</b></p>) : productDetail.amount < 5 ? (<p><b>Last:</b> {productDetail.amount} <b>products</b></p>
               ) : (

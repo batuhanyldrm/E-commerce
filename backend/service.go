@@ -121,7 +121,7 @@ func (service *Service) PostStocks(productDTO models.ProductDTO) *models.Product
 	return &stock
 }
 
-func (service *Service) PostOrder(userId, productId string, orderDTO models.OrderDTO) *models.Order {
+func (service *Service) PostOrder(userId string, orderDTO models.OrderDTO) *models.Order {
 
 	user, err := service.Repository.GetUserID(userId)
 	if err != nil {

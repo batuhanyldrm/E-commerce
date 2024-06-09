@@ -7,6 +7,8 @@ import CreditCardIcon from '@material-ui/icons/CreditCard';
 import { updateProductAmount } from '../api/productApi';
 import { fetchProducts, updateProductStock } from '../actions/productActions';
 import { connect } from 'react-redux';
+import { addOrder } from '../actions/orderActions';
+import { postOrder } from '../api/orderApi';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,8 +77,26 @@ const PaymentForm = (props) => {
     } = props;
     
     const [success, setSuccess] = useState(false)
+    const [address, setAddress] = useState("");
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [discount, setDiscount] = useState(0);
+    
+    
+    
     const stripe = useStripe()
     const elements = useElements()
+
+    //order post a göre düzenlenecek
+    const handleOrderPost = async () => {
+  
+      try {
+        const res = await postOrder();
+        addOrder(res.data);
+      } catch (error) {
+      } finally {
+        //handleClose(false);
+      }
+    };
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
@@ -105,7 +125,7 @@ const PaymentForm = (props) => {
                           updateProductStock(productDetail.id,newAmount)
                       }).finally(() => {
                         fetchProduct(productDetail.id)
-                        fetchProducts()
+                        /* fetchProducts() */
                       })
                     } catch (error) {
                       console.log("Error updating product amount:", error);

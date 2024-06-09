@@ -205,9 +205,7 @@ const AllProducts = (props) => {
             <Box sx={{ display: 'flex' }}>
               <div>
                 <Typography level="body3">Total price:</Typography>
-                <Typography fontSize="lg" fontWeight="lg">
-                ${priceFormat(product.price)}
-                </Typography>
+                <Typography fontSize="lg" fontWeight="lg">{priceFormat(product.price)} $</Typography>
               </div>
               <Button
                 component={Link}

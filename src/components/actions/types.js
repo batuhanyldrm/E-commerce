@@ -13,3 +13,4 @@ export const UPDATE_USER = "UPDATE_USER"
 
 //order
 export const FETCH_ORDERS = "FETCH_ORDERS"
+export const ADD_ORDER = "ADD_ORDER";
