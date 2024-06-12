@@ -7,6 +7,7 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 import { Alert, Snackbar, Button, CircularProgress } from '@mui/material';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import Stripe from './payment/Stripe';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,11 +100,11 @@ const ProductDetails = (props) => {
     setAlert({ open: true, message: "product successfully added", status: "success" })
   };
 
-  const handleBuyNow = () => {
+  /* const handleBuyNow = () => {
     if (document.cookie.includes("user_token")) {
-     setShowForm(true)
+      setShowForm(true)
     }
-  };
+  }; */
 
   const priceFormat = (price) => {
     return Intl.NumberFormat('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(price);
@@ -148,7 +149,7 @@ const ProductDetails = (props) => {
               Add to Cart
             </Button>
             <div className="Payment">
-            {showForm ? <Stripe productDetail={productDetail} fetchProduct={fetchProduct} /> : <>
+            {/* {showForm ? <Stripe productDetail={productDetail} fetchProduct={fetchProduct} /> : <> */}
             <Button
               variant="contained"
               color="primary"
@@ -156,10 +157,11 @@ const ProductDetails = (props) => {
               fullWidth
               style={{ marginBottom: 5, maxWidth:130, minWidth: 100, backgroundColor: 'rgba(186,130,57,255)' }}
               disabled={productDetail.amount === 0}
-              onClick={handleBuyNow}
+              component={Link}
+              to={`/payment`}
             >
               Buy Now
-            </Button></>}
+            </Button>{/* </>} */}
             </div>
           </div>
         </div>
