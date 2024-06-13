@@ -30,22 +30,6 @@ const useStyles = makeStyles((theme) => ({
       gridTemplateColumns: "1fr",
     },
   },
-  mainItems: {
-    display: "grid",
-    gridGap: "25px",
-    gridTemplateColumns: "1fr 1fr 1fr 1fr",
-    marginTop: 10,
-    ["@media (max-width: 950px)"]:{
-      display: "grid",
-      gridGap: "25px",
-      gridTemplateColumns: "1fr 1fr",
-    },
-    ["@media (max-width: 640px)"]:{
-      display: "grid",
-      gridGap: "25px",
-      gridTemplateColumns: "1fr",
-    },
-  },
   categoryItemsLink: {
     display: 'flex',
     textDecoration: 'none',
@@ -58,23 +42,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems:"end",
     marginRight: "5px"
-  },
-  grid:{
-    display:"grid", 
-    gridGap:"25px", 
-    gridTemplateColumns:"1fr 1fr 1fr",
-    marginLeft:"25px", 
-    justifyContent:"center",
-    ["@media (max-width: 950px)"]:{
-      display:"grid", 
-      gridGap:"25px", 
-      gridTemplateColumns:"1fr 1fr",
-    },
-    ["@media (max-width: 640px)"]:{
-      display:"grid", 
-      gridGap:"25px", 
-      gridTemplateColumns:"1fr",
-    },
   },
 }));
 
