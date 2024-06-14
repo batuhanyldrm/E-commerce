@@ -123,71 +123,69 @@ const LoginPage = (props) => {
       </Link>
       <CssVarsProvider>
       <main>
-            <Sheet
-              sx={{
-                width: 300,
-                mx: 'auto', // margin left & right
-                my: 7, // margin top & bottom
-                py: 3, // padding top & bottom
-                px: 2, // padding left & right
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-                borderRadius: 'sm',
-                boxShadow: 'md',
-              }}
-              variant="outlined"
-            >
-              <div>
-                <Typography level="h4" component="h1">
-                  <b>Welcome to Qasis</b>
-                </Typography>
-                <Typography level="body2">
-                  Sign in to continue.
-                  <ModeToggle />
-                </Typography>
-              </div>
-              <FormControl>
-                <FormLabel>Email</FormLabel>
-                <Input
-                  // html input attribute
-                  name="email"
-                  type="email"
-                  placeholder="qasis@gmail.com"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Password</FormLabel>
-                <Input
-                  // html input attribute
-                  name="password"
-                  placeholder="password"
-                  value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  type={showPassword ? 'text' : 'password'}              
-                  endDecorator={
-                    <IconButton 
-                      variant="plain" 
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}>
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  }
-                />
-              </FormControl>
+        <Sheet
+          sx={{
+            width: 300,
+            mx: 'auto', // margin left & right
+            my: 7, // margin top & bottom
+            py: 3, // padding top & bottom
+            px: 2, // padding left & right
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            borderRadius: 'sm',
+            boxShadow: 'md',
+          }}
+          variant="outlined"
+        >
+          <div>
+            <Typography level="h4" component="h1">
+              <b>Welcome to Qasis</b>
+            </Typography>
+            <Typography level="body2">
+              Sign in to continue.
+              <ModeToggle />
+            </Typography>
+          </div>
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <Input
+              name="email"
+              type="email"
+              placeholder="qasis@gmail.com"
+              value={loginEmail}
+              onChange={(e) => setLoginEmail(e.target.value)}
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Password</FormLabel>
+            <Input
+              name="password"
+              placeholder="password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+              onKeyPress={handleKeyPress}
+              type={showPassword ? 'text' : 'password'}              
+              endDecorator={
+                <IconButton 
+                  variant="plain" 
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              }
+            />
+          </FormControl>
 
-              <Button sx={{ mt: 1}} onClick={handleloginUser}>Log in</Button>
-              <Typography
-                endDecorator={<Link to="/sign-up">Sign up</Link>}
-                fontSize="sm"
-                sx={{ alignSelf: 'center' }}
-              >
-                Don&apos;t have an account?
-              </Typography>
-            </Sheet>
+          <Button sx={{ mt: 1}} onClick={handleloginUser}>Log in</Button>
+          <Typography
+            endDecorator={<Link to="/sign-up">Sign up</Link>}
+            fontSize="sm"
+            sx={{ alignSelf: 'center' }}
+          >
+            Don&apos;t have an account?
+          </Typography>
+        </Sheet>
       </main>
     </CssVarsProvider>
     <Snackbar
