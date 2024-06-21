@@ -13,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: '5px',
     maxWidth: 600,
-    //maxHeight: 400,
-    border: '1px solid lightgray',
-    borderRadius: 5,
+    height: "100%",
     ["@media (max-width: 400px)"]:{
     },
   },
   flex: {
     display:"flex",
+    border: '1px solid lightgray',
+    borderRadius: 5,
     ["@media (max-width: 400px)"]:{
       display:"grid",
       justifyContent:"space-around",
@@ -62,6 +62,14 @@ const useStyles = makeStyles((theme) => ({
     width: 250,
     height: 200,
   },
+  footer: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+    textAlign: 'center',
+    backgroundColor: '#f1f1f1',
+    padding: '10px 0',
+  }
 }));
 
 const ProductDetails = (props) => {
@@ -166,7 +174,7 @@ const ProductDetails = (props) => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
       <Snackbar
         open={alert.open}
         autoHideDuration={1000}
