@@ -126,10 +126,10 @@ const LoginPage = (props) => {
         <Sheet
           sx={{
             width: 300,
-            mx: 'auto', // margin left & right
-            my: 7, // margin top & bottom
-            py: 3, // padding top & bottom
-            px: 2, // padding left & right
+            mx: 'auto',
+            my: 7,
+            py: 3,
+            px: 2,
             display: 'flex',
             flexDirection: 'column',
             gap: 2,

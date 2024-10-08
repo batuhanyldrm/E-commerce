@@ -85,9 +85,6 @@ const useStyles = makeStyles((theme) => ({
         opacity:0.8,
     },
   },
-  /* errorSnackBar: {
-    zIndex: "10001",
-  } */
 }));
 
 const AllProducts = (props) => {
