@@ -9,8 +9,8 @@ const OrderListItem = (props) => {
 		return Intl.NumberFormat('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(price);
 	}
 
-  return(
-    <>
+	return(
+		<>
 		<TableRow key={order.id}>
 			<TableCell align="center" style={{ whiteSpace: 'pre-line' }}>{order.productList.map(product => product.productName ? product.productName : "-").join(',\n')}</TableCell>
 			<TableCell align="center" style={{ whiteSpace: 'pre-line' }}>{order.productList.map(product => product.productCode ? product.productCode : "-").join(',\n')}</TableCell>
@@ -20,8 +20,8 @@ const OrderListItem = (props) => {
 			<TableCell align="center">{order.discount ? order.discount : "-"}</TableCell>
 			<TableCell align="center">{order.additionalNote ? order.additionalNote : "-"}</TableCell>
 		</TableRow>
-    </>
-  );
+		</>
+	);
 };
 
 export default OrderListItem;

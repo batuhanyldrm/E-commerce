@@ -9,7 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select'
+import Select from '@mui/material/Select'
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { updateProductAmount } from '../api/productApi';
@@ -55,9 +55,7 @@ function Order(props) {
       fullWidth
     >
       <DialogTitle id="alert-dialog-title">
-        <div style={{ textAlign : "center" }}>
-          Use Product
-        </div>
+        <div style={{textAlign : "center" }}> Use Product</div>
       </DialogTitle>
       <DialogContent>
         <div style={{display:"grid"}}>

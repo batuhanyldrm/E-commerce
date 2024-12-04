@@ -14,7 +14,7 @@ import { loginUser } from '../actions/userActions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop:"5px",
+			marginTop:"5px",
     },
     content: {
       flexGrow: 1,
@@ -22,120 +22,117 @@ const useStyles = makeStyles((theme) => ({
       overflowX: "auto"
     },
     btn:{
-        "&:hover": {
-            opacity:0.8
-        },
+			"&:hover": {
+				opacity:0.8
+			},
     }
   }));
 
 function Product(props) {
-    const classes = useStyles();
+	const classes = useStyles();
 
-    const {fetchProducts, products, fetchSearchProducts, loginUser, user} = props;
+	const {fetchProducts, products, fetchSearchProducts, loginUser, user} = props;
 
-    const [open, setOpen] = useState(false);
-    const [order, setOrder] = useState(false);
-    const [search, setSearch] = useState("");
+	const [open, setOpen] = useState(false);
+	const [order, setOrder] = useState(false);
+	const [search, setSearch] = useState("");
 
-    const handleSearch = () => {
-        fetchSearchProducts(search)
-    }
+	const handleSearch = () => {
+		fetchSearchProducts(search)
+	}
 
-    const checkPressedEnter = (key) => {
-        if (key === "Enter") {
-            fetchSearchProducts(search)
-        }
-      };
+	const checkPressedEnter = (key) => {
+		if (key === "Enter") {
+			fetchSearchProducts(search)
+		}
+	};
 
-    useEffect(() => {
-        fetchProducts()
-      }, [])
+	useEffect(() => {
+		fetchProducts()
+	}, [])
 
-    const orderPopUpClose = () => {
-        setOrder(false);
-    };
+	const orderPopUpClose = () => {
+		setOrder(false);
+	};
     
-    const handleClose = () => {
-    setOpen(false);
-    };
+	const handleClose = () => {
+		setOpen(false);
+	};
 
-    useEffect(() => {
-        loginUser();
-      }, [loginUser]);
+	useEffect(() => {
+		loginUser();
+	}, [loginUser]);
 
-    const navigate = useNavigate();
+	const navigate = useNavigate();
   
-    useEffect(() => {
-      const hasCookie = document.cookie.includes('user_token');
-      if (!hasCookie) {
-        navigate('/login');
-      }
-      else{
-        
-      }
-    }, [navigate]); 
+	useEffect(() => {
+		const hasCookie = document.cookie.includes('user_token');
+		if (!hasCookie) {
+			navigate('/login');
+		}
+	}, [navigate]); 
 
-    return(
-    <div>
-        <Order
-            open={order}
-            orderPopUpClose={orderPopUpClose}
-            products={products}
-            fetchProducts={fetchProducts}
-        />
-        <AddProduct
-            open={open}
-            handleClose={handleClose}
-        />
+	return(
+	<div>
+		<Order
+			open={order}
+			orderPopUpClose={orderPopUpClose}
+			products={products}
+			fetchProducts={fetchProducts}
+		/>
+		<AddProduct
+			open={open}
+			handleClose={handleClose}
+		/>
 
-        <Button variant="contained" className={classes.btn} style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOrder(true)}>
-            USE PRODUCT
-        </Button>
-        <Button variant="contained" color="primary" className={classes.btn} style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOpen(true)}>
-            ADD PRODUCT
-        </Button>
-            <TextField 
-                className={classes.root} 
-                style={{ marginTop:"5px",}}
-                id="outlined-basic" 
-                label="Search" 
-                size='small'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                onKeyPress={(e) => checkPressedEnter(e.key)}
-                variant="outlined" 
-                InputProps={{
-                    endAdornment: (
-                        <>
-                        <IconButton size="small" onClick={() => handleSearch()}>
-                            <SearchIcon/>
-                        </IconButton>
-                        </>
-                    ),
-             }}
-            />
-        <ProductList
-            products={products}
-        />
-    </div>
-    );
+		<Button variant="contained" className={classes.btn} style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOrder(true)}>
+			USE PRODUCT
+		</Button>
+		<Button variant="contained" color="primary" className={classes.btn} style={{margin:"5px", backgroundColor:"rgba(39,38,152,255)"}} onClick={() => setOpen(true)}>
+			ADD PRODUCT
+		</Button>
+		<TextField 
+			className={classes.root} 
+			style={{ marginTop:"5px",}}
+			id="outlined-basic" 
+			label="Search" 
+			size='small'
+			value={search}
+			onChange={(e) => setSearch(e.target.value)}
+			onKeyPress={(e) => checkPressedEnter(e.key)}
+			variant="outlined" 
+			InputProps={{
+				endAdornment: (
+					<>
+						<IconButton size="small" onClick={() => handleSearch()}>
+							<SearchIcon/>
+						</IconButton>
+					</>
+				),
+			}}
+		/>
+		<ProductList
+			products={products}
+		/>
+	</div>
+	);
 }
 
 const mapStateToProps = (state) => ({
-    products: state.products,
-    user: state.user
-  });
+	products: state.products,
+	user: state.user
+});
   
-  const mapDispatchToProps = (dispatch) => ({
-    fetchProducts: () => {
-      dispatch(fetchProducts());
-    },
-    fetchSearchProducts: (data) => {
-        dispatch(fetchSearchProducts(data));
-    },
-    loginUser: () => {
-        dispatch(loginUser());
-    },
-  });
+const mapDispatchToProps = (dispatch) => ({
+	fetchProducts: () => {
+		dispatch(fetchProducts());
+	},
+	fetchSearchProducts: (data) => {
+		dispatch(fetchSearchProducts(data));
+	},
+	loginUser: () => {
+		dispatch(loginUser());
+	},
+});
 
 export default  connect(mapStateToProps,mapDispatchToProps) (Product)
